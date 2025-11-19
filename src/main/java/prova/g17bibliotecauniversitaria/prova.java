@@ -10,5 +10,5 @@ package prova.g17bibliotecauniversitaria;
  * @author Pasquale
  */
 public class prova {
-    
+    public int prova;
 }
