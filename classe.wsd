@@ -1,0 +1,113 @@
+@startuml
+
+class Autore{
+    - nome: String
+    - cognome: String
+
+    + getNome(): String
+    + getCognome(): String
+    
+    + equals(): boolean
+    + hashCode(): int
+    + toString(): String
+}
+
+class Libro{
+    - titolo: String
+    - listaAutori: ArrayList<Autore>
+    - anno: int
+    - codidceISBN: int
+    - numeroCopie: int
+
+    + getTitolo(): String
+    + getListaAutori(): String
+    + getAnno(): int
+    + getCodiceISBN(): int
+    + getNumeroCopie(): int
+
+    + setTitolo()
+    + setListaAutori()
+    + setAnno()
+    + setCodiceISBN()
+    + setNumeroCopie()
+
+    + aumentaCopie()
+    + diminuisciCopie()
+    + disponibilità(): boolean
+
+    + toString(): String
+    + equals(): boolean
+    + hashCode(): int
+}
+
+class Utente{
+    - nome: String
+    - cognome: String
+    - matricola: int
+    - email: String
+    - prestitiAttivi: ArrayList<Prestito>
+
+    + getNome(): String
+    + getCognome(): String
+    + getMatricola(): int
+    + getEmail(): String
+    + getPrestitiAttivi(): ArrayList<Prestito>
+
+    + setNome()
+    + setCognome()
+    + setmatricola()
+    + setEmail()
+
+    + aggiungiPrestito()
+    + rimuoviPrestito()
+
+    + toString(): String
+    + equals(): boolean
+    + hashCode(): int
+}
+
+class Prestito{
+    - utente: Utente
+    - libro: Libro
+    - dataRestituzione: LocalDate
+
+    + getUtente(): Utente
+    + getLibro(): Libro
+    + getDataResituzione(): LocalDate
+
+    + setUtente()
+    + setLibro()
+    
+    + isInRitardo(): boolean
+
+    + toString(): String
+    + equals(): boolean
+    + hashCode(): int
+}
+
+class Libreria{
+    - libreria: ArrayList<Libro>
+
+    + aggiungiLibro()
+    + eliminaLibro()
+    + modificaLibro()
+}
+
+class Clienti{
+    - clienti: ArrayList<Utente>
+    
+    + aggiungiUtente()
+    + eliminaUtente()
+    + modificaUtente()
+}
+
+
+class Prestiti{
+    - prestiti: ArrayList<Prestito>
+
+    + aggiungiPrestito()
+    + rimuoviPrestito()
+}
+
+
+@enduml
