@@ -1,3 +1,10 @@
+/**
+ * @file Libreria.java
+ * @brief Questo file contiene la lista dei libri presenti nella Biblioteca.
+ * 
+ * La classe Libreria include la struttura che contiene tutti i libri della biblioteca ed i relativi metodi utili per la maipolazioni di tale struttura.
+ */
+
 package Model;
 
 
@@ -5,20 +12,58 @@ import java.util.ArrayList;
 
 public class Libreria {
 
-    private ArrayList<Libro> Libreria;
+    private ArrayList<Libro> libreria;  ///< Lista dei libri
 
+    ///Costruttore della classe
+    public Libreria(ArrayList<Libro> libreria) {
+        this.libreria = libreria;
+    }
+
+    /**
+     * @brief Permette di aggiungere un libro alla lista
+     * 
+     * Il libro può essere aggiunto solamente se i suoi campi sono corretti
+     * 
+     * @post Il libro dato da input è stato aggiunto alla lista
+     * 
+     * @param l È il libro da aggiungere alla lista
+     */
     public void aggiungiLibro(Libro l) {
     }
 
-    public void modificaLibro(Libro l) {
-    }
-
+    /**
+     * @brief Permette di eliminare un libro dalla lista
+     * 
+     * @pre Il libro dato in input dev'essere presente nella lista
+     * @post Il libro non è più presente nella lista
+     * 
+     * @param l È il libro da rimuovere dalla lista
+     */
     public void eliminaLibro(Libro l) {
     }
-
+    
+    /**
+     * @brief Permette di modificare i campi di un libro della lista
+     * 
+     * @pre Il libro dato in input dev'essere presente nella lista
+     * @post I campi desiderati sono stati modificati
+     * 
+     * @param l È il libro i cui campi devono essere modificati
+     */
+    public void modificaLibro(Libro l) {
+    }
+    
+    /**
+     * @brief Permette di controllare che un libro sia presente nella lista
+     * 
+     * @param l È il libro che dev'essere ricercato nella lista
+     * @return True se il libro è presente nella libreria
+     */
     public boolean isInLibreria(Libro l) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    //DA COMPLETAREq
 
     public ArrayList<Libro> cercaPerTitolo(String Titolo) {
         throw new UnsupportedOperationException("Not supported yet.");
