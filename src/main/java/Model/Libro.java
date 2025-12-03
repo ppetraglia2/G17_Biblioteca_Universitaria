@@ -1,13 +1,23 @@
+package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Libro {
 
     private String titolo;
-    private ArrayList<Autore> autori;
+    private List<Autore> autori;
     private int anno;
     private int ISBN;
     private int numCopie;
+
+    public Libro(String titolo, ArrayList<Autore> autori, int anno, int ISBN, int numCopie) {
+        this.titolo = titolo;
+        this.autori = new ArrayList<Autore>();
+        this.anno = anno;
+        this.ISBN = ISBN;
+        this.numCopie = numCopie;
+    }
 
     public void aggiungiAutore(Autore a) {
     }

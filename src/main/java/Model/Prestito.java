@@ -1,4 +1,7 @@
+package Model;
 
+
+import Model.Libro;
 import java.time.LocalDate;
 
 public class Prestito {
