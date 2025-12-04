@@ -1,0 +1,7 @@
+.leftAP {
+    -fx-flex-direction: column;
+}
+
+.buttons {
+    -fx-margin: 20px;
+}
