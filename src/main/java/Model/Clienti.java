@@ -18,7 +18,10 @@ public class Clienti {
     public Clienti(ArrayList<Utente> clienti) {
         this.clienti = clienti;
     }
-
+    
+    //Getter di Clienti
+    public ArrayList<Utente> getClienti(){return clienti;}
+    
     /**
      * @brief Permette di aggiungere un'utente alla lista
      * 
@@ -29,6 +32,7 @@ public class Clienti {
      * @param u È l'utente da aggiungere alla lista
      */
     public void aggiungiUtente(Utente u) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
@@ -40,6 +44,7 @@ public class Clienti {
      * @param u È l'utente da eliminare dalla lsita
      */
     public void eliminaUtente(Utente u) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
@@ -50,21 +55,13 @@ public class Clienti {
      * @param u È l'utente a cui bisogna modificare i campi
      */
     public void modificaUtente(Utente u) {
-    }
-
-    /**DA COMPLETARE
-     * @brief Permette di cercare l'utente che possiede quel numero di matricola
-     * 
-     * @pre Numero di matricola presente nel 
-     * 
-     * @param matricola Il numero di matricola utilizzato per la ricerca
-     * @return La lista che contiene solamente il numero di matricola specificata in input
-     */
-    public ArrayList<Utente> cercaPerMatricola(int matricola) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public ArrayList<Utente> cercaPerCognome(String cognome) {
+    /**
+     * @bried Permette di verificare l'esistenza dell'Utente nella lista
+     */
+    public void esisteUtente(Utente u){
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
