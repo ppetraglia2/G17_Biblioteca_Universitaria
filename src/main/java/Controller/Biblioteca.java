@@ -148,6 +148,9 @@ public class Biblioteca implements Serializable{
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    private boolean checkValiditaCampiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi){
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
     /**
      * @brief Aggiunge un nuovo utente ai Clienti.
