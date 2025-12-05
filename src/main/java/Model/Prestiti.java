@@ -18,6 +18,8 @@ public class Prestiti {
         this.prestiti = prestiti;
     }
 
+    ///Getter di Prestiti
+    public ArrayList<Prestito> getPrestiti(){return prestiti;}
     
     /**
      * @brief Aggiunge un prestito alla lista dei prestiti.
@@ -38,5 +40,15 @@ public class Prestiti {
      * @param p La variabile di tipo Prestito che specifica il prestito da rimuovere dalla lista.
      */
     public void rimuoviPrestito(Prestito p) {
+    }
+    
+    /**
+     * @brief Permette di controllare che un libro sia preso in prestito
+     * 
+     * @param l È il libro che dev'essere ricercato
+     * @return True se il libro è stato preso in prestito
+     */
+    public boolean isInLibreria(Libro l) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
