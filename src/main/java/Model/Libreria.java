@@ -18,6 +18,9 @@ public class Libreria {
     public Libreria(ArrayList<Libro> libreria) {
         this.libreria = libreria;
     }
+    
+    ///Getter di Libreria
+    public ArrayList<Libro> getLibreria(){return libreria;}
 
     /**
      * @brief Permette di aggiungere un libro alla lista
@@ -63,17 +66,4 @@ public class Libreria {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    //DA COMPLETARE
-
-    public ArrayList<Libro> cercaPerTitolo(String Titolo) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public ArrayList<Libro> cercaPerAutore(String Autore) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public ArrayList<Libro> cercaPerISBN(int ISBN) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }
