@@ -63,7 +63,7 @@ public class Libreria {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    //DA COMPLETAREq
+    //DA COMPLETARE
 
     public ArrayList<Libro> cercaPerTitolo(String Titolo) {
         throw new UnsupportedOperationException("Not supported yet.");

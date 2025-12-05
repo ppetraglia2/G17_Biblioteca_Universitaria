@@ -24,41 +24,30 @@ public class Prestito {
     }
 
     /// Getter dell'utente.
-    public Utente getUtente() {
-        return utente;
-    }
+    public Utente getUtente() { return utente; }
 
     /// Getter del libro.
-    public Libro getLibro() {
-        return libro;
-    }
+    public Libro getLibro() { return libro; }
 
     /// Getter della data di restituzione.
-    public LocalDate getDataRestituzione() {
-        return dataRestituzione;
-    }
+    public LocalDate getDataRestituzione() { return dataRestituzione; }
 
     /// Setter dell'utente.
-    public void setUtente(Utente utente) {
-        this.utente = utente;
-    }
+    public void setUtente(Utente utente) { this.utente = utente; }
 
     /// Setter del libro.
-    public void setLibro(Libro libro) {
-        this.libro = libro;
-    }
+    public void setLibro(Libro libro) { this.libro = libro; }
 
     /// Setter della data di restituzione.
-    public void setDataRestituzione(LocalDate dataRestituzione) {
-        this.dataRestituzione = dataRestituzione;
-    }
+    public void setDataRestituzione(LocalDate dataRestituzione) { this.dataRestituzione = dataRestituzione; }
 
     /**
      * @brief Controlla che la data di restituzione non sia inferiore alla data odierna.
      * @return Restituisce `true` se la data di restituzione è inferiore alla data odierna, quindi la restituzione è in ritardo. Altrimenti, restituisce `false`.
      * 
+     * @param dataOdierna La data odierna di tipo LocalDate passata in input.
      */
-    public boolean controllaRitardo() {
+    public boolean controllaRitardo(LocalDate dataOdierna) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

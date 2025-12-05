@@ -19,22 +19,14 @@ public class Autore {
     }
 
     ///Getter del Nome
-    public String getNome() {
-        return nome;
-    }
+    public String getNome() { return nome; }
 
     ///Getter del cognome
-    public String getCognome() {
-        return cognome;
-    }
+    public String getCognome() { return cognome; }
 
     ///Setter del Nome
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public void setNome(String nome) { this.nome = nome; }
 
     ///Setter del Cognome
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }   
+    public void setCognome(String cognome) { this.cognome = cognome; }   
 }

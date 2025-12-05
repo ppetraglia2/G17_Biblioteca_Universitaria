@@ -28,34 +28,22 @@ public class Libro {
     }
 
     /// Getter del titolo.
-    public String getTitolo() {
-        return titolo;
-    }
+    public String getTitolo() { return titolo; }
 
     /// Getter degli autori.
-    public List<Autore> getAutori() {
-        return autori;
-    }
+    public List<Autore> getAutori() { return autori; }
 
     /// Getter dell'anno di pubblicazione.
-    public int getAnno() {
-        return anno;
-    }
+    public int getAnno() { return anno; }
 
     /// Getter del codice ISBN.
-    public int getISBN() {
-        return ISBN;
-    }
+    public int getISBN() { return ISBN; }
 
     /// Getter del numero di copie.
-    public int getNumCopie() {
-        return numCopie;
-    }
+    public int getNumCopie() { return numCopie; }
 
     /// Setter del titolo.
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
-    }
+    public void setTitolo(String titolo) { this.titolo = titolo; }
 
     /// Setter della lista degli autori.
     public void setAutori(List<Autore> autori) {
@@ -63,19 +51,13 @@ public class Libro {
     }
 
     /// Setter dell'anno di pubblicazione.
-    public void setAnno(int anno) {
-        this.anno = anno;
-    }
+    public void setAnno(int anno) { this.anno = anno; }
 
     /// Setter del codice ISBN.
-    public void setISBN(int ISBN) {
-        this.ISBN = ISBN;
-    }
+    public void setISBN(int ISBN) { this.ISBN = ISBN; }
 
     /// Setter del numero di copie.
-    public void setNumCopie(int numCopie) {
-        this.numCopie = numCopie;
-    }
+    public void setNumCopie(int numCopie) { this.numCopie = numCopie; }
     
     /**
      * @brief Controlla se l'istanza corrente di Libro è attualmente in prestito o no.
