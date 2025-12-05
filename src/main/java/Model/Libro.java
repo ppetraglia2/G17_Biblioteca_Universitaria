@@ -15,16 +15,18 @@ public class Libro {
     private String titolo;          ///< Titolo del libro.    
     private List<Autore> autori;    ///< Lista degli autori.
     private int anno;               ///< Anno di pubblicazione.
-    private int ISBN;               ///< Codice ISBN a 13 cifre.
-    private int numCopie;           ///< Numero di copie disponibili.
+    private String ISBN;               ///< Codice ISBN a 13 cifre.
+    private int numCopieTotali;         ///< Numero di copie totali.
+    private int numCopieDisponibili;    ///< Numero di copie disponibili.
 
     /// Costruttore della classe.
-    public Libro(String titolo, ArrayList<Autore> autori, int anno, int ISBN, int numCopie) {
+    public Libro(String titolo, ArrayList<Autore> autori, int anno, String ISBN, int numCopieTotali, int numCopieDisponibili) {
         this.titolo = titolo;
         this.autori = new ArrayList<Autore>();
         this.anno = anno;
         this.ISBN = ISBN;
-        this.numCopie = numCopie;
+        this.numCopieTotali = numCopieTotali;
+        this.numCopieDisponibili = numCopieTotali;      //< All'inizio, le copie disponibili sono pari al totale
     }
 
     /// Getter del titolo.
@@ -37,10 +39,13 @@ public class Libro {
     public int getAnno() { return anno; }
 
     /// Getter del codice ISBN.
-    public int getISBN() { return ISBN; }
+    public String getISBN() { return ISBN; }
 
-    /// Getter del numero di copie.
-    public int getNumCopie() { return numCopie; }
+    /// Getter del numero di copie totali.
+    public int getNumCopieTotali() { return numCopieTotali; }
+    
+    //Getter del numero di copie disponibili
+    public int getNumCopieDisponibili(){return numCopieDisponibili;}
 
     /// Setter del titolo.
     public void setTitolo(String titolo) { this.titolo = titolo; }
@@ -54,20 +59,18 @@ public class Libro {
     public void setAnno(int anno) { this.anno = anno; }
 
     /// Setter del codice ISBN.
-    public void setISBN(int ISBN) { this.ISBN = ISBN; }
+    public void setISBN(String ISBN) { this.ISBN = ISBN; }
 
-    /// Setter del numero di copie.
-    public void setNumCopie(int numCopie) { this.numCopie = numCopie; }
-    
-    /**
-     * @brief Controlla se l'istanza corrente di Libro è attualmente in prestito o no.
-     * 
-     * @return Restituisce `true` se il libro è in prestito ad almeno un utente. Altrimenti, restituisce `false`
-     */
-    public boolean inPrestito() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    // Setter del numero di copie TOTALI
+    public void setNumCopieTotali(int numCopieTotali) { 
+        this.numCopieTotali = numCopieTotali;
     }
     
+    // Setter del numero di copie DISPONIBILI
+    public void setNumCopieDisponibili(int numCopieDisponibili) { 
+        this.numCopieDisponibili = numCopieDisponibili;
+    }
+     
     /**
      * @brief Aggiunge un autore alla lista degli autori.
      * 
@@ -95,6 +98,49 @@ public class Libro {
      * @return Restituisce `true` se `numCopie > 0`, altrimenti restituisce `false`.
      */
     public boolean isDisponibile() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.numCopieDisponibili > 0;
+    }
+    
+    /**
+     * @brief Aumenta il numero di copie disponibili dell'istanza corrente di Libro
+     */
+    public void aumentaCopie(){
+        
+    }
+    
+    /**
+     * @brief Diminuisce il numero di copie disponibili dell'istanza corrente di Libro
+     */
+    public void diminuisciCopie(){
+        
+    }
+    /**
+     * @brief Ritorna una rappresentazione in stringa dell'oggetto Libro.
+     * @return Una stringa contenente Titolo, Autori e il Codice ISBN .
+     */
+    @Override
+    public String toString() {
+        return String.format("%s (Autori : %s) [ISBN: %s]\n", titolo, autori.toString(), ISBN);
+    }
+
+    /**
+     * @brief Definisce l'uguaglianza logica tra due oggetti Libro.
+     * Due libri sono considerati uguali se hanno lo stesso Codice ISBN.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass() || ISBN == null) return false; 
+        Libro libro = (Libro) o;
+        return this.ISBN.equals(libro.ISBN);
+    }
+
+    /**
+     * @brief Ritorna il codice hash dell'oggetto, basato sull'ISBN per coerenza con equals().
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return 31*hash + ISBN.hashCode();
     }
 }
