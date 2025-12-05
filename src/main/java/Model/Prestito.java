@@ -41,13 +41,49 @@ public class Prestito {
     /// Setter della data di restituzione.
     public void setDataRestituzione(LocalDate dataRestituzione) { this.dataRestituzione = dataRestituzione; }
 
-    /**
-     * @brief Controlla che la data di restituzione non sia inferiore alla data odierna.
-     * @return Restituisce `true` se la data di restituzione è inferiore alla data odierna, quindi la restituzione è in ritardo. Altrimenti, restituisce `false`.
-     * 
-     * @param dataOdierna La data odierna di tipo LocalDate passata in input.
+     /**
+     * @brief Controlla se il prestito è in ritardo rispetto alla data odierna.
+     * @return true se la data odierna è successiva alla data prevista di restituzione.
      */
-    public boolean controllaRitardo(LocalDate dataOdierna) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean controllaRitardo() {
+        return LocalDate.now().isAfter(this.dataRestituzione);
+    }
+    
+    /**
+     * @brief Ritorna una rappresentazione in stringa dell'oggetto Prestito.
+     * @return Una stringa contenente Prestito, Titolo del libro, Nome e Cognome dell'Utente, Data Restituzione.
+     */
+    @Override
+    public String toString() {
+        return String.format("Prestito: %s a %s. --- Scadenza: %s (Ritardo: %s)", 
+            libro.getTitolo(), 
+            utente.getNome() + " " + utente.getCognome(), 
+            dataRestituzione.toString(),
+            controllaRitardo()? "SI" : "NO");
+    }
+
+    /**
+     * @brief Definisce l'uguaglianza logica per identificare in modo univoco
+     * un prestito attivo. Si considera univoco per la combinazione Utente-Libro-DataPrestito.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prestito prestito = (Prestito) o;
+        
+        // Un prestito attivo è definito dall'Utente, dal Libro (ISBN) e dalla Data di Inizio.
+        return utente.equals(prestito.utente) && 
+                libro.equals(prestito.libro) && 
+                dataRestituzione.equals(prestito.dataRestituzione);
+    }
+
+    /**
+     * @brief Ritorna il codice hash, coerente con equals().
+     */
+    @Override
+    public int hashCode() {
+        int hash =7;
+        return 31*hash + utente.hashCode() + libro.hashCode() + libro.hashCode();
     }
 }
