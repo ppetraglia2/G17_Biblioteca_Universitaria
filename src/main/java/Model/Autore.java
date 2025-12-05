@@ -7,6 +7,8 @@
 
 package Model;
 
+import java.util.Objects;
+
 public class Autore {
 
     private String nome;    ///< Nome dell'autore
@@ -29,4 +31,38 @@ public class Autore {
 
     ///Setter del Cognome
     public void setCognome(String cognome) { this.cognome = cognome; }   
+    
+    /**
+     * @brief Ritorna una rappresentazione in stringa dell'oggetto Autore.
+     * @return Una stringa contenente Nome e Cognome.
+     */
+    @Override
+    public String toString(){
+        return nome + " " + cognome;
+    }
+    
+    /**
+     * @brief Definisce l'uguaglianza logica tra due oggetti Autore. 
+     * Due autori sono considerati uguali se hanno lo stesso Nome E lo stesso Cognome.
+     * @param o L'oggetto da confrontare.
+     * @return true se gli oggetti sono logicamente uguali.
+     */
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || this.getClass() != o.getClass()) return false;
+        Autore a = (Autore) o;
+        return Objects.equals(this.nome,a.nome) && Objects.equals(this.cognome, a.cognome);
+    }
+    
+    /**
+     * @brief Ritorna il codice hash dell'oggetto, coerente con il metodo equals().
+     * 
+     * @return Il codice hash dell'oggetto.
+     */
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        return 31*hash + nome.hashCode() + cognome.hashCode();
+    }
 }
