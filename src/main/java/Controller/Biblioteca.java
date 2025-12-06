@@ -148,6 +148,16 @@ public class Biblioteca implements Serializable{
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    /**
+     * @brief Controlla la validità minima dei campi per l'aggiunta di un Utente.
+     * @param nome Il nome dell'utente.
+     * @param cognome Il cognome dell'utente.
+     * @param matricola La matricola univoca.
+     * @param email L'email istituzionale.
+     * @param numPrestitiAttivi Il numero di prestiti attivi dell'utente.
+     * @return true se i campi sono validi, false altrimenti.
+     */
+    
     private boolean checkValiditaCampiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi){
         throw new UnsupportedOperationException("Not supported yet.");
     }
