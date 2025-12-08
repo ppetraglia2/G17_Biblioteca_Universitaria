@@ -40,7 +40,10 @@ public class Libreria implements Serializable{
      * 
      * @param l È il libro da aggiungere alla lista
      */
-    public void aggiungiLibro(Libro l) {
+    public void aggiungiLibro(Libro l) throws Exception{
+        if (this.isInLibreria(l)) {
+            throw new Exception("ERRORE DUPLICATO: Libro" + l.toString() + " già presente.");
+        }
         this.libreria.add(l);
     }
 
