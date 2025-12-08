@@ -7,16 +7,25 @@
 
 package Model;
 
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Libreria {
+public class Libreria implements Serializable{
 
     private ArrayList<Libro> libreria;  ///< Lista dei libri
 
     ///Costruttore della classe
     public Libreria(ArrayList<Libro> libreria) {
-        this.libreria = libreria;
+        if (libreria != null) {
+            this.libreria = new ArrayList<>(libreria);
+        } else {
+            this.libreria = new ArrayList<>();
+        }
+    }
+    
+    //Costruttore di default
+    public Libreria(){
+        this.libreria = new ArrayList<>();
     }
     
     ///Getter di Libreria
@@ -32,6 +41,7 @@ public class Libreria {
      * @param l È il libro da aggiungere alla lista
      */
     public void aggiungiLibro(Libro l) {
+        this.libreria.add(l);
     }
 
     /**
@@ -42,7 +52,14 @@ public class Libreria {
      * 
      * @param l È il libro da rimuovere dalla lista
      */
-    public void eliminaLibro(Libro l) {
+    public void eliminaLibro(Libro l) throws Exception{
+        if(!this.isInLibreria(l)){
+            throw new Exception ("IMPOSSIBILE ELIMINARE LIBRO! Libro : " + l.toString() + " non presente nella lista!");
+        }
+        if(l.isLibroInPrestito()){
+            throw new Exception ("IMPOSSIBILE ELIMINARE LIBRO! Libro : " + l.toString() + " in prestito!");
+        }
+        this.libreria.remove(l);
     }
     
     /**
@@ -63,7 +80,7 @@ public class Libreria {
      * @return True se il libro è presente nella libreria
      */
     public boolean isInLibreria(Libro l) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.libreria.contains(l);
     }
     
 }

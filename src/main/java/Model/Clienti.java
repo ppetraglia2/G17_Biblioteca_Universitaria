@@ -6,11 +6,10 @@
  */
 
 package Model;
-
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Clienti {
+public class Clienti implements Serializable{
 
     private ArrayList<Utente> clienti;  // Lista degli utenti
 
@@ -32,7 +31,7 @@ public class Clienti {
      * @param u È l'utente da aggiungere alla lista
      */
     public void aggiungiUtente(Utente u) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.clienti.add(u);
     }
 
     /**
@@ -41,10 +40,13 @@ public class Clienti {
      * @pre L'utente dev'essere presente in lista
      * @post L'utente non è più presente in lista
      * 
-     * @param u È l'utente da eliminare dalla lsita
+     * @param u È l'utente da eliminare dalla lista
      */
-    public void eliminaUtente(Utente u) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void eliminaUtente(Utente u) throws Exception{
+        if(!this.esisteUtente(u)){
+            throw new Exception ("IMPOSSIBILE ELIMINARE UTENTE! Utente : " + u.toString() + " non presente nella lista!");
+        }
+        this.clienti.remove(u);
     }
 
     /**
@@ -60,8 +62,10 @@ public class Clienti {
 
     /**
      * @bried Permette di verificare l'esistenza dell'Utente nella lista
+     * @param Utente u è l'utente su cui effettuare la verifica
+     * @return True se l'Utente passato come parametro è presente nella lista
      */
-    public void esisteUtente(Utente u){
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean esisteUtente(Utente u){
+        return this.clienti.contains(u);
     }
 }

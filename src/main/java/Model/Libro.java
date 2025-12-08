@@ -52,7 +52,7 @@ public class Libro {
 
     /// Setter della lista degli autori.
     public void setAutori(List<Autore> autori) {
-        // foreach
+        this.autori = new ArrayList<>(autori);;
     }
 
     /// Setter dell'anno di pubblicazione.
@@ -78,7 +78,15 @@ public class Libro {
      * 
      * @param a La variabile di tipo Autore che specifica il nome e il cognome dell'autore da aggiungere alla lista.
      */
-    public void aggiungiAutore(Autore a) {
+    public void aggiungiAutore(Autore a) throws Exception{
+        //Verifico che l'autore a non sia già presente nella lista
+        //e in quel caso lo aggiungo
+        if(!this.autori.contains(a)){
+            this.autori.add(a);
+        }
+        else{
+            throw new Exception("L'autore " + a.toString() + " è già presente in questo libro.");
+        }
     }
 
     /**
@@ -89,9 +97,26 @@ public class Libro {
      * 
      * @param a La variabile di tipo Autore che specifica il nome e il cognome dell'autore da rimuovere.
      */
-    public void rimuoviAutore(Autore a) {
+    public void rimuoviAutore(Autore a) throws Exception{
+        //AUTORE NON PRESENTE NELLA LISTA
+        if(!this.autori.contains(a)){
+            throw new Exception("L'autore " + a.toString() + " non è presente in questo libro.");
+        }
+        else{
+            //AUTORE PRESENTE NELLA LISTA
+            this.autori.remove(a);
+        }
     }
-
+   
+    /**
+     * @brief Permette di controllare che un libro sia preso in prestito
+     * 
+     * @return True se almeno una copia del libro è in prestito
+     */
+    public boolean isLibroInPrestito() {
+        return this.numCopieTotali > this.numCopieDisponibili;
+    }
+    
     /**
      * @brief Controlla che `numCopie > 0`.
      * 
@@ -105,13 +130,21 @@ public class Libro {
      * @brief Aumenta il numero di copie disponibili dell'istanza corrente di Libro
      */
     public void aumentaCopie(){
+        this.numCopieDisponibili++;
         
     }
     
     /**
      * @brief Diminuisce il numero di copie disponibili dell'istanza corrente di Libro
+     * @pre Il numero di copie disponibili deve essere > 0.
      */
-    public void diminuisciCopie(){
+    public void diminuisciCopie()throws Exception{
+        if(this.numCopieDisponibili > 0){
+            this.numCopieDisponibili--;
+        }
+        else{
+            throw new Exception("Non ci sono copie disponibili di questo libro per il prestito.");
+        }
         
     }
     /**

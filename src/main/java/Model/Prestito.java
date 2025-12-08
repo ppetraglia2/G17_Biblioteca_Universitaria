@@ -84,6 +84,6 @@ public class Prestito {
     @Override
     public int hashCode() {
         int hash =7;
-        return 31*hash + utente.hashCode() + libro.hashCode() + libro.hashCode();
+        return 31*hash + utente.hashCode() + libro.hashCode() + dataRestituzione.hashCode();
     }
 }

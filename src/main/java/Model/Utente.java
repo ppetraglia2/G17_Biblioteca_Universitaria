@@ -9,10 +9,10 @@ package Model;
 
 public class Utente {
 
-    private String nome;        ///< Nome dell'utente
-    private String cognome;     ///< Cognome dell'utente
-    private String matricola;   ///< Numero di matricola
-    private String email;       ///< Email istituzionale
+    private String nome;            ///< Nome dell'utente
+    private String cognome;         ///< Cognome dell'utente
+    private String matricola;       ///< Numero di matricola
+    private String email;           ///< Email istituzionale
     private int numPrestitiAttivi;  ///< Numero di Prestiti attivi dell'Utente
 
     ///Costruttore della classe Utente
@@ -70,7 +70,7 @@ public class Utente {
      * @return Restituisce `true` se l'Utente ha dei libri in prestito.
      */
     public boolean inPrestito() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.numPrestitiAttivi > 0;
     }
     
     /**
