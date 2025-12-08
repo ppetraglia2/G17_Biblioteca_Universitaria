@@ -136,16 +136,24 @@ public class Biblioteca implements Serializable{
     
     /**
      * @brief Controlla la validità minima dei campi per l'aggiunta di un Libro.
-     * @param titolo Il titolo del libro.
      * @param autori La lista degli autori del libro.
-     * @param anno L'anno di pubblicazione.
+     * @param anno L'anno di publicazione del libro.
      * @param ISBN Il codice ISBN .
      * @param copieTot Il numero di copie totali.
      * @param copieDisp Il numero di copie disponibili.
      * @return true se i campi sono validi, false altrimenti.
      */
-    private boolean checkValiditaCampiLibro(String titolo,List<Autore> autori, int anno,String ISBN, int copieTot, int copieDisp) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private boolean checkValiditaCampiLibro(List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) {
+        
+        if(!ISBN.matches("^\\d{13}$") || copieTot < copieDisp || anno <= 0)
+            return false;
+        
+        for(Autore a : autori){
+            if(!a.getNome().trim().matches("^[\\p{L}' ]+$") || !a.getCognome().trim().matches("^[\\p{L}' ]+$"))
+                return false;
+        }
+        
+        return true;
     }
     
     /**
@@ -159,7 +167,12 @@ public class Biblioteca implements Serializable{
      */
     
     private boolean checkValiditaCampiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi){
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        return nome.matches("^[\\p{L}' ]+$") 
+                && cognome.matches("^[\\p{L}' ]+$") 
+                && matricola.matches("^\\d{10}$") 
+                && email.matches("^[A-Za-z]\\.[\\p{L}']+\\d+@studenti\\.unisa\\.it$") 
+                && numPrestitiAttivi >= 0;
     }
     
     /**
