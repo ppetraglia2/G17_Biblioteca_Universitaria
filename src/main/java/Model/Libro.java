@@ -13,7 +13,7 @@ import java.util.List;
 public class Libro {
 
     private String titolo;          ///< Titolo del libro.    
-    private List<Autore> autori;    ///< Lista degli autori.
+    private ArrayList<Autore> autori;    ///< Lista degli autori.
     private int anno;               ///< Anno di pubblicazione.
     private String ISBN;               ///< Codice ISBN a 13 cifre.
     private int numCopieTotali;         ///< Numero di copie totali.
