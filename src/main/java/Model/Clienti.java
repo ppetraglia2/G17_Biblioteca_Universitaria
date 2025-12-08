@@ -15,7 +15,15 @@ public class Clienti implements Serializable{
 
     ///Costruttore della classe
     public Clienti(ArrayList<Utente> clienti) {
-        this.clienti = clienti;
+        if (clienti != null) {
+            this.clienti = new ArrayList<>(clienti);
+        } else {
+            this.clienti = new ArrayList<>();
+        }
+    }
+    //Costruttore di Default
+    public Clienti(){
+        this.clienti = new ArrayList<>();
     }
     
     //Getter di Clienti
@@ -30,7 +38,10 @@ public class Clienti implements Serializable{
      * 
      * @param u È l'utente da aggiungere alla lista
      */
-    public void aggiungiUtente(Utente u) {
+    public void aggiungiUtente(Utente u) throws Exception{
+        if (this.esisteUtente(u)) {
+            throw new Exception("ERRORE DUPLICATO: Utente" + u.toString() + " già presente.");
+        }
         this.clienti.add(u);
     }
 
@@ -46,7 +57,12 @@ public class Clienti implements Serializable{
         if(!this.esisteUtente(u)){
             throw new Exception ("IMPOSSIBILE ELIMINARE UTENTE! Utente : " + u.toString() + " non presente nella lista!");
         }
+        
+        if (u.inPrestito()) { 
+             throw new Exception("IMPOSSIBILE ELIMINARE UTENTE! L'utente ha ancora " + u.getNumPrestitiAttivi() + " prestiti attivi.");
+        }
         this.clienti.remove(u);
+        
     }
 
     /**
