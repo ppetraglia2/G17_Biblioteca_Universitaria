@@ -33,6 +33,7 @@ public class Prestiti implements Serializable{
     /**
      * @brief Aggiunge un prestito alla lista dei prestiti.
      * 
+     * @pre Il prestito non deve essere già presente nella lista.
      * @post Alla lista è stato aggiunto il prestito specificato in input.
      * 
      * @param p La variabile di tipo Prestito che specifica il prestito da aggiungere alla lista.
@@ -47,7 +48,7 @@ public class Prestiti implements Serializable{
     /**
      * @brief Rimuove un prestito dalla lista dei prestiti.
      * 
-     * @pre `p` deve trovarsi nella lista.
+     * @pre Il prestito `p` deve trovarsi nella lista.
      * @post Dalla lista è stato rimosso il prestito specificato in input.
      * 
      * @param p La variabile di tipo Prestito che specifica il prestito da rimuovere dalla lista.
