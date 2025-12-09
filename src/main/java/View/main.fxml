@@ -14,33 +14,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainController">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
                            <children>
-                              <HBox prefHeight="39.0" prefWidth="605.0">
-                                 <children>
-                                    <Label prefHeight="27.0" prefWidth="36.0" text="Cerca:">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <TextField alignment="TOP_LEFT" prefHeight="25.0" prefWidth="487.0" promptText="Titolo, Autore, ISBN...">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                 </children>
+                              <Label prefHeight="27.0" prefWidth="83.0" text="Cerca:">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
-                              </HBox>
+                              </Label>
+                              <TextField alignment="TOP_LEFT" prefHeight="25.0" prefWidth="487.0" promptText="Titolo, Autore, ISBN..." HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
                               <HBox minWidth="-Infinity" prefHeight="29.0" prefWidth="173.0" spacing="5.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefWidth="53.0" text="Titolo" />
@@ -84,29 +77,22 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
                            <children>
-                              <HBox prefHeight="39.0" prefWidth="605.0">
-                                 <children>
-                                    <Label prefHeight="27.0" prefWidth="36.0" text="Cerca:">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <TextField alignment="TOP_LEFT" prefHeight="25.0" prefWidth="487.0" promptText="Cognome, Matricola...">
-                                       <HBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                 </children>
+                              <Label prefHeight="27.0" prefWidth="83.0" text="Cerca:">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
-                              </HBox>
+                              </Label>
+                              <TextField alignment="TOP_LEFT" prefHeight="25.0" prefWidth="487.0" promptText="Cognome, Matricola..." HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
                               <HBox minWidth="-Infinity" prefHeight="29.0" prefWidth="153.0" spacing="5.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Cognome" />
@@ -185,26 +171,26 @@
       </StackPane>
    </center>
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="anchorpane" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="33.0" layoutY="14.0" prefHeight="38.0" prefWidth="136.0" text="BIBLIOTECA">
                <font>
                   <Font size="26.0" />
                </font>
             </Label>
-            <VBox layoutX="33.0" layoutY="106.0" prefHeight="93.0" prefWidth="136.0" spacing="15.0">
+            <VBox layoutX="33.0" layoutY="106.0" prefHeight="93.0" prefWidth="136.0" spacing="15.0" styleClass="sidebar-vbox">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Gestione Libri">
+                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" styleClass="standard-button" text="Gestione Libri">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Gestione Utenti">
+                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="standard-button" text="Gestione Utenti">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Gestione Prestiti">
+                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="standard-button" text="Gestione Prestiti">
                      <font>
                         <Font size="14.0" />
                      </font>

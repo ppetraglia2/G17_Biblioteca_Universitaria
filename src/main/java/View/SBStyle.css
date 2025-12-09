@@ -1,7 +1,66 @@
-.leftAP {
-    -fx-flex-direction: column;
+:root {
+    -primary-color: #B3E5FC; /* Alternativa: #E1F5FE*/
+    -accent-color: #0288D1;
+    -text-color: #303C42;
+    -text-bg-color: #FAFAFA;
 }
 
-.buttons {
-    -fx-margin: 20px;
+.anchorpane {
+    -fx-background-color: -primary-color;
+}
+
+.standard-button {
+    -fx-background-color: transparent; /* Rimuove lo sfondo grigio */
+    -fx-text-fill: -text-color;
+    -fx-alignment: CENTER_LEFT;
+    -fx-underline: true;
+}
+
+.standard-button:hover {
+    -fx-background-color: -text-bg-color;
+    -fx-cursor: hand;
+    -fx-underline: false;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+
+.table-view .column-header-background {
+    -fx-background-color: -primary-color;
+    -fx-background-radius: 7 7 0 0;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 40px; /* Altezza header */
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -text-bg-color;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Righe della tabella */
+.table-row-cell {
+    -fx-background-color: -text-bg-color;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: #ECEFF1;
+}
+
+/* Riga con focus */
+.table-view:focused .table-row-cell:filled:selected, 
+.table-row-cell:filled:selected:hover {
+    -fx-background-color: #E1F5FE;
+    -fx-background-insets: 0;
+    -fx-text-fill: -text-color; 
+}
+
+/* Riga all'hover del mouse */
+.table-row-cell:filled:hover {
+    -fx-background-color: -text-bg-color;
 }
