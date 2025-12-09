@@ -174,6 +174,6 @@ public class Libro {
     @Override
     public int hashCode() {
         int hash = 7;
-        return 31*hash + ISBN.hashCode();
+        return 31 * hash + ISBN.hashCode();
     }
 }

@@ -120,22 +120,38 @@ public class Biblioteca implements Serializable{
      * @post Il libro è aggiunto alla Libreria e alla obLibreria.
      */
     public void aggiungiLibro(String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) throws Exception {
+       if(checkValiditaCampiLibro(titolo, autori, anno, ISBN, copieTot, copieDisp)) throw new Exception("Campi non validi!");
        
+       Libro l = new Libro(titolo, new ArrayList<>(autori), anno, ISBN, copieTot, copieDisp);
+       
+       if(libreria.isInLibreria(l)) throw new Exception("Libro già presente");
+       
+       libreria.aggiungiLibro(l);
+       obLibreria.add(l);
+       salvaSuFile();
     }
     
     /**
      * @brief Elimina un libro dalla Libreria.
      *
+     * Controlla che il libro non sia in prestito ed affida la rimozione del libro alla classe Libreria.
+     * Aggiorna la lista osservabile.
+     * 
      * @param l Il Libro da eliminare.
      * @throws Exception Se il libro ha ancora copie in prestito.
      * @post Il libro è rimosso da Libreria e da obLibreria.
      */
     public void eliminaLibro(Libro l) throws Exception {
+        if(l.isLibroInPrestito()) throw new Exception("Impossibile eliminare: Libro in prestito");
         
+        libreria.eliminaLibro(l);
+        obLibreria.remove(l);
+        salvaSuFile();
     }
     
     /**
      * @brief Controlla la validità minima dei campi per l'aggiunta di un Libro.
+     * @param titolo Il titolo del libro.
      * @param autori La lista degli autori del libro.
      * @param anno L'anno di publicazione del libro.
      * @param ISBN Il codice ISBN .
@@ -143,9 +159,9 @@ public class Biblioteca implements Serializable{
      * @param copieDisp Il numero di copie disponibili.
      * @return true se i campi sono validi, false altrimenti.
      */
-    private boolean checkValiditaCampiLibro(List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) {
+    private boolean checkValiditaCampiLibro(String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) {
         
-        if(!ISBN.matches("^\\d{13}$") || copieTot < copieDisp || anno <= 0)
+        if(!ISBN.matches("^\\d{13}$") || copieTot < copieDisp || anno <= 0 || !titolo.trim().matches("^[\\p{L}\\p{N}'\":\\-.,?! ]+$"))
             return false;
         
         for(Autore a : autori){
