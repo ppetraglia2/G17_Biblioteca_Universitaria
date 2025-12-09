@@ -9,27 +9,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox prefHeight="70.0" prefWidth="859.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
                            <children>
-                              <TextField alignment="TOP_LEFT" promptText="Cerca...">
+                              <HBox prefHeight="39.0" prefWidth="605.0">
+                                 <children>
+                                    <Label prefHeight="27.0" prefWidth="36.0" text="Cerca:">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField alignment="TOP_LEFT" prefHeight="25.0" prefWidth="487.0" promptText="Titolo, Autore, ISBN...">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
                                  <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    <Insets />
                                  </HBox.margin>
-                              </TextField>
-                              <HBox prefHeight="29.0" prefWidth="181.0" spacing="5.0">
+                              </HBox>
+                              <HBox minWidth="-Infinity" prefHeight="29.0" prefWidth="173.0" spacing="5.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefWidth="53.0" text="Titolo" />
                                     <Button mnemonicParsing="false" prefWidth="53.0" text="Autore">
@@ -37,22 +49,17 @@
                                           <Insets />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="53.0" text="ISBN" />
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="ISBN" />
                                  </children>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </HBox>
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+" textFill="WHITE">
+                              <Region prefHeight="39.0" prefWidth="75.0" HBox.hgrow="ALWAYS" />
+                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="157.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+ Nuovo Libro" textFill="WHITE">
                                  <HBox.margin>
-                                    <Insets left="400.0" />
+                                    <Insets />
                                  </HBox.margin>
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
                               </Button>
                            </children>
                            <padding>
@@ -65,9 +72,10 @@
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="Titolo" />
                                   <TableColumn prefWidth="75.0" text="Autori" />
-                                    <TableColumn prefWidth="75.0" text="ISBN" />
                                     <TableColumn prefWidth="75.0" text="Anno" />
-                                    <TableColumn prefWidth="75.0" text="Quantità" />
+                                    <TableColumn prefWidth="75.0" text="ISBN" />
+                                    <TableColumn prefWidth="75.0" text="Copie (D/T)" />
+                                    <TableColumn prefWidth="75.0" text="Azioni" />
                                 </columns>
                               </TableView>
                            </children>
@@ -80,50 +88,58 @@
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334">
                      <children>
-                        <HBox prefHeight="70.0" prefWidth="859.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
                            <children>
-                              <TextField alignment="TOP_LEFT" promptText="Cerca...">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <HBox prefHeight="29.0" prefWidth="181.0" spacing="5.0">
+                              <HBox prefHeight="39.0" prefWidth="605.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Cognome" />
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Matricola">
+                                    <Label prefHeight="27.0" prefWidth="36.0" text="Cerca:">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField alignment="TOP_LEFT" prefHeight="25.0" prefWidth="487.0" promptText="Cognome, Matricola...">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox minWidth="-Infinity" prefHeight="29.0" prefWidth="153.0" spacing="5.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Cognome" />
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Matricola">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                     </Button>
                                  </children>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </HBox>
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+" textFill="WHITE">
+                              <Region prefHeight="39.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
+                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+ Nuovo Utente" textFill="WHITE">
                                  <HBox.margin>
-                                    <Insets left="400.0" />
+                                    <Insets />
                                  </HBox.margin>
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
                               </Button>
                            </children>
                            <padding>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </padding>
                         </HBox>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <TableView prefHeight="805.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="Nome" />
                                     <TableColumn prefWidth="75.0" text="Cognome" />
+                                    <TableColumn prefWidth="75.0" text="Nome" />
                                     <TableColumn prefWidth="75.0" text="Matricola" />
                                     <TableColumn prefWidth="75.0" text="Prestiti" />
+                                    <TableColumn prefWidth="75.0" text="Azioni" />
                                  </columns>
                               </TableView>
                            </children>
@@ -132,19 +148,16 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane id="panePrestiti" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane id="panePrestiti" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334">
                      <children>
-                        <HBox prefHeight="70.0" prefWidth="859.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+" textFill="WHITE">
+                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+ Nuovo Prestito" textFill="WHITE">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets left="717.0" />
                                  </HBox.margin>
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
                               </Button>
                            </children>
                            <padding>
@@ -157,7 +170,9 @@
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="Utente" />
                                     <TableColumn prefWidth="75.0" text="Libro" />
-                                    <TableColumn prefWidth="119.3333740234375" text="Data di restituzione" />
+                                    <TableColumn prefWidth="75.0" text="Scadenza" />
+                                    <TableColumn prefWidth="75.0" text="Stato" />
+                                    <TableColumn prefWidth="75.0" text="Azioni" />
                                  </columns>
                               </TableView>
                            </children>
@@ -179,17 +194,17 @@
             </Label>
             <VBox layoutX="33.0" layoutY="106.0" prefHeight="93.0" prefWidth="136.0" spacing="15.0">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Libri">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Gestione Libri">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Utenti">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Gestione Utenti">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Prestiti">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Gestione Prestiti">
                      <font>
                         <Font size="14.0" />
                      </font>
