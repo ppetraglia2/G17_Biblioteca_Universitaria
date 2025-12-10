@@ -62,7 +62,7 @@ public class Utente {
      * @return True se il limite è stato raggiunto
      */
     public boolean limitePrestiti() {
-        return numPrestitiAttivi >= 3;
+        return this.numPrestitiAttivi >= 3;
     }
     
     /**
@@ -72,6 +72,7 @@ public class Utente {
     public boolean inPrestito() {
         return this.numPrestitiAttivi > 0;
     }
+    
     
     /**
      * @brief Ritorna una rappresentazione in stringa dell'oggetto Utente.
