@@ -153,6 +153,31 @@ public class UtenteTest {
     }
     
     
+    @Test
+    void testIncrementaPrestitiAttivi() {
+        // 1. Arrange: Inizializza con 1 prestito
+        Utente utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI);
+        
+        // 2. Act: Incrementa
+        utente.incrementaPrestitiAttivi();
+        
+        // 3. Assert: Verifica che sia passato a 2
+        assertEquals(2, utente.getNumPrestitiAttivi(), "Dopo l'incremento, i prestiti attivi dovrebbero essere 2.");
+    }
+    
+    @Test
+    void testDecrementaPrestitiAttivi() {
+        // 1. Arrange: Inizializza con 1 prestito
+        Utente utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,2);
+        
+        // 2. Act: Incrementa
+        utente.decrementaPrestitiAttivi();
+        
+        // 3. Assert: Verifica che sia passato a 2
+        assertEquals(1, utente.getNumPrestitiAttivi(), "Dopo la diminuzione, i prestiti attivi dovrebbero essere 1.");
+    }
+    
+    
     // --- Test di toString() ---
     @Test
     public void testToString(){
