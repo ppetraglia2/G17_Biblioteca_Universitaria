@@ -1,3 +1,5 @@
+/* Design System */
+
 :root {
     -primary-color: #B3E5FC; /* Alternativa: #E1F5FE*/
     -accent-color: #0288D1;
@@ -9,35 +11,73 @@
     -fx-background-color: -primary-color;
 }
 
+.start-button {
+    -fx-background-radius: 7;
+    -fx-text-fill: -text-color;
+    -fx-background-color: transparent;
+}
+
+.start-button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: -text-bg-color;
+    -fx-effect: dropshadow(three-pass-box, -accent-color, 5, 0, 3, 3);
+}
+
+.separator {
+    -fx-background-color: -text-color;
+}
+
+/* Stili per i pulsanti di aggiunta */
+
+.add-button {
+    -fx-background-radius: 7;
+    -fx-background-color: -accent-color;
+    -fx-background-color:  linear-gradient(from 0% 0% to 0% 100%, -accent-color, -primary-color);
+}
+
+.add-button:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, -accent-color, 5, 0, 3, 3);
+}
+
+/* Stili per i pulsanti normali */
+
 .standard-button {
+    -fx-background-radius: 7;
     -fx-background-color: transparent; /* Rimuove lo sfondo grigio */
     -fx-text-fill: -text-color;
     -fx-alignment: CENTER_LEFT;
-    -fx-underline: true;
 }
 
 .standard-button:hover {
-    -fx-background-color: -text-bg-color;
     -fx-cursor: hand;
-    -fx-underline: false;
+    -fx-background-color: -text-bg-color;
+    -fx-effect: dropshadow(three-pass-box, -accent-color, 5, 0, 3, 3);
 }
+
+/* Stile per la tabella */
 
 .table-view {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
+/* Stile per il background dell'header della tabella */
 
 .table-view .column-header-background {
     -fx-background-color: -primary-color;
     -fx-background-radius: 7 7 0 0;
 }
 
+/* Stile per i column header e i filler*/
+
 .table-view .column-header, .table-view .filler {
     -fx-background-color: transparent;
     -fx-size: 40px; /* Altezza header */
     -fx-border-color: transparent;
 }
+
+/* Stile per i label dei column header*/
 
 .table-view .column-header .label {
     -fx-text-fill: -text-bg-color;
@@ -46,6 +86,7 @@
 }
 
 /* Righe della tabella */
+
 .table-row-cell {
     -fx-background-color: -text-bg-color;
     -fx-border-color: transparent;
@@ -53,6 +94,7 @@
 }
 
 /* Riga con focus */
+
 .table-view:focused .table-row-cell:filled:selected, 
 .table-row-cell:filled:selected:hover {
     -fx-background-color: #E1F5FE;
@@ -61,6 +103,7 @@
 }
 
 /* Riga all'hover del mouse */
+
 .table-row-cell:filled:hover {
     -fx-background-color: -text-bg-color;
 }

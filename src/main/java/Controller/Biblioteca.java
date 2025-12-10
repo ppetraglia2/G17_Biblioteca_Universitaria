@@ -12,6 +12,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import Model.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 //Necessari per JavaFX(ObservableList, FilteredList)
@@ -36,10 +41,11 @@ public class Biblioteca implements Serializable{
     
     ///Costruttore della classe Biblioteca
     public Biblioteca(){
-        this.libreria = new Libreria(new ArrayList<Libro>()); 
-        this.clienti = new Clienti(new ArrayList<Utente>()); 
-        this.prestiti = new Prestiti(new ArrayList<Prestito>());
-        
+        if(!caricaDaFile()){
+            this.libreria = new Libreria(new ArrayList<>()); 
+            this.clienti = new Clienti(new ArrayList<>()); 
+            this.prestiti = new Prestiti(new ArrayList<>());
+        }
         // Inizializzazione delle liste ObservableList/FilteredList
         inizializzaListe();
     }
@@ -75,7 +81,7 @@ public class Biblioteca implements Serializable{
      * crea le FilteredList, agganciandole per le operazioni di UI.
      *
      */
-    public void inizializzaListe() {
+    private void inizializzaListe() {
         // Crea le ObservableList, avvolgendo le liste interne dei gestori
         this.obLibreria = FXCollections.observableArrayList(libreria.getLibreria());
         this.obClienti = FXCollections.observableArrayList(clienti.getClienti());
@@ -88,65 +94,32 @@ public class Biblioteca implements Serializable{
     
     /**
      * @brief Applica un filtro alla lista dei Libri.
-     * @param q La stringa è utilizzata per specificare il tipo di filtraggio (titolo, autore, ISBN, ecc.).
+     * @param search La stringa è utilizzata per specificare il tipo di filtraggio (titolo, autore, ISBN, ecc.).
      * @post La FilteredList flLibreria è aggiornata in base al filtro.
      */
-    public void filtraLibri(String q) {
-        
+    public void filtraLibri(String search) {
+        flLibreria.setPredicate(libro->{
+            if(search == null || search.isEmpty()) return true;
+            
+            String lowSearch = search.toLowerCase();
+            
+            return libro.getTitolo().toLowerCase().contains(lowSearch) || libro.getAutori().toString().toLowerCase().contains(lowSearch) || libro.getISBN().toLowerCase().contains(lowSearch);
+        });
     }
     
     /**
      * @brief Applica un filtro alla lista degli Utenti.
-     * @param q La stringa è utilizzata per specificare il tipo di filtraggio (nome, cognome, matricola, ecc.).
+     * @param search La stringa è utilizzata per specificare il tipo di filtraggio (nome, cognome, matricola, ecc.).
      * @post La FilteredList flClienti è aggiornata in base al filtro.
      */
-    public void filtraUtenti(String q) {
-        
-    }
-    
-    /**
-     * @brief Aggiunge un nuovo libro alla Libreria.
-     *
-     * Effettua i controlli di validità sui campi e affida l'aggiunta del libro alla classe Libreria.
-     * Aggiorna la lista osservabile in caso di successo.
-     *
-     * @param titolo Il titolo del libro.
-     * @param autori La lista degli autori del libro.
-     * @param anno L'anno di pubblicazione.
-     * @param ISBN Il codice ISBN .
-     * @param copieTot Il numero di copie totali.
-     * @param copieDisp Il numero di copie disponibili.
-     * @throws Exception Se i dati non sono validi o il libro esiste già.
-     * @post Il libro è aggiunto alla Libreria e alla obLibreria.
-     */
-    public void aggiungiLibro(String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) throws Exception {
-       if(checkValiditaCampiLibro(titolo, autori, anno, ISBN, copieTot, copieDisp)) throw new Exception("Campi non validi!");
-       
-       Libro l = new Libro(titolo, new ArrayList<>(autori), anno, ISBN, copieTot, copieDisp);
-       
-       if(libreria.isInLibreria(l)) throw new Exception("Libro già presente");
-       
-       libreria.aggiungiLibro(l);
-       obLibreria.add(l);
-       salvaSuFile();
-    }
-    
-    /**
-     * @brief Elimina un libro dalla Libreria.
-     *
-     * Controlla che il libro non sia in prestito ed affida la rimozione del libro alla classe Libreria.
-     * Aggiorna la lista osservabile.
-     * 
-     * @param l Il Libro da eliminare.
-     * @throws Exception Se il libro ha ancora copie in prestito.
-     * @post Il libro è rimosso da Libreria e da obLibreria.
-     */
-    public void eliminaLibro(Libro l) throws Exception {
-        if(l.isLibroInPrestito()) throw new Exception("Impossibile eliminare: Libro in prestito");
-        
-        libreria.eliminaLibro(l);
-        obLibreria.remove(l);
-        salvaSuFile();
+    public void filtraUtenti(String search) {
+        flClienti.setPredicate(utente->{
+            if(search == null || search.isEmpty()) return true;
+            
+            String lowSearch = search.toLowerCase();
+            
+            return utente.getCognome().toLowerCase().contains(lowSearch) || utente.getMatricola().toLowerCase().contains(lowSearch);
+        });
     }
     
     /**
@@ -192,6 +165,51 @@ public class Biblioteca implements Serializable{
     }
     
     /**
+     * @brief Aggiunge un nuovo libro alla Libreria.
+     *
+     * Effettua i controlli di validità sui campi e affida l'aggiunta del libro alla classe Libreria.
+     * Aggiorna la lista osservabile in caso di successo.
+     *
+     * @param titolo Il titolo del libro.
+     * @param autori La lista degli autori del libro.
+     * @param anno L'anno di pubblicazione.
+     * @param ISBN Il codice ISBN .
+     * @param copieTot Il numero di copie totali.
+     * @param copieDisp Il numero di copie disponibili.
+     * @throws Exception Se i dati non sono validi o il libro esiste già.
+     * @post Il libro è aggiunto alla Libreria e alla obLibreria.
+     */
+    public void aggiungiLibro(String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) throws Exception {
+       if(!checkValiditaCampiLibro(titolo, autori, anno, ISBN, copieTot, copieDisp)) throw new Exception("Campi non validi!");
+       
+       Libro l = new Libro(titolo, new ArrayList<>(autori), anno, ISBN, copieTot, copieDisp);
+       
+       if(libreria.isInLibreria(l)) throw new Exception("Libro già presente");
+       
+       libreria.aggiungiLibro(l);
+       obLibreria.add(l);
+       salvaSuFile();
+    }
+    
+    /**
+     * @brief Elimina un libro dalla Libreria.
+     *
+     * Controlla che il libro non sia in prestito ed affida la rimozione del libro alla classe Libreria.
+     * Aggiorna la lista osservabile.
+     * 
+     * @param l Il Libro da eliminare.
+     * @throws Exception Se il libro ha ancora copie in prestito.
+     * @post Il libro è rimosso da Libreria e da obLibreria.
+     */
+    public void eliminaLibro(Libro l) throws Exception {
+        if(l.isLibroInPrestito()) throw new Exception("Impossibile eliminare: Libro in prestito");
+        
+        libreria.eliminaLibro(l);
+        obLibreria.remove(l);
+        salvaSuFile();
+    }
+    
+    /**
      * @brief Aggiunge un nuovo utente ai Clienti.
      *
      * Effettua i controlli di validità e delega l'aggiunta alla classe Clienti.
@@ -205,7 +223,15 @@ public class Biblioteca implements Serializable{
      * @post L'utente è aggiunto a Clienti e a obClienti.
      */
     public void aggiungiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi) throws Exception {
+       if(!checkValiditaCampiUtente(nome, cognome, matricola, email, numPrestitiAttivi)) throw new Exception("Campi non validi!");
        
+       Utente u = new Utente(nome, cognome, matricola, email, numPrestitiAttivi);
+       
+       if(clienti.esisteUtente(u)) throw new Exception("Utente già registrato");
+       
+       clienti.aggiungiUtente(u);
+       obClienti.add(u);
+       salvaSuFile();
     }
     
     /**
@@ -216,7 +242,11 @@ public class Biblioteca implements Serializable{
      * @post L'utente è rimosso da Clienti e da obClienti.
      */
     public void eliminaUtente(Utente u) throws Exception {
+        if(u.inPrestito()) throw new Exception("Impossibile eliminare: Utente possiede prestiti attivi");
         
+        clienti.eliminaUtente(u);
+        obClienti.remove(u);
+        salvaSuFile();
     }
     
     /**
@@ -232,6 +262,20 @@ public class Biblioteca implements Serializable{
      * e il numero di copie disponibili del libro è decrementato.
      */
     public void aggiungiPrestito(Utente u, Libro l, LocalDate data) throws Exception {
+        if(u == null || l == null || data == null) throw new Exception("Dati non validi");
+        if(l.getNumCopieDisponibili() < 0) throw new Exception("Copie del libro non disponibili");
+        if(u.getNumPrestitiAttivi() >= 3) throw new Exception("L'utente selezionato è già a carico di 3 prestiti");
+        
+        Prestito p = new Prestito(u, l, data);
+        prestiti.aggiungiPrestito(p);
+        obPrestiti.add(p);
+        
+        l.diminuisciCopie();
+        u.incrementaPrestitiAttivi();
+        obClienti.set(obClienti.indexOf(u), u);
+        obLibreria.set(obLibreria.indexOf(l), l);
+        
+        salvaSuFile();
     }
     
     /**
@@ -245,7 +289,18 @@ public class Biblioteca implements Serializable{
      * viene decrementato e il numero di copie del libro incrementato.
      */
     public void restituisciPrestito(Prestito p) throws Exception {
+        prestiti.rimuoviPrestito(p);
+        obPrestiti.remove(p);
         
+        Libro l = p.getLibro();
+        Utente u = p.getUtente();
+        
+        l.aumentaCopie();
+        u.decrementaPrestitiAttivi();
+        obClienti.set(obClienti.indexOf(u), u);
+        obLibreria.set(obLibreria.indexOf(l), l);
+        
+        salvaSuFile();
     }
 
     /**
@@ -257,8 +312,14 @@ public class Biblioteca implements Serializable{
      * @throws Exception Se si verificano errori di I/O durante la serializzazione.
      * @post I dati sono salvati sul file.
      */
-    public void salvaSuFile() throws Exception {
-        
+    private void salvaSuFile() throws Exception {
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))){
+            
+            out.writeObject(libreria);
+            out.writeObject(clienti);
+            out.writeObject(prestiti);
+            
+        }catch(IOException e){ throw new Exception("Errore nel salvataggio dei dati"); }
     }
 
     /**
@@ -267,10 +328,16 @@ public class Biblioteca implements Serializable{
      * Deserializza l'oggetto Biblioteca dal file e ripristina lo stato interno.
      * Richiama inizializzaListe() dopo il caricamento.
      *
-     * @throws Exception Se si verificano errori di I/O o di classe durante la deserializzazione.
-     * @return Una nuova istanza di Biblioteca con i dati caricati.
+     * @return true se il caricamento ha avuto successo, false altrimenti.
      */
-    public Biblioteca caricaDaFile() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private boolean caricaDaFile(){
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))){
+            
+            libreria = (Libreria) in.readObject();
+            clienti = (Clienti) in.readObject();
+            prestiti = (Prestiti) in.readObject();
+            
+            return true;
+        }catch(Exception e){ return false; }
     }
 }

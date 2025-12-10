@@ -75,6 +75,20 @@ public class Utente {
     
     
     /**
+     * @brief Incrementa il numero di prestiti attivi dell'utente
+     */
+    public void incrementaPrestitiAttivi(){
+        this.numPrestitiAttivi++;
+    }
+    
+    /**
+     * @brief Decrementa il numero di prestiti attivi dell'utente
+     */
+    public void decrementaPrestitiAttivi(){
+        this.numPrestitiAttivi--;
+    }
+    
+    /**
      * @brief Ritorna una rappresentazione in stringa dell'oggetto Utente.
      * @return Una stringa contenente Nome, Cognome, Matricola, Email Istituzionale, Numero di Prestiti Attivi.
      */

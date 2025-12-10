@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -49,7 +51,7 @@
                                  </HBox.margin>
                               </HBox>
                               <Region prefHeight="39.0" prefWidth="75.0" HBox.hgrow="ALWAYS" />
-                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="157.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+ Nuovo Libro" textFill="WHITE">
+                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="157.0" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -77,7 +79,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334">
                      <children>
@@ -107,7 +109,7 @@
                                  </HBox.margin>
                               </HBox>
                               <Region prefHeight="39.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
-                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="177.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+ Nuovo Utente" textFill="WHITE">
+                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="177.0" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -140,7 +142,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: #57C785; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #57C785, #066610);" text="+ Nuovo Prestito" textFill="WHITE">
+                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="107.0" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="717.0" />
                                  </HBox.margin>
@@ -167,17 +169,17 @@
                   </VBox>
                </children>
             </AnchorPane>
+            <ImageView fitHeight="251.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
          </children>
       </StackPane>
    </center>
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="anchorpane" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="33.0" layoutY="14.0" prefHeight="38.0" prefWidth="136.0" text="BIBLIOTECA">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Label>
             <VBox layoutX="33.0" layoutY="106.0" prefHeight="93.0" prefWidth="136.0" spacing="15.0" styleClass="sidebar-vbox">
                <children>
                   <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" styleClass="standard-button" text="Gestione Libri">
@@ -197,6 +199,11 @@
                   </Button>
                </children>
             </VBox>
+            <ImageView fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
