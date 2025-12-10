@@ -4,34 +4,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D6ECFF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane style="-fx-background-color: #B3E5FC;" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" layoutX="108.0" layoutY="68.0" prefHeight="279.0" prefWidth="389.0" spacing="10.0">
+      <VBox alignment="CENTER" prefHeight="279.0" prefWidth="389.0" spacing="10.0">
          <children>
-            <Label text="BIBLIOTECA UNIVERSITARIA">
-               <font>
-                  <Font name="Arial Black" size="19.0" />
-               </font>
-            </Label>
+            <ImageView fitHeight="146.0" fitWidth="340.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
             <Label text="Benvenuto nel sistema di gestione della Biblioteca Universitaria." />
-            <Separator prefWidth="200.0" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: #4fa3ff;" text="ENTRA NEL SISTEMA" textFill="WHITE" />
+            <Separator maxWidth="-Infinity" prefWidth="337.0" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="start-button" text="ENTRA NEL SISTEMA" />
          </children>
-         <effect>
-            <InnerShadow />
-         </effect>
       </VBox>
    </children>
    <effect>
-      <InnerShadow choke="0.67" height="55.07" radius="32.145" width="75.51">
+      <InnerShadow choke="0.67" height="65.29" radius="34.7" width="75.51">
          <color>
-            <Color red="0.4166666567325592" green="0.5906432867050171" blue="0.7894737124443054" />
+            <Color red="0.4156862795352936" green="0.5921568870544434" blue="0.7882353067398071" />
          </color>
       </InnerShadow>
    </effect>
-</AnchorPane>
+</StackPane>
