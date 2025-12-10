@@ -11,6 +11,22 @@
     -fx-background-color: -primary-color;
 }
 
+.start-button {
+    -fx-background-radius: 7;
+    -fx-text-fill: -text-color;
+    -fx-background-color: transparent;
+}
+
+.start-button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: -text-bg-color;
+    -fx-effect: dropshadow(three-pass-box, -accent-color, 5, 0, 3, 3);
+}
+
+.separator {
+    -fx-background-color: -text-color;
+}
+
 /* Stili per i pulsanti di aggiunta */
 
 .add-button {
