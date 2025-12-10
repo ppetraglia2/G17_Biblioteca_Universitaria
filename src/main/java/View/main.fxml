@@ -119,7 +119,7 @@
                         </HBox>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView prefHeight="805.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView prefHeight="767.0" prefWidth="859.0" AnchorPane.bottomAnchor="-567.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="Cognome" />
                                     <TableColumn prefWidth="75.0" text="Nome" />
