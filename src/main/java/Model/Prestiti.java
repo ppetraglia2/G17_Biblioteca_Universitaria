@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class Prestiti implements Serializable{
 
-    private ArrayList<Prestito> prestiti; ///< Lista dei prestiti.
+    /// Lista dei prestiti.
+    private ArrayList<Prestito> prestiti;
 
     /// Costruttore della classe.
     public Prestiti(ArrayList<Prestito> prestiti) {

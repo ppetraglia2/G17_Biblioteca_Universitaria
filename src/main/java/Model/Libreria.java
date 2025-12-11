@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 public class Libreria implements Serializable{
 
-    private ArrayList<Libro> libreria;  ///< Lista dei libri
+    /// Lista dei libri.
+    private ArrayList<Libro> libreria;
 
     ///Costruttore della classe
     public Libreria(ArrayList<Libro> libreria) {

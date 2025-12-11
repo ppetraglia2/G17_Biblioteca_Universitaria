@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class Clienti implements Serializable{
 
-    private ArrayList<Utente> clienti;  // Lista degli utenti
+    /// Lista degli utenti.
+    private ArrayList<Utente> clienti;
 
     ///Costruttore della classe
     public Clienti(ArrayList<Utente> clienti) {
@@ -40,7 +41,7 @@ public class Clienti implements Serializable{
      */
     public void aggiungiUtente(Utente u) throws Exception{
         if (this.esisteUtente(u)) {
-            throw new Exception("ERRORE DUPLICATO: Utente" + u.toString() + " già presente.");
+            throw new Exception("ERRORE DUPLICATO: Utente " + u.toString() + " già presente.");
         }
         this.clienti.add(u);
     }

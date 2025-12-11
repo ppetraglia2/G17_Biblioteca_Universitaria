@@ -7,14 +7,18 @@
 
 package Model;
 
-import Model.Libro;
 import java.time.LocalDate;
 
 public class Prestito {
 
-    private Utente utente;              ///< Uente che richiede il prestito.
-    private Libro libro;                ///< Libro preso in prestito. 
-    private LocalDate dataRestituzione; ///< Dta di restituzione prevista.
+    /// Uente che richiede il prestito.
+    private Utente utente;
+    
+    /// Libro preso in prestito.
+    private Libro libro; 
+    
+    /// Data di restituzione prevista.
+    private LocalDate dataRestituzione;
 
     /// Costruttore della classe.
     public Prestito(Utente utente, Libro libro, LocalDate dataRestituzione) {
