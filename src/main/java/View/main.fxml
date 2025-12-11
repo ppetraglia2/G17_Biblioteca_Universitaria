@@ -154,7 +154,7 @@
                         </HBox>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView prefHeight="767.0" prefWidth="859.0" AnchorPane.bottomAnchor="-567.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView prefHeight="767.0" prefWidth="859.0" stylesheets="@SBStyle.css" AnchorPane.bottomAnchor="-567.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn prefWidth="75.0" text="Cognome" />
                                     <TableColumn prefWidth="75.0" text="Nome" />
