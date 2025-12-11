@@ -99,7 +99,7 @@
 /* Stile per i label dei column header*/
 
 .table-view .column-header .label {
-    -fx-text-fill: -text-bg-color;
+    -fx-text-fill: -text-color;
     -fx-font-weight: bold;
     -fx-alignment: CENTER_LEFT;
 }
