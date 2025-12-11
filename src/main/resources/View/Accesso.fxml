@@ -36,7 +36,7 @@
       </VBox>
    </children>
    <effect>
-      <InnerShadow height="184.92" radius="77.3625" width="126.53">
+      <InnerShadow height="155.73" radius="70.065" width="126.53">
          <color>
             <Color green="0.41960784792900085" blue="0.7019608020782471" />
          </color>
