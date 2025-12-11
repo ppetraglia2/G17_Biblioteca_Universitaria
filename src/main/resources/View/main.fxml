@@ -3,9 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,6 +16,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainController">
@@ -216,30 +219,52 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="anchorpane" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="33.0" layoutY="106.0" prefHeight="93.0" prefWidth="136.0" spacing="15.0" styleClass="sidebar-vbox" AnchorPane.topAnchor="130.0">
+            <VBox layoutX="24.0" layoutY="229.0" prefHeight="141.0" prefWidth="155.0" spacing="15.0" styleClass="sidebar-vbox" AnchorPane.topAnchor="229.0">
                <children>
-                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" styleClass="standard-button" text="Gestione Libri">
+                  <Button id="standardButton" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" style="-fx-background-color: white;" styleClass="standard-button" text="Gestione Libri" textFill="#434040">
                      <font>
-                        <Font name="Noto Sans Bold" size="14.0" />
+                        <Font name="Arial Black" size="14.0" />
                      </font>
+                     <effect>
+                        <InnerShadow height="15.16" radius="6.1075" width="11.27">
+                           <color>
+                              <Color red="0.0117647061124444" green="0.5882353186607361" blue="0.800000011920929" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
                   </Button>
-                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="standard-button" text="Gestione Utenti">
+                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="31.0" prefWidth="169.0" style="-fx-background-color: white;" styleClass="standard-button" text="Gestione Utenti" textFill="#434040">
                      <font>
-                        <Font name="Noto Sans Bold" size="14.0" />
+                        <Font name="Arial Black" size="14.0" />
                      </font>
+                     <effect>
+                        <InnerShadow height="13.21" radius="5.62" width="11.27">
+                           <color>
+                              <Color red="0.0117647061124444" green="0.5882353186607361" blue="0.800000011920929" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
                   </Button>
-                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="standard-button" text="Gestione Prestiti">
+                  <Button id="standardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: white;" styleClass="standard-button" text="Gestione Prestiti" textFill="#434040">
                      <font>
-                        <Font name="Noto Sans Bold" size="14.0" />
+                        <Font name="Arial Black" size="14.0" />
                      </font>
+                     <effect>
+                        <InnerShadow height="9.32" radius="4.6475" width="11.27">
+                           <color>
+                              <Color red="0.0117647061124444" green="0.5882353186607361" blue="0.800000011920929" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
                   </Button>
                </children>
             </VBox>
-            <ImageView fitHeight="125.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="130.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: SRC_OVER;">
                <image>
                   <Image url="@logo.png" />
                </image>
             </ImageView>
+            <Separator layoutX="-6.0" layoutY="125.0" prefHeight="12.0" prefWidth="209.0" />
          </children>
       </AnchorPane>
    </left>
