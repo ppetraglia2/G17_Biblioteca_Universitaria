@@ -270,5 +270,23 @@ public class UtenteTest {
         //Assert
         assertFalse(utente.equals(altraClasse), "L'oggetto non deve essere uguale ad un oggetto di un'altra classe.");
     }
+    
+    // --- Test HashCode ---
+    
+    @Test
+    void testHashCode_OggettiUguali() {
+        //Istanzio due oggetti con gli stessi dati
+        Utente utente2 = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI);
+        //Assert
+        assertEquals(utente.hashCode(),utente2.hashCode(),"L'hashcode deve essere uguale per due oggetti uguali."); 
+    }
+    
+    @Test
+    void testHashCode_OggettiDiversi() {
+        //Istanzio due oggetti con dati diversi
+        Utente utente2 = new Utente(NOME_NUOVO,COGNOME_NUOVO,MATRICOLA_NUOVA,EMAIL_NUOVA,NUM_PRESTITI_ATTIVI);
+        //Assert
+        assertEquals(utente.hashCode(),utente2.hashCode(),"L'hashcode non deve essere uguale per due oggetti uguali."); 
+    }
 }
 
