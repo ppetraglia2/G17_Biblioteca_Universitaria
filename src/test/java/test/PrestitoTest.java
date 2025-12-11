@@ -150,7 +150,7 @@ public class PrestitoTest {
 
         // ASSERT
         String expectedString = String.format("Prestito: %s a %s %s. --- Scadenza: %s (Ritardo: SI)",
-                libroIniziale.getTitolo(), utenteIniziale.getNome(), utenteIniziale.getCognome(), DATA_NON_SCADUTA.toString());
+                libroIniziale.getTitolo(), utenteIniziale.getNome(), utenteIniziale.getCognome(), DATA_SCADUTA.toString());
 
         assertEquals(expectedString, prestitoScaduto.toString(), "toString() deve restituire la stringa formattata.");
     }

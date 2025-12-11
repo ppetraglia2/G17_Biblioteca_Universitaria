@@ -33,13 +33,17 @@ public class Libro {
     /// Costruttore della classe.
     public Libro(String titolo, ArrayList<Autore> autori, int anno, String ISBN, int numCopieTotali, int numCopieDisponibili) {
         this.titolo = titolo;
-        this.autori = new ArrayList<Autore>();
+        if (autori != null) {
+            this.autori = new ArrayList<>(autori); // Crea una NUOVA lista con gli stessi contenuti
+        } else {
+            this.autori = new ArrayList<>();
+        }
         this.anno = anno;
         this.ISBN = ISBN;
         this.numCopieTotali = numCopieTotali;
         this.numCopieDisponibili = numCopieTotali;      //< All'inizio, le copie disponibili sono pari al totale
     }
-
+  
     /// Getter del titolo.
     public String getTitolo() { return titolo; }
 

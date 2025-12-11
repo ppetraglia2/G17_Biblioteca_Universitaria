@@ -43,7 +43,7 @@ public class Libreria implements Serializable{
      */
     public void aggiungiLibro(Libro l) throws Exception{
         if (this.isInLibreria(l)) {
-            throw new Exception("ERRORE DUPLICATO: Libro" + l.toString() + " già presente.");
+            throw new Exception("ERRORE DUPLICATO: Libro " + l.toString() + " già presente.");
         }
         this.libreria.add(l);
     }

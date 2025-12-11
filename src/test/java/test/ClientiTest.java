@@ -19,8 +19,8 @@ public class ClientiTest {
     @BeforeEach
     void setUp(){
         //Oggetti utente
-        utente1 = new Utente("Pasquale", "Petraglia", "0612708970", "p.petraglia3@studenti.unisa.it", 1);
-        utente2 = new Utente("Andrea", "Rossomando", "0612708971", "a.rossomando6@studenti.unisa.it", 1);
+        utente1 = new Utente("Pasquale", "Petraglia", "0612708970", "p.petraglia3@studenti.unisa.it", 0);
+        utente2 = new Utente("Andrea", "Rossomando", "0612708971", "a.rossomando6@studenti.unisa.it", 0);
         
         //Oggetto clienti
         clienti = new Clienti();

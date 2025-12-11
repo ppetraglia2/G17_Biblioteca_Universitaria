@@ -286,7 +286,7 @@ public class UtenteTest {
         //Istanzio due oggetti con dati diversi
         Utente utente2 = new Utente(NOME_NUOVO,COGNOME_NUOVO,MATRICOLA_NUOVA,EMAIL_NUOVA,NUM_PRESTITI_ATTIVI);
         //Assert
-        assertEquals(utente.hashCode(),utente2.hashCode(),"L'hashcode non deve essere uguale per due oggetti uguali."); 
+        assertNotEquals(utente.hashCode(),utente2.hashCode(),"L'hashcode deve essere diverso per due oggetti diversi."); 
     }
 }
 
