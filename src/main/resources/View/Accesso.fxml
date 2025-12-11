@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<StackPane blendMode="SOFT_LIGHT" style="-fx-background-color: lightcyan;" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane blendMode="SOFT_LIGHT" style="-fx-background-color: #66c2ff;" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="279.0" prefWidth="389.0" spacing="10.0" stylesheets="@SBStyle.css">
          <children>
@@ -25,24 +25,20 @@
                   <Font name="Roboto" size="12.0" />
                </font></Label>
             <Separator maxWidth="-Infinity" prefWidth="337.0" style="-fx-background-color: black;" />
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" mnemonicParsing="false" style="-fx-background-color: white;" styleClass="start-button" text="ENTRA NEL SISTEMA">
+            <Button alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" graphicTextGap="2.0" mnemonicParsing="false" style="-fx-background-color: white;" styleClass="start-button" text="ENTRA NEL SISTEMA">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
                <effect>
-                  <InnerShadow radius="6.105" width="5.42">
-                     <color>
-                        <Color red="0.5417208075523376" green="0.8790651559829712" blue="0.9385964870452881" />
-                     </color>
-                  </InnerShadow>
+                  <InnerShadow blurType="GAUSSIAN" choke="0.63" height="5.43" radius="2.215" width="5.43" />
                </effect></Button>
          </children>
       </VBox>
    </children>
    <effect>
-      <InnerShadow height="255.0" radius="127.0" width="255.0">
+      <InnerShadow height="184.92" radius="77.3625" width="126.53">
          <color>
-            <Color red="0.23348495364189148" green="0.6926720142364502" blue="0.859649121761322" />
+            <Color green="0.41960784792900085" blue="0.7019608020782471" />
          </color>
       </InnerShadow>
    </effect>
