@@ -52,7 +52,7 @@ public class Libro {
 
     /// Setter della lista degli autori.
     public void setAutori(List<Autore> autori) {
-        this.autori = new ArrayList<>(autori);;
+        this.autori = new ArrayList<>(autori);
     }
 
     /// Setter dell'anno di pubblicazione.
