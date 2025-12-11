@@ -77,14 +77,16 @@ public class Utente {
     /**
      * @brief Incrementa il numero di prestiti attivi dell'utente
      */
-    public void incrementaPrestitiAttivi(){
+    public void incrementaPrestitiAttivi()throws Exception{
+        if(this.numPrestitiAttivi >=3) throw new Exception("Impossibile incrementare: L'utente ha raggiunto il numero massimo di prestiti possibili.");
         this.numPrestitiAttivi++;
     }
     
     /**
      * @brief Decrementa il numero di prestiti attivi dell'utente
      */
-    public void decrementaPrestitiAttivi(){
+    public void decrementaPrestitiAttivi()throws Exception{
+        if(this.numPrestitiAttivi <= 0) throw new Exception("Non si possono avere prestiti negativi");
         this.numPrestitiAttivi--;
     }
     

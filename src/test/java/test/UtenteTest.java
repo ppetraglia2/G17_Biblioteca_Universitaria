@@ -22,10 +22,16 @@ public class UtenteTest {
     private static final String MATRICOLA_NUOVA = "0612708971";
     private static final String EMAIL_NUOVA = "a.rossomando6@studenti.unisa.it";
     
+    
+    @BeforeEach
+    void setUp() {
+        // Inizializza l'oggetto base prima di ogni test
+        utente = new Utente(NOME_INIZIALE, COGNOME_INIZIALE, MATRICOLA_INIZIALE, EMAIL_INIZIALE, NUM_PRESTITI_ATTIVI);
+    }
+    
     // --- Test del Costruttore e dei Getter ---
     @Test
-    public void testConstructorEGetter() {
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI);
+    public void testGetter() {
     
         // 2. Assert
         assertEquals(NOME_INIZIALE, utente.getNome(), "Il nome deve corrispondere al valore passato nel costruttore.");
@@ -110,27 +116,27 @@ public class UtenteTest {
      */
     @Test
     public void testLimitePrestiti_SottoLimiteBasso(){
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,0);
+        utente.setNumPrestitiAttivi(0);
         assertFalse(utente.limitePrestiti(), "Deve ritornare FALSE se il numero di prestiti attivi è <= 3.");
     }
     
     public void testLimitePrestiti_SottoLimite(){
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,1);
+        utente.setNumPrestitiAttivi(1);
         assertFalse(utente.limitePrestiti(), "Deve ritornare FALSE se il numero di prestiti attivi è <= 3.");
     }
     
     public void testLimitePrestiti_SottoLimiteAlto(){
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,2);
+        utente.setNumPrestitiAttivi(2);
         assertFalse(utente.limitePrestiti(), "Deve ritornare FALSE se il numero di prestiti attivi è <= 3.");
     }
     
     public void testLimitePrestiti_AlLimite(){
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,3);
-        assertFalse(utente.limitePrestiti(), "Deve ritornare TRUE se il numero di prestiti attivi è = 3.(al limite)");
+        utente.setNumPrestitiAttivi(3);
+        assertTrue(utente.limitePrestiti(), "Deve ritornare TRUE se il numero di prestiti attivi è = 3.(al limite)");
     }
     
     public void testLimitePrestiti_SopraLimite(){
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,4);
+        utente.setNumPrestitiAttivi(4);
         assertFalse(utente.limitePrestiti(), "Deve ritornare TRUE se il numero di prestiti attivi è >= 3.(sopra al limite)");
     }
     
@@ -141,40 +147,69 @@ public class UtenteTest {
     @Test
     void testInPrestito_Zero() {
         // Utente senza prestiti attivi
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,0);
+        utente.setNumPrestitiAttivi(0);
         assertFalse(utente.inPrestito(), "inPrestito() deve essere FALSE con 0 prestiti.");
     }
 
     @Test
     void testInPrestito_Uno() {
         // Utente con prestiti attivi
-        utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,1);
+        utente.setNumPrestitiAttivi(1);
         assertTrue(utente.inPrestito(), "inPrestito() deve essere TRUE con prestito > 0");
     }
     
     
     @Test
-    void testIncrementaPrestitiAttivi() {
-        // 1. Arrange: Inizializza con 1 prestito
-        Utente utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI);
-        
-        // 2. Act: Incrementa
+    void testIncrementaPrestitiAttivi() throws Exception{
+        // Inizializza con 1 prestito
         utente.incrementaPrestitiAttivi();
         
-        // 3. Assert: Verifica che sia passato a 2
+        // Assert: Verifica che sia passato a 2
         assertEquals(2, utente.getNumPrestitiAttivi(), "Dopo l'incremento, i prestiti attivi dovrebbero essere 2.");
     }
     
     @Test
-    void testDecrementaPrestitiAttivi() {
-        // 1. Arrange: Inizializza con 1 prestito
-        Utente utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,2);
+    void testIncrementaPrestitiAttivi_AlLimite() throws Exception{
+
+        utente.setNumPrestitiAttivi(2);
         
-        // 2. Act: Incrementa
+        //Incrementa
+        utente.incrementaPrestitiAttivi();
+        
+        // Assert: Verifica che sia passato a 2
+        assertEquals(2, utente.getNumPrestitiAttivi(), "Dopo l'incremento, i prestiti attivi dovrebbero essere 3(al limite).");
+    }
+    
+    @Test
+    void testIncrementaPrestitiAttivi_SopraLimite() {
+        // Inizializza con 1 prestito
+        Utente utente = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,3);
+        
+        //Incrementa
+        assertThrows(Exception.class, ()-> {utente.incrementaPrestitiAttivi();}, "Deve lanciare un'eccezione se il numero di prestiti attivi è > 3.");
+
+    }
+    
+    @Test
+    void testDecrementaPrestitiAttivi() throws Exception {
+        // Inizializza con 1 prestito
+        utente.setNumPrestitiAttivi(2);
+        
+        // Decrementa
         utente.decrementaPrestitiAttivi();
         
-        // 3. Assert: Verifica che sia passato a 2
+        // Assert: Verifica che sia passato a 1
         assertEquals(1, utente.getNumPrestitiAttivi(), "Dopo la diminuzione, i prestiti attivi dovrebbero essere 1.");
+    }
+    
+    @Test
+    void testDecrementaPrestitiAttivi_LimiteInferiore() {
+        // Inizializza con 0 prestiti
+        utente.setNumPrestitiAttivi(0);
+        
+        // Decrementa ulteriormente
+        assertThrows(Exception.class, ()-> {utente.decrementaPrestitiAttivi();}, "Deve lanciare un'eccezione se il numero di prestiti attivi è <= 0.");
+        
     }
     
     
@@ -197,31 +232,28 @@ public class UtenteTest {
     @Test
     public void testEquals_OggettiUguali(){
         //Istanzio due autori con gli stessi dati
-        Utente utente1 = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI);
         Utente utente2 = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI); 
         
         //Assert
-        assertTrue(utente1.equals(utente2),"Due oggetti con stessi dati devono essere uguali.");
+        assertTrue(utente.equals(utente2),"Due oggetti con stessi dati devono essere uguali.");
     }
     
     @Test
     public void testEquals_MatricolaUguale(){
         //Istanzio due autori con stessa matricola
-        Utente utente1 = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI);
         Utente utente2 = new Utente(NOME_NUOVO,COGNOME_NUOVO,MATRICOLA_INIZIALE,EMAIL_NUOVA,NUM_PRESTITI_ATTIVI); 
         
         //Assert
-        assertTrue(utente1.equals(utente2),"Due oggetti con la stessa matricola devono essere uguali.");  
+        assertTrue(utente.equals(utente2),"Due oggetti con la stessa matricola devono essere uguali.");  
     }
     
     @Test
     public void testEquals_MatricolaDiversa(){
         //Istanzio due autori con matricola diversa
-        Utente utente1 = new Utente(NOME_INIZIALE,COGNOME_INIZIALE,MATRICOLA_INIZIALE,EMAIL_INIZIALE,NUM_PRESTITI_ATTIVI);
         Utente utente2 = new Utente(NOME_NUOVO,COGNOME_NUOVO,MATRICOLA_NUOVA,EMAIL_NUOVA,NUM_PRESTITI_ATTIVI); 
         
         //Assert
-        assertFalse(utente1.equals(utente2),"Due oggetti con la matricola diversa non devono essere uguali."); 
+        assertFalse(utente.equals(utente2),"Due oggetti con la matricola diversa non devono essere uguali."); 
     }
     
     @Test

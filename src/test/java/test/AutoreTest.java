@@ -16,13 +16,17 @@ public class AutoreTest {
     private static final String COGNOME_INIZIALE = "Manzoni";
     private static final String NOME_NUOVO = "Italo";
     private static final String COGNOME_NUOVO = "Calvino";
+    
+    
+    @BeforeEach
+    void setUp() {
+        // Inizializza l'oggetto base prima di ogni test
+        Autore autore = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
+    }
 
     // --- Test del Costruttore e dei Getter ---
     @Test
-    public void testConstructorEGetter() {
-        // 1. Istanzio Autore
-        Autore autore = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
-
+    public void testGetter() {
         // 2. Assert
         assertEquals(NOME_INIZIALE, autore.getNome(), "Il nome deve corrispondere al valore passato nel costruttore.");
         assertEquals(COGNOME_INIZIALE, autore.getCognome(), "Il cognome deve corrispondere al valore passato nel costruttore.");
@@ -67,31 +71,28 @@ public class AutoreTest {
     @Test
     public void testEquals_OggettiUguali(){
         //Istanzio due autori con gli stessi dati
-        Autore autore1 = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
         Autore autore2 = new Autore(NOME_INIZIALE, COGNOME_INIZIALE); 
         
         //Assert
-        assertTrue(autore1.equals(autore2),"Due oggetti con stesso nome e cognome devono essere uguali.");
+        assertTrue(autore.equals(autore2),"Due oggetti con stesso nome e cognome devono essere uguali.");
     }
     
     @Test
     public void testEquals_NomeDiverso(){
-        //Istanzio due autori con gli stessi dati
-        Autore autore1 = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
+        //Istanzio due autori con nomi diversi
         Autore autore2 = new Autore(NOME_NUOVO, COGNOME_INIZIALE);
         
         //Assert 
-        assertFalse(autore1.equals(autore2), "Due oggetti con nome diverso non devono essere uguali.");  
+        assertFalse(autore.equals(autore2), "Due oggetti con nome diverso non devono essere uguali.");  
     }
     
     @Test
     public void testEquals_CognomeDiverso(){
-        //Istanzio due autori con gli stessi dati
-        Autore autore1 = new Autore(NOME_INIZIALE, COGNOME_NUOVO);
-        Autore autore2 = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
+        //Istanzio due autori con cognomi diversi
+        Autore autore2 = new Autore(NOME_INIZIALE, COGNOME_NUOVO);
         
         //Assert 
-        assertFalse(autore1.equals(autore2), "Due oggetti con cognome diverso non devono essere uguali.");
+        assertFalse(autore.equals(autore2), "Due oggetti con cognome diverso non devono essere uguali.");
     }
     
     @Test
@@ -115,21 +116,19 @@ public class AutoreTest {
     @Test
     void testHashCode_OggettiUguali() {
         //Istanzio due autori con gli stessi dati
-        Autore autore1 = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
         Autore autore2 = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
         
         //Assert
-        assertEquals(autore1.hashCode(),autore2.hashCode(),"L'hashcode deve essere uguale per due oggetti uguali."); 
+        assertEquals(autore.hashCode(),autore2.hashCode(),"L'hashcode deve essere uguale per due oggetti uguali."); 
     }
     
     @Test
     void testHashCode_OggettiDIversi() {
         //Istanzio due autori con dati diversi
-        Autore autore1 = new Autore(NOME_NUOVO, COGNOME_NUOVO);
-        Autore autore2 = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
+        Autore autore2 = new Autore(NOME_NUOVO, COGNOME_NUOVO);
         
         //Assert
-        assertNotEquals(autore1.hashCode(),autore2.hashCode(),"L'hashcode non deve essere uguale per due oggetti diversi."); 
+        assertNotEquals(autore.hashCode(),autore2.hashCode(),"L'hashcode non deve essere uguale per due oggetti diversi."); 
     }
     
 }
