@@ -21,7 +21,7 @@ public class AutoreTest {
     @BeforeEach
     void setUp() {
         // Inizializza l'oggetto base prima di ogni test
-        Autore autore = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
+        this.autore = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
     }
 
     // --- Test del Costruttore e dei Getter ---

@@ -26,7 +26,7 @@ public class UtenteTest {
     @BeforeEach
     void setUp() {
         // Inizializza l'oggetto base prima di ogni test
-        utente = new Utente(NOME_INIZIALE, COGNOME_INIZIALE, MATRICOLA_INIZIALE, EMAIL_INIZIALE, NUM_PRESTITI_ATTIVI);
+        this.utente = new Utente(NOME_INIZIALE, COGNOME_INIZIALE, MATRICOLA_INIZIALE, EMAIL_INIZIALE, NUM_PRESTITI_ATTIVI);
     }
     
     // --- Test del Costruttore e dei Getter ---
