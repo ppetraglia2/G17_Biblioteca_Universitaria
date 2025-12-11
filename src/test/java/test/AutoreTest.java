@@ -21,7 +21,7 @@ public class AutoreTest {
     @BeforeEach
     void setUp() {
         // Inizializza l'oggetto base prima di ogni test
-        Autore autore = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
+        this.autore = new Autore(NOME_INIZIALE, COGNOME_INIZIALE);
     }
 
     // --- Test del Costruttore e dei Getter ---
@@ -65,7 +65,7 @@ public class AutoreTest {
     // --- Test di equals() ---
     @Test
     public void testEquals_stessaIstanza(){
-        assertTrue(autore.equals(this),"L'oggetto deve essere uguale a sé stesso.");
+        assertTrue(autore.equals(autore),"L'oggetto deve essere uguale a sé stesso.");
     }
     
     @Test

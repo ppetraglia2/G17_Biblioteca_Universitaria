@@ -26,7 +26,7 @@ public class UtenteTest {
     @BeforeEach
     void setUp() {
         // Inizializza l'oggetto base prima di ogni test
-        utente = new Utente(NOME_INIZIALE, COGNOME_INIZIALE, MATRICOLA_INIZIALE, EMAIL_INIZIALE, NUM_PRESTITI_ATTIVI);
+        this.utente = new Utente(NOME_INIZIALE, COGNOME_INIZIALE, MATRICOLA_INIZIALE, EMAIL_INIZIALE, NUM_PRESTITI_ATTIVI);
     }
     
     // --- Test del Costruttore e dei Getter ---
@@ -177,7 +177,7 @@ public class UtenteTest {
         utente.incrementaPrestitiAttivi();
         
         // Assert: Verifica che sia passato a 2
-        assertEquals(2, utente.getNumPrestitiAttivi(), "Dopo l'incremento, i prestiti attivi dovrebbero essere 3(al limite).");
+        assertEquals(3, utente.getNumPrestitiAttivi(), "Dopo l'incremento, i prestiti attivi dovrebbero essere 3(al limite).");
     }
     
     @Test
@@ -226,7 +226,7 @@ public class UtenteTest {
     // --- Test di equals() ---
     @Test
     public void testEquals_stessaIstanza(){
-        assertTrue(utente.equals(this),"L'oggetto deve essere uguale a sé stesso.");
+        assertTrue(utente.equals(utente),"L'oggetto deve essere uguale a sé stesso.");
     }
     
     @Test
