@@ -97,7 +97,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334">
                      <children>
@@ -205,7 +205,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="359.0" fitWidth="567.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fitHeight="359.0" fitWidth="567.0" opacity="0.1" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo.png" />
                </image>
