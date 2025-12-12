@@ -27,49 +27,74 @@
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
+                        <VBox prefHeight="136.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
                            <children>
-                              <Label prefHeight="27.0" prefWidth="83.0" text="Cerca:">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
+                              <Label alignment="CENTER" prefHeight="77.0" prefWidth="259.0" text="ARCHIVIO LIBRI">
                                  <font>
-                                    <Font name="Noto Sans Regular" size="12.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField alignment="TOP_LEFT" prefHeight="28.0" prefWidth="661.0" promptText="Titolo, Autore, ISBN..." styleClass="textfield" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Noto Sans Regular" size="12.0" />
-                                 </font>
-                              </TextField>
-                              <Region prefHeight="39.0" prefWidth="75.0" HBox.hgrow="ALWAYS" />
-                              <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="131.0" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Noto Sans Bold" size="12.0" />
-                                 </font>
-                              </Button>
+                              <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="54.0" text="Cerca:">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField alignment="TOP_LEFT" prefHeight="37.0" prefWidth="523.0" promptText="Titolo, Autore, ISBN..." styleClass="textfield">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <InnerShadow height="5.84" radius="2.42" width="5.84" />
+                                       </effect>
+                                    </TextField>
+                                    <Region prefHeight="98.0" prefWidth="25.0" />
+                                    <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@search.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Region prefHeight="98.0" prefWidth="48.0" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <InnerShadow choke="0.34" radius="7.08" width="9.32">
+                                             <color>
+                                                <Color red="0.036739226430654526" green="0.33323541283607483" blue="0.5175438523292542" />
+                                             </color>
+                                          </InnerShadow>
+                                       </effect>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </HBox>
                            </children>
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
-                        </HBox>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        </VBox>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" VBox.vgrow="ALWAYS">
                            <children>
-                              <TableView prefHeight="805.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView prefHeight="693.0" prefWidth="860.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="Titolo" />
-                                  <TableColumn prefWidth="75.0" text="Autori" />
-                                    <TableColumn prefWidth="75.0" text="Anno" />
-                                    <TableColumn prefWidth="75.0" text="ISBN" />
-                                    <TableColumn prefWidth="75.0" text="Copie (D/T)" />
-                                    <TableColumn prefWidth="75.0" text="Azioni" />
+                                  <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Titolo" />
+                                  <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Autori" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Anno" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="ISBN" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Copie (D/T)" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Azioni" />
                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <effect>
+                                    <InnerShadow height="21.59" radius="6.0525" width="4.62" />
+                                 </effect>
                               </TableView>
                            </children>
                         </AnchorPane>
@@ -77,68 +102,74 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" visible="false">
                <children>
-                  <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" style="-fx-background-color: lightgrey;">
+                  <VBox layoutY="2.0" prefHeight="874.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="127.0" prefWidth="859.0" style="-fx-background-color: lightgrey;">
+                        <VBox prefHeight="134.0" prefWidth="860.0">
                            <children>
-                              <Label prefHeight="27.0" prefWidth="83.0" text="Cerca:">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
+                              <Label alignment="CENTER" prefHeight="96.0" prefWidth="310.0" style="-fx-font-style: bold;" text="ELENCO UTENTI REGISTRATI">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField alignment="TOP_LEFT" prefHeight="31.0" prefWidth="535.0" promptText="Cognome, Matricola..." styleClass="textfield" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Noto Sans Regular" size="12.0" />
-                                 </font>
-                                 <effect>
-                                    <InnerShadow height="5.84" radius="2.42" width="5.84" />
-                                 </effect>
-                              </TextField>
-                              <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="61.0" prefWidth="53.0" spacing="7.0" style="-fx-background-color: lightgrey;">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
+                              <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
                                  <children>
-                                    <ImageView pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fitHeight="31.0" fitWidth="24.0" preserveRatio="true">
-                                       <image>
-                                          <Image url="@search.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Label prefHeight="27.0" prefWidth="83.0" text="Cerca:">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField alignment="TOP_LEFT" prefHeight="34.0" prefWidth="521.0" promptText="Cognome, Matricola..." styleClass="textfield" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <InnerShadow height="5.84" radius="2.42" width="5.84" />
+                                       </effect>
+                                    </TextField>
+                                    <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="61.0" prefWidth="53.0" spacing="7.0" style="-fx-background-color: lightgrey;">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <ImageView pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fitHeight="31.0" fitWidth="24.0" preserveRatio="true">
+                                             <image>
+                                                <Image url="@search.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <Region prefHeight="39.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <InnerShadow choke="0.34" radius="7.08" width="9.32">
+                                             <color>
+                                                <Color red="0.036739226430654526" green="0.33323541283607483" blue="0.5175438523292542" />
+                                             </color>
+                                          </InnerShadow>
+                                       </effect>
+                                    </Button>
                                  </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
                               </HBox>
-                              <Region prefHeight="39.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
-                              <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="135.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <effect>
-                                    <InnerShadow choke="0.34" radius="7.08" width="9.32">
-                                       <color>
-                                          <Color red="0.036739226430654526" green="0.33323541283607483" blue="0.5175438523292542" />
-                                       </color>
-                                    </InnerShadow>
-                                 </effect>
-                              </Button>
                            </children>
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
-                           <effect>
-                              <InnerShadow height="5.84" radius="2.42" width="5.84" />
-                           </effect>
-                        </HBox>
+                        </VBox>
                         <TableView editable="true" prefHeight="665.0" prefWidth="859.0" style="-fx-background-color: white;">
                            <columns>
                               <TableColumn prefWidth="123.33326470851898" style="-fx-background-color: #4db8ff;" text="Cognome" />
@@ -166,31 +197,47 @@
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="859.0">
-                           <children>
-                              <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="131.0" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="698.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Noto Sans Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                           </children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
                            <padding>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </padding>
-                        </HBox>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <TableView prefHeight="805.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="324.0" text="ELENCO DEI PRESTITI ATTIVI">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="100.0" prefWidth="374.0" />
+                              <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow choke="0.34" radius="7.08" width="9.32">
+                                       <color>
+                                          <Color red="0.036739226430654526" green="0.33323541283607483" blue="0.5175438523292542" />
+                                       </color>
+                                    </InnerShadow>
+                                 </effect>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" VBox.vgrow="ALWAYS">
+                           <children>
+                              <TableView layoutX="3.2" layoutY="-6.0" prefHeight="684.0" prefWidth="859.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-6.0">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="Utente" />
-                                    <TableColumn prefWidth="75.0" text="Libro" />
-                                    <TableColumn prefWidth="75.0" text="Scadenza" />
-                                    <TableColumn prefWidth="75.0" text="Stato" />
-                                    <TableColumn prefWidth="75.0" text="Azioni" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Utente" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Libro" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Scadenza" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Stato" />
+                                    <TableColumn prefWidth="75.0" style="-fx-background-color: #33adff;" text="Azioni" />
                                  </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <effect>
+                                    <InnerShadow radius="5.905" width="4.62" />
+                                 </effect>
                               </TableView>
                            </children>
                         </AnchorPane>
