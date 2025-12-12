@@ -23,7 +23,7 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -37,7 +37,7 @@
                                     <Font name="Noto Sans Regular" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField alignment="TOP_LEFT" prefHeight="28.0" prefWidth="471.0" promptText="Titolo, Autore, ISBN..." styleClass="textfield" HBox.hgrow="ALWAYS">
+                              <TextField alignment="TOP_LEFT" prefHeight="28.0" prefWidth="661.0" promptText="Titolo, Autore, ISBN..." styleClass="textfield" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -45,29 +45,6 @@
                                     <Font name="Noto Sans Regular" size="12.0" />
                                  </font>
                               </TextField>
-                              <HBox minWidth="-Infinity" prefHeight="29.0" prefWidth="180.0" spacing="7.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" prefWidth="55.0" styleClass="filter-button" text="Titolo">
-                                       <font>
-                                          <Font name="Noto Sans Regular" size="12.0" />
-                                       </font></Button>
-                                    <Button mnemonicParsing="false" prefWidth="55.0" styleClass="filter-button" text="Autore">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <font>
-                                          <Font name="Noto Sans Regular" size="12.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" styleClass="filter-button" text="ISBN">
-                                       <font>
-                                          <Font name="Noto Sans Regular" size="12.0" />
-                                       </font></Button>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </HBox>
                               <Region prefHeight="39.0" prefWidth="75.0" HBox.hgrow="ALWAYS" />
                               <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="131.0" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
                                  <HBox.margin>
@@ -100,7 +77,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <AnchorPane id="paneUtenti" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" style="-fx-background-color: lightgrey;">
                      <children>
@@ -221,7 +198,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="359.0" fitWidth="567.0" opacity="0.1" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="359.0" fitWidth="567.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@logo.png" />
                </image>
