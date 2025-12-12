@@ -8,8 +8,9 @@
 package Model;
 
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Prestito {
+public class Prestito implements Serializable{
 
     /// Uente che richiede il prestito.
     private Utente utente;

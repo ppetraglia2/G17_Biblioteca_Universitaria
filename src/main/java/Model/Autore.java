@@ -6,10 +6,11 @@
  */
 
 package Model;
+import java.io.Serializable;
 
 import java.util.Objects;
 
-public class Autore {
+public class Autore implements Serializable{
 
     /// Nome dell'autore.
     private String nome;
