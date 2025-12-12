@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file LibreriaTest.java
+ * @brief Test unitario per la classe Libreria.
  */
 package test;
 import Model.*;
@@ -10,10 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- *
- * @author Pasquale
- */
 public class LibreriaTest {
     private Libreria libreria;
     private Libro libro1, libro2;
