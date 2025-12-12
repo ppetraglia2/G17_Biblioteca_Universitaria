@@ -23,7 +23,7 @@ public class MainController {
     
     // --- ELEMENTI GRAFICI DA INSERIRE --- 
     
-    
+
     // --- Metodi di Inizializzazione ---
     /**
      * @brief Metodo chiamato automaticamente dopo il caricamento del file FXML.
