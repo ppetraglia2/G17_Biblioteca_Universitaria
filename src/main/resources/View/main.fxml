@@ -23,7 +23,7 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -133,7 +133,7 @@
                                     <ImageView pickOnBounds="true" preserveRatio="true" />
                                     <ImageView fitHeight="31.0" fitWidth="24.0" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../../Downloads/search.png" />
+                                          <Image url="@search.png" />
                                        </image>
                                     </ImageView>
                                  </children>
