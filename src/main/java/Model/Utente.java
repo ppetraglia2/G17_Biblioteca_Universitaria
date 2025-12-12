@@ -6,8 +6,9 @@
  */
 
 package Model;
+import java.io.Serializable;
 
-public class Utente {
+public class Utente implements Serializable{
 
     /// Nome dell'utente.
     private String nome;
