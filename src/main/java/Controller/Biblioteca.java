@@ -37,7 +37,7 @@ public class Biblioteca implements Serializable{
     private FilteredList<Libro> flLibreria;
     private FilteredList<Utente> flClienti;
     
-    private final String filename = "";
+    private final String filename = "output.bin";
     
     ///Costruttore della classe Biblioteca
     public Biblioteca(){

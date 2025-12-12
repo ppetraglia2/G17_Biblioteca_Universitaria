@@ -23,7 +23,7 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>

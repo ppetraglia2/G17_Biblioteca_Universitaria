@@ -77,14 +77,10 @@ public class Libro {
     public void setISBN(String ISBN) { this.ISBN = ISBN; }
 
     // Setter del numero di copie TOTALI
-    public void setNumCopieTotali(int numCopieTotali) { 
-        this.numCopieTotali = numCopieTotali;
-    }
+    public void setNumCopieTotali(int numCopieTotali) { this.numCopieTotali = numCopieTotali; }
     
     // Setter del numero di copie DISPONIBILI
-    public void setNumCopieDisponibili(int numCopieDisponibili) { 
-        this.numCopieDisponibili = numCopieDisponibili;
-    }
+    public void setNumCopieDisponibili(int numCopieDisponibili) { this.numCopieDisponibili = numCopieDisponibili; }
      
     /**
      * @brief Aggiunge un autore alla lista degli autori.
@@ -124,9 +120,9 @@ public class Libro {
     }
    
     /**
-     * @brief Permette di controllare che un libro sia preso in prestito
+     * @brief Permette di controllare che un libro sia preso in prestito.
      * 
-     * @return True se almeno una copia del libro è in prestito
+     * @return True se almeno una copia del libro è in prestito.
      */
     public boolean isLibroInPrestito() {
         return this.numCopieTotali > this.numCopieDisponibili;

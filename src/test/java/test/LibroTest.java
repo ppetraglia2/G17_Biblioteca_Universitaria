@@ -68,10 +68,14 @@ public class LibroTest {
     
     @Test
     public void testSetAutori(){
-        libro.setAutori(listaAutori);
+        
+        ArrayList<Autore> nuovaLista = new ArrayList<>();
+        nuovaLista.add(AUTORE2);
+        
+        libro.setAutori(nuovaLista);
         
         // Assert
-        assertEquals(listaAutori, libro.getAutori(), "La lista autori deve essere aggiornato dal setter della lista autori.");
+        assertEquals(nuovaLista, libro.getAutori(), "La lista autori deve essere aggiornato dal setter della lista autori.");
         assertEquals(TITOLO_INIZIALE, libro.getTitolo(), "Il titolo non deve essere modificato dal setter della lista autori.");
         assertEquals(ISBN_INIZIALE, libro.getISBN(), "Il codice ISBN non deve essere modificato dal setter della lista autori.");
         assertEquals(ANNO_INIZIALE, libro.getAnno(), "L'anno non deve essere modificato dal setter della lista autori.");
@@ -134,5 +138,181 @@ public class LibroTest {
         assertEquals(ISBN_INIZIALE, libro.getISBN(), "L'ISBN non deve essere modificato dal setter del numero di copie disponibili.");
         assertEquals(NUM_COPIE_TOTALI, libro.getNumCopieTotali(),"Il numero di copie totali non deve essere modificato dal setter del numero di copie disponibili.");
         
+    }
+    
+    @Test
+    public void testAggiungiAutore() throws Exception{
+        libro.aggiungiAutore(AUTORE2);
+        
+        assertEquals(2, libro.getAutori().size(), "La grandezza della lista deve essere 2 dopo l'aggiunta di 2 autori");
+        assertTrue(libro.getAutori().contains(AUTORE2), "La lista deve contenere il nuovo autore");
+        assertTrue(libro.getAutori().contains(AUTORE1), "La lista deve contenere il vecchio autore");
+    }
+    
+    @Test
+    public void testAggiungiAutore_Presente(){
+        
+        // Verifico che si scateni l'eccezione, senza far crashare il programma di test.
+       assertThrows(Exception.class, () -> {
+            libro.aggiungiAutore(AUTORE1);
+        }, "Deve lanciare un'eccezione se si prova ad aggiungere un autore già aggiunto.");
+        
+        assertEquals(1, libro.getAutori().size(), "La lista non deve cambiare dimensione se viene lanciata un'eccezione.");
+    }
+    
+    @Test
+    public void testRimuoviAutore() throws Exception{
+        libro.rimuoviAutore(AUTORE1);
+        
+        assertEquals(0, libro.getAutori().size(), "La grandezza della lista deve essere 0 dopo la rimozione dell'unico autore.");
+        assertFalse(libro.getAutori().contains(AUTORE1), "La lista non deve contenere l'autore dopo la sua rimozione.");
+    }
+    
+    @Test
+    public void testRimuoviAutore_UnoSuDue() throws Exception{
+        libro.aggiungiAutore(AUTORE2);
+        
+        libro.rimuoviAutore(AUTORE1);
+        
+        assertEquals(1, libro.getAutori().size(), "La grandezza della lista deve essere 1 dopo la rimozione di un autore da una lista di due autori.");
+        assertFalse(libro.getAutori().contains(AUTORE1), "La lista non deve contenere l'autore dopo la sua rimozione.");
+        assertTrue(libro.getAutori().contains(AUTORE2), "La lista deve contenere il secondo autore anche dopo la rimozione del primo.");
+    }
+    
+    @Test
+    public void testRimuoviAutore_NonPresente(){
+        assertThrows(Exception.class, () -> {
+            libro.rimuoviAutore(AUTORE2);
+        }, "Deve lanciare un'eccezione se si prova a rimuovere un autore non aggiunto.");
+        
+        assertEquals(1, libro.getAutori().size(), "La lista non deve cambiare dimensione se viene lanciata un'eccezione.");
+    }
+    
+    @Test
+    public void testIsLibroInPrestito(){
+        
+        libro.setNumCopieDisponibili(NUM_COPIE_DISPONIBILI_NUOVO);
+        // Totali = 3, Disponibili = 2.
+        
+        assertTrue(libro.isLibroInPrestito(), "Deve restituire true quando il numero di copie totali supera quello di copie disponibili.");
+    }
+    
+    @Test
+    public void testIsLibroInPrestito_NoPrestito(){
+        // Totali = 3, Disponibili = 3.
+        
+        assertFalse(libro.isLibroInPrestito(), "Deve restituire false quando il numero di copie totali non supera quello di copie disponibili.");
+    }
+    
+    @Test
+    public void testIsDisponibile() {
+        // Disponibili = 3.
+        
+        assertTrue(libro.isDisponibile(), "Deve restituire true quando il numero di copie disponibili è maggiore di zero.");
+    }
+    
+    @Test
+    public void testIsDisponibile_NonDisponibile(){
+        libro.setNumCopieDisponibili(0);
+        
+        assertFalse(libro.isDisponibile(), "Deve restituire false quando il numero di copie disponibili non è maggiore di zero.");
+    }
+    
+    @Test
+    public void testAumentaCopie(){
+        libro.aumentaCopie();
+        
+        assertEquals(4, libro.getNumCopieDisponibili(), "Il numero di copie disponibili deve aumentare di uno.");
+    }
+    
+    @Test
+    public void testDiminuisciCopie_NonPresenti(){
+        libro.setNumCopieDisponibili(0);
+        assertThrows(Exception.class, () -> {
+            libro.diminuisciCopie();
+        }, "Deve lanciare un'eccezione se si prova a rimuovere una copia, ma le copie sono 0.");
+    }
+    
+    @Test
+    public void testDiminuisciCopie() throws Exception {
+        libro.diminuisciCopie();
+        
+        assertEquals(2, libro.getNumCopieDisponibili(), "Il numero di copie disponibili deve essere 2 dopo aver rimosso la terza copia.");
+    }
+    
+    // --- Test di toString() ---
+    @Test
+    public void testToString(){
+        String expectedString = String.format("%s (Autori : %s) [ISBN: %s]\n",
+                TITOLO_INIZIALE, listaAutori.toString(), ISBN_INIZIALE);
+        //Assert
+        assertEquals(expectedString, libro.toString(), "toString() deve restituire la stringa formattata.");
+    }
+    
+    
+    // --- Test di equals() ---
+    @Test
+    public void testEquals_stessaIstanza(){
+        assertTrue(libro.equals(libro),"L'oggetto deve essere uguale a sé stesso.");
+    }
+    
+    @Test
+    public void testEquals_OggettiUguali(){
+        //Istanzio due libri con gli stessi dati
+        Libro libro2 = new Libro(TITOLO_INIZIALE, listaAutori, ANNO_INIZIALE, ISBN_INIZIALE, NUM_COPIE_TOTALI, NUM_COPIE_DISPONIBILI_INIZIALE);
+
+        // Assert
+        assertTrue(libro.equals(libro2), "Due oggetti con gli stessi dati devono essere uguali.");
+    }
+    
+    @Test
+    public void testEquals_ISBNUguale(){
+        //Istanzio due libri con stesso ISBN
+        Libro libro2 = new Libro(TITOLO_NUOVO, listaAutori, ANNO_NUOVO, ISBN_INIZIALE, NUM_COPIE_TOTALI, NUM_COPIE_DISPONIBILI_INIZIALE);
+
+        // Assert
+        assertTrue(libro.equals(libro2), "Due libri con lo stesso ISBN devono essere uguali, anche se il resto cambia.");  
+    }
+    
+    @Test
+    public void testEquals_ISBNDiverso(){
+        //Istanzio due libri con ISBN diverso
+        Libro libro2 = new Libro(TITOLO_INIZIALE, listaAutori, ANNO_INIZIALE, ISBN_NUOVO, NUM_COPIE_TOTALI, NUM_COPIE_DISPONIBILI_INIZIALE);
+        
+        //Assert
+        assertFalse(libro.equals(libro2),"Due oggetti con ISBN diverso non devono essere uguali, anche se il resto è uguale."); 
+    }
+    
+    @Test
+    public void testEquals_NULL(){
+        //Assert
+        assertFalse(libro.equals(null), "L'oggetto non deve essere uguale a NULL.");
+    }
+    
+    @Test
+    public void testEquals_AltraClasse(){
+        //Istanzio oggetto appartenente ad un'altra classe
+        Object altraClasse = new Object(); 
+        
+        //Assert
+        assertFalse(libro.equals(altraClasse), "L'oggetto non deve essere uguale ad un oggetto di un'altra classe.");
+    }
+    
+    // --- Test HashCode ---
+    
+    @Test
+    void testHashCode_OggettiUguali() {
+        //Istanzio due oggetti con gli stessi dati
+        Libro libro2 = new Libro(TITOLO_INIZIALE, listaAutori, ANNO_INIZIALE, ISBN_INIZIALE, NUM_COPIE_TOTALI, NUM_COPIE_DISPONIBILI_INIZIALE);
+        //Assert
+        assertEquals(libro.hashCode(),libro2.hashCode(),"L'hashcode deve essere uguale per due oggetti uguali."); 
+    }
+    
+    @Test
+    void testHashCode_OggettiDiversi() {
+        //Istanzio due oggetti con dati diversi
+        Libro libro2 = new Libro(TITOLO_INIZIALE, listaAutori, ANNO_INIZIALE, ISBN_NUOVO, NUM_COPIE_TOTALI, NUM_COPIE_DISPONIBILI_INIZIALE);
+        //Assert
+        assertNotEquals(libro.hashCode(),libro2.hashCode(),"L'hashcode deve essere diverso per due oggetti diversi."); 
     }
 }
