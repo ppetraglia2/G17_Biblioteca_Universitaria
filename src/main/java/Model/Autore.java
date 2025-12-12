@@ -11,8 +11,11 @@ import java.util.Objects;
 
 public class Autore {
 
-    private String nome;    ///< Nome dell'autore
-    private String cognome; ///< Cognome dell'autore
+    /// Nome dell'autore.
+    private String nome;
+    
+    /// Cognome dell'autore.
+    private String cognome;
     
     ///Costruttore della classe Autore
     public Autore(String nome, String cognome){

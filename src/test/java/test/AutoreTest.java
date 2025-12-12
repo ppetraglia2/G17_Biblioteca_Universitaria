@@ -123,7 +123,7 @@ public class AutoreTest {
     }
     
     @Test
-    void testHashCode_OggettiDIversi() {
+    void testHashCode_OggettiDiversi() {
         //Istanzio due autori con dati diversi
         Autore autore2 = new Autore(NOME_NUOVO, COGNOME_NUOVO);
         

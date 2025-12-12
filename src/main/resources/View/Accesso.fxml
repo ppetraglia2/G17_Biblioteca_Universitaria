@@ -9,26 +9,36 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<StackPane style="-fx-background-color: #B3E5FC;" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane blendMode="SOFT_LIGHT" style="-fx-background-color: #66c2ff;" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="279.0" prefWidth="389.0" spacing="10.0">
+      <VBox alignment="CENTER" prefHeight="279.0" prefWidth="389.0" spacing="10.0" stylesheets="@SBStyle.css">
          <children>
-            <ImageView fitHeight="146.0" fitWidth="340.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="121.0" fitWidth="254.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo.png" />
                </image>
             </ImageView>
-            <Label text="Benvenuto nel sistema di gestione della Biblioteca Universitaria." />
-            <Separator maxWidth="-Infinity" prefWidth="337.0" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="start-button" text="ENTRA NEL SISTEMA" />
+            <Label text="Benvenuto nel sistema di gestione della Biblioteca Universitaria.">
+               <font>
+                  <Font name="Roboto" size="12.0" />
+               </font></Label>
+            <Separator maxWidth="-Infinity" prefWidth="337.0" style="-fx-background-color: black;" />
+            <Button alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" graphicTextGap="2.0" mnemonicParsing="false" style="-fx-background-color: white;" styleClass="start-button" text="ENTRA NEL SISTEMA">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+               <effect>
+                  <InnerShadow blurType="GAUSSIAN" choke="0.63" height="5.43" radius="2.215" width="5.43" />
+               </effect></Button>
          </children>
       </VBox>
    </children>
    <effect>
-      <InnerShadow choke="0.67" height="65.29" radius="34.7" width="75.51">
+      <InnerShadow height="155.73" radius="70.065" width="126.53">
          <color>
-            <Color red="0.4156862795352936" green="0.5921568870544434" blue="0.7882353067398071" />
+            <Color green="0.41960784792900085" blue="0.7019608020782471" />
          </color>
       </InnerShadow>
    </effect>

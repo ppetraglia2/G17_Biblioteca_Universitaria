@@ -12,23 +12,38 @@ import java.util.List;
 
 public class Libro {
 
-    private String titolo;          ///< Titolo del libro.    
-    private ArrayList<Autore> autori;    ///< Lista degli autori.
-    private int anno;               ///< Anno di pubblicazione.
-    private String ISBN;               ///< Codice ISBN a 13 cifre.
-    private int numCopieTotali;         ///< Numero di copie totali.
-    private int numCopieDisponibili;    ///< Numero di copie disponibili.
+    /// Titolo del libro.
+    private String titolo;
+    
+    /// Lista degli autori.
+    private ArrayList<Autore> autori;
+    
+    /// Anno di pubblicazione.
+    private int anno;
+    
+    /// Codice ISBN a 13 cifre.
+    private String ISBN;
+    
+    /// Numero di copie totali.
+    private int numCopieTotali;
+    
+    /// Numero di copie disponibili.
+    private int numCopieDisponibili;
 
     /// Costruttore della classe.
     public Libro(String titolo, ArrayList<Autore> autori, int anno, String ISBN, int numCopieTotali, int numCopieDisponibili) {
         this.titolo = titolo;
-        this.autori = new ArrayList<Autore>();
+        if (autori != null) {
+            this.autori = new ArrayList<>(autori); // Crea una NUOVA lista con gli stessi contenuti
+        } else {
+            this.autori = new ArrayList<>();
+        }
         this.anno = anno;
         this.ISBN = ISBN;
         this.numCopieTotali = numCopieTotali;
         this.numCopieDisponibili = numCopieTotali;      //< All'inizio, le copie disponibili sono pari al totale
     }
-
+  
     /// Getter del titolo.
     public String getTitolo() { return titolo; }
 

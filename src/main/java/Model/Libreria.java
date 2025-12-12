@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 public class Libreria implements Serializable{
 
-    private ArrayList<Libro> libreria;  ///< Lista dei libri
+    /// Lista dei libri.
+    private ArrayList<Libro> libreria;
 
     ///Costruttore della classe
     public Libreria(ArrayList<Libro> libreria) {
@@ -42,7 +43,7 @@ public class Libreria implements Serializable{
      */
     public void aggiungiLibro(Libro l) throws Exception{
         if (this.isInLibreria(l)) {
-            throw new Exception("ERRORE DUPLICATO: Libro" + l.toString() + " già presente.");
+            throw new Exception("ERRORE DUPLICATO: Libro " + l.toString() + " già presente.");
         }
         this.libreria.add(l);
     }

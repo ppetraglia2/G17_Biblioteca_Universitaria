@@ -9,11 +9,20 @@ package Model;
 
 public class Utente {
 
-    private String nome;            ///< Nome dell'utente
-    private String cognome;         ///< Cognome dell'utente
-    private String matricola;       ///< Numero di matricola
-    private String email;           ///< Email istituzionale
-    private int numPrestitiAttivi;  ///< Numero di Prestiti attivi dell'Utente
+    /// Nome dell'utente.
+    private String nome;
+    
+    /// Cognome dell'utente.
+    private String cognome;
+
+    /// Numero di matricola.
+    private String matricola;
+    
+    /// Email istituzionale.
+    private String email;
+    
+    /// Numero di Prestiti attivi dell'Utente.
+    private int numPrestitiAttivi;
 
     ///Costruttore della classe Utente
     public Utente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi) {
