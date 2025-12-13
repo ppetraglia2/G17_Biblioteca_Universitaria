@@ -17,7 +17,7 @@ public class MainController {
     //Riferimento al Controller
     private Biblioteca biblioteca;
     
-    // --- ELEMENTI GRAFICI DA INSERIRE --- 
+    // --- ELEMENTI GRAFICI DA INSERIRE ---
     
     
     // --- Metodi di Inizializzazione ---
