@@ -165,7 +165,19 @@ public class Libro implements Serializable{
      */
     @Override
     public String toString() {
-        return String.format("%s (Autori : %s) [ISBN: %s]\n", titolo, autori.toString(), ISBN);
+        return String.format("%s (Autori : %s) [ISBN: %s]\n", titolo, this.autoriToString(), ISBN);
+    }
+    
+    /**
+     * @brief Ritorna una rappresentazione in stringa della lista di Autori.
+     * @return Una stringa contenente Nome e Cognome degli Autori.
+     */
+    public String autoriToString(){
+        StringBuffer sb = new StringBuffer();
+        for(Autore a : autori){
+            sb.append(a.getNome()).append(" ").append(a.getCognome()).append(", ");
+        }
+        return sb.toString();
     }
 
     /**
