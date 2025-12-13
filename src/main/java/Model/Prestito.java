@@ -70,6 +70,7 @@ public class Prestito implements Serializable{
     /**
      * @brief Definisce l'uguaglianza logica per identificare in modo univoco
      * un prestito attivo. Si considera univoco per la combinazione Utente-Libro-DataPrestito.
+     * @param o
      */
     @Override
     public boolean equals(Object o) {
