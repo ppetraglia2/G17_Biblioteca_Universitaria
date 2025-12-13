@@ -263,7 +263,7 @@ public class Biblioteca implements Serializable{
      */
     public void aggiungiPrestito(Utente u, Libro l, LocalDate data) throws Exception {
         if(u == null || l == null || data == null) throw new Exception("Dati non validi");
-        if(l.getNumCopieDisponibili() < 0) throw new Exception("Copie del libro non disponibili");
+        if(l.getNumCopieDisponibili() <= 0) throw new Exception("Copie del libro non disponibili");
         if(u.getNumPrestitiAttivi() >= 3) throw new Exception("L'utente selezionato è già a carico di 3 prestiti");
         
         Prestito p = new Prestito(u, l, data);
