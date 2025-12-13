@@ -13,9 +13,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane; // Modificato per compatibilità con FXML
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane; 
 import javafx.scene.paint.Color;
 
 import java.time.LocalDate;
@@ -30,9 +31,10 @@ public class MainController {
     // --- ELEMENTI GRAFICI (Iniettati da FXML) ---
     
     // Pannelli principali
-    @FXML private VBox paneLibri;
-    @FXML private VBox paneUtenti;
-    @FXML private VBox panePrestiti;
+    // NOTA: Cambiati da VBox a AnchorPane per corrispondere al main.fxml
+    @FXML private AnchorPane paneLibri;
+    @FXML private AnchorPane paneUtenti;
+    @FXML private AnchorPane panePrestiti;
 
     // Campi di Ricerca
     @FXML private TextField searchLibri;
@@ -83,7 +85,6 @@ public class MainController {
         configuraPrestiti();
 
         // Collega i dati del modello alle tabelle
-        // Si assume che Biblioteca esponga liste osservabili/filtrate
         if (biblioteca.getFlLibreria() != null)
             tableLibri.setItems(biblioteca.getFlLibreria());
         
@@ -109,13 +110,14 @@ public class MainController {
      */
     public void configuraLibri() {
         colLibTitolo.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTitolo()));
-        // Si assume che Libro abbia un metodo getAutoriFormatted() o simile
-        colLibAutori.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getAutori().toString())); 
+        colLibAutori.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().autoriToString())); 
         colLibAnno.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getAnno()));
         colLibIsbn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getISBN()));
-        colLibCopie.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNumCopieDisponibili() + "/" + d.getValue().getNumCopieTotali()));
+        // Mostra copie disponibili / totali
+        colLibCopie.setCellValueFactory(d -> new SimpleStringProperty(
+            d.getValue().getNumCopieDisponibili() + "/" + d.getValue().getNumCopieTotali()));
 
-        // Colonna Azioni (Bottoni Modifica/Elimina)
+        // Colonna Azioni
         colLibAzioni.setCellFactory(param -> new TableCell<Libro, Void>() {
             private final Button btnEdit = new Button("Modif.");
             private final Button btnDel = new Button("Elim.");
@@ -188,14 +190,14 @@ public class MainController {
     /**
      * @brief Configura la TableView e le colonne per la visualizzazione dei Prestiti.
      *
-     * Collega la lista osservabile dei Prestiti (obPrestiti) alla TableView.
+     * Collega la lista completa dei Prestiti (obPrestiti) alla TableView.
      */
     private void configuraPrestiti() {
         colPresUtente.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUtente().getCognome()));
         colPresLibro.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getLibro().getTitolo()));
         colPresData.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDataRestituzione().toString()));
 
-        // Stato con colorazione condizionale
+        // Configurazione stato (Verde = OK, Rosso = Ritardo)
         colPresStato.setCellFactory(c -> new TableCell<Prestito, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -205,7 +207,6 @@ public class MainController {
                     setGraphic(null);
                 } else {
                     Prestito p = (Prestito) getTableRow().getItem();
-                    // Si assume che Prestito abbia il metodo isInRitardo()
                     boolean ritardo = p.controllaRitardo();
                     setText(ritardo ? "RITARDO" : "Attivo");
                     setTextFill(ritardo ? Color.RED : Color.GREEN);
@@ -213,7 +214,7 @@ public class MainController {
             }
         });
 
-        // Azione Restituzione
+        // Tasto restituzione
         colPresAzioni.setCellFactory(p -> new TableCell<Prestito, Void>() {
             private final Button btnRet = new Button("Rientro");
             {
@@ -221,9 +222,10 @@ public class MainController {
                     Prestito prestito = getTableView().getItems().get(getIndex());
                     try {
                         biblioteca.restituisciPrestito(prestito);
+                        // Refresh necessario per aggiornare contatori e disponibilità
                         tablePrestiti.refresh();
-                        tableLibri.refresh(); // Aggiorna contatore copie
-                        tableUtenti.refresh(); // Aggiorna contatore prestiti utente
+                        tableLibri.refresh();
+                        tableUtenti.refresh();
                     } catch (Exception ex) {
                         alertErrore(ex.getMessage());
                     }
@@ -237,12 +239,10 @@ public class MainController {
         });
     }
     
-    
     // --- Metodi di Visualizzazione/Navigazione ---
 
     /**
-     * @brief Visualizza la sezione relativa alla gestione dei Libri.
-     * @post Il pannello dei Libri è visibile, gli altri sono nascosti.
+     * @brief Mostra la vista relativa alla gestione dei Libri.
      */
     @FXML
     public void mostraLibri() {
@@ -250,8 +250,7 @@ public class MainController {
     }
 
     /**
-     * @brief Visualizza la sezione relativa alla gestione degli Utenti.
-     * @post Il pannello degli Utenti è visibile, gli altri sono nascosti.
+     * @brief Mostra la vista relativa alla gestione degli Utenti.
      */
     @FXML
     public void mostraUtenti() {
@@ -259,8 +258,7 @@ public class MainController {
     }
 
     /**
-     * @brief Visualizza la sezione relativa alla gestione dei Prestiti.
-     * @post Il pannello dei Prestiti è visibile, gli altri sono nascosti.
+     * @brief Mostra la vista relativa alla gestione dei Prestiti.
      */
     @FXML
     public void mostraPrestiti() {
@@ -268,20 +266,19 @@ public class MainController {
     }
 
     /**
-     * @brief Gestisce il cambio tra le diverse sezioni dell'interfaccia.
+     * @brief Gestisce la visibilità dei pannelli principali.
      *
-     * Metodo ausiliario per nascondere tutti i pannelli e mostrare solo quello specificato.
+     * Nasconde tutti i pannelli e rende visibile solo quello specificato.
      *
-     * @param paneToShow Il pannello VBox da rendere visibile.
+     * @param paneToShow Il pannello (AnchorPane/Pane) da rendere visibile.
      */
-    private void cambiaScena(VBox paneToShow) {
+    private void cambiaScena(Pane paneToShow) {
         if(paneLibri != null) paneLibri.setVisible(false);
         if(paneUtenti != null) paneUtenti.setVisible(false);
         if(panePrestiti != null) panePrestiti.setVisible(false);
         
         if(paneToShow != null) paneToShow.setVisible(true);
     }
-    
     
     // --- Metodi per gestire le Azioni (Event Handlers) ---
 
@@ -315,8 +312,10 @@ public class MainController {
             if (response == ButtonType.OK) {
                 try {
                     List<Autore> newautori = parseAutori(tAutori.getText());
-                    int newanno = Integer.parseInt(tAnno.getText());
-                    int newcopie = Integer.parseInt(tCopie.getText());
+                    // Gestione base per la conversione intero
+                    int newanno = Integer.parseInt(tAnno.getText().trim());
+                    int newcopie = Integer.parseInt(tCopie.getText().trim());
+                    
                     biblioteca.aggiungiLibro(
                         tTitolo.getText(), 
                         newautori, 
@@ -325,6 +324,8 @@ public class MainController {
                         newcopie,
                         newcopie
                     );
+                } catch (NumberFormatException ne) {
+                    alertErrore("Errore: Anno e Copie devono essere numeri interi.");
                 } catch (Exception e) {
                     alertErrore("Errore inserimento: " + e.getMessage());
                 }
@@ -385,10 +386,9 @@ public class MainController {
         
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
         
-        // ComboBox popolate dalle liste osservabili della biblioteca
         ComboBox<Utente> comboUtenti = new ComboBox<>(biblioteca.getObClienti());
         ComboBox<Libro> comboLibri = new ComboBox<>(biblioteca.getObLibreria());
-        DatePicker datePicker = new DatePicker(LocalDate.now().plusDays(30)); // Default 30gg
+        DatePicker datePicker = new DatePicker(LocalDate.now().plusDays(30)); 
         
         g.addRow(0, new Label("Utente:"), comboUtenti);
         g.addRow(1, new Label("Libro:"), comboLibri);
@@ -430,7 +430,7 @@ public class MainController {
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
         
         TextField tTitolo = new TextField(l.getTitolo());
-        TextField tAutori = new TextField(l.getAutori().toString());
+        TextField tAutori = new TextField(l.autoriToString());
         TextField tAnno = new TextField(String.valueOf(l.getAnno()));
         TextField tIsbn = new TextField(l.getISBN());
         TextField tCopie = new TextField(String.valueOf(l.getNumCopieTotali()));
@@ -446,8 +446,8 @@ public class MainController {
         d.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    int newanno = Integer.parseInt(tAnno.getText());
-                    int newcopie = Integer.parseInt(tCopie.getText());
+                    int newanno = Integer.parseInt(tAnno.getText().trim());
+                    int newcopie = Integer.parseInt(tCopie.getText().trim());
                     List<Autore> newautori = parseAutori(tAutori.getText());
                     
                     biblioteca.modificaLibro(l, tTitolo.getText(), newautori, newanno, tIsbn.getText(), newcopie);
@@ -497,43 +497,40 @@ public class MainController {
         });
     }
     
+    /**
+     * @brief Helper per convertire la stringa autori in Lista di oggetti Autore.
+     * Separatore virgola. Ultima parola considerata come cognome.
+     *
+     * @param str La stringa di input (es. "Nome1 Cognome1, Nome2 Cognome2").
+     * @return ArrayList<Autore> parsata.
+     */
     private ArrayList<Autore> parseAutori(String str) {
-    ArrayList<Autore> listaAutori = new ArrayList<>();
-    
-    if (str == null || str.isEmpty()) {
+        ArrayList<Autore> listaAutori = new ArrayList<>();
+        
+        if (str == null || str.trim().isEmpty()) {
+            return listaAutori;
+        }
+
+        String[] stringheAutori = str.split(",");
+
+        for (String s : stringheAutori) {
+            s = s.trim();
+            if (!s.isEmpty()) {
+                int ultimoSpazio = s.lastIndexOf(" ");
+                String nome, cognome;
+
+                if (ultimoSpazio == -1) {
+                    nome = s;
+                    cognome = ""; 
+                } else {
+                    nome = s.substring(0, ultimoSpazio);
+                    cognome = s.substring(ultimoSpazio + 1);
+                }
+                listaAutori.add(new Autore(nome, cognome));
+            }
+        }
         return listaAutori;
     }
-
-    // Separazione degli autori
-    String[] stringheAutori = str.split(",");
-
-    for (String s : stringheAutori) {
-        s = s.trim();
-        
-        if (!s.isEmpty()) {
-            // Separazione nomi e cognomi
-            int ultimoSpazio = s.lastIndexOf(" ");
-            
-            String nome;
-            String cognome;
-
-            if (ultimoSpazio == -1) {
-                // Nessuno spazio trovato
-                nome = s;
-                cognome = ""; 
-            } else {
-                // Prima dell'ultimo spazio fa parte del nome
-                nome = s.substring(0, ultimoSpazio);
-                // Dopo l'ultimo spazio fa parte del cognome
-                cognome = s.substring(ultimoSpazio + 1);
-            }
-
-            listaAutori.add(new Autore(nome, cognome));
-        }
-    }
-    return listaAutori;
-}
-
 
     /**
      * @brief Visualizza un Alert di errore all'utente.
