@@ -73,7 +73,7 @@ public class Clienti implements Serializable{
      * 
      * @param u È l'utente a cui bisogna modificare i campi
      */
-    public void modificaUtente(Utente u) {
+    public void modificaUtente(Utente u, String nome, String cognome, String matricola, String email) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

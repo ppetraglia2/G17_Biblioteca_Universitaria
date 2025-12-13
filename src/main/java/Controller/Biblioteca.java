@@ -209,6 +209,14 @@ public class Biblioteca implements Serializable{
         salvaSuFile();
     }
     
+    public void modificaLibro(Libro l, String titolo, List<Autore> autori, int anno, String isbn, int copie) throws Exception{
+        if(!checkValiditaCampiLibro(titolo, autori, anno, isbn, copie, copie)) throw new Exception("Campi non validi!");
+        
+        libreria.modificaLibro(l, titolo, autori, anno, isbn, copie);
+        obLibreria.set(obLibreria.indexOf(l), l);
+        salvaSuFile();
+    }
+    
     /**
      * @brief Aggiunge un nuovo utente ai Clienti.
      *
@@ -218,14 +226,13 @@ public class Biblioteca implements Serializable{
      * @param cognome Il cognome dell'utente.
      * @param matricola La matricola dell'utente.
      * @param email L'indirizzo email.
-     * @param numPrestitiAttivi Il numero di Prestiti Attivi dell'utente
      * @throws Exception Se i dati non sono validi o la matricola esiste già.
      * @post L'utente è aggiunto a Clienti e a obClienti.
      */
-    public void aggiungiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi) throws Exception {
-       if(!checkValiditaCampiUtente(nome, cognome, matricola, email, numPrestitiAttivi)) throw new Exception("Campi non validi!");
+    public void aggiungiUtente(String nome, String cognome, String matricola, String email) throws Exception {
+       if(!checkValiditaCampiUtente(nome, cognome, matricola, email, 0)) throw new Exception("Campi non validi!");
        
-       Utente u = new Utente(nome, cognome, matricola, email, numPrestitiAttivi);
+       Utente u = new Utente(nome, cognome, matricola, email, 0);
        
        if(clienti.esisteUtente(u)) throw new Exception("Utente già registrato");
        
@@ -246,6 +253,15 @@ public class Biblioteca implements Serializable{
         
         clienti.eliminaUtente(u);
         obClienti.remove(u);
+        salvaSuFile();
+    }
+    
+    
+    public void modificaUtente(Utente u, String nome, String cognome, String matricola, String email) throws Exception{
+        if(!checkValiditaCampiUtente(nome, cognome, matricola, email, 0)) throw new Exception("Campi non validi!");
+        
+        clienti.modificaUtente(u, nome, cognome, matricola, email);
+        obClienti.set(obClienti.indexOf(u), u);
         salvaSuFile();
     }
     
@@ -302,7 +318,7 @@ public class Biblioteca implements Serializable{
         
         salvaSuFile();
     }
-
+    
     /**
      * @brief Salva lo stato corrente della Biblioteca su un file esterno.
      *

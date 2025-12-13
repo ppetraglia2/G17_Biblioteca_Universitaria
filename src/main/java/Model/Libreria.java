@@ -9,6 +9,7 @@ package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Libreria implements Serializable{
 
@@ -74,7 +75,8 @@ public class Libreria implements Serializable{
      * 
      * @param l È il libro i cui campi devono essere modificati
      */
-    public void modificaLibro(Libro l) {
+    public void modificaLibro(Libro l, String titolo, List<Autore> autori, int anno, String isbn, int copie) {
+        
     }
     
     /**
