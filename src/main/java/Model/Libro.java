@@ -42,7 +42,7 @@ public class Libro implements Serializable{
         this.anno = anno;
         this.ISBN = ISBN;
         this.numCopieTotali = numCopieTotali;
-        this.numCopieDisponibili = numCopieTotali;      //< All'inizio, le copie disponibili sono pari al totale
+        this.numCopieDisponibili = numCopieDisponibili;      //< All'inizio, le copie disponibili sono pari al totale
     }
   
     /// Getter del titolo.

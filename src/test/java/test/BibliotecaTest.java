@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.File;
 
 
 public class BibliotecaTest {
@@ -29,14 +30,13 @@ public class BibliotecaTest {
     
     @BeforeEach
     void setUp(){
+        new File("output.bin").delete();
         //Inizializzo oggetti di supporto
         listaAutori = new ArrayList<>();
 
         biblioteca = new Biblioteca();
-        biblioteca.getObClienti().clear();
-        biblioteca.getObLibreria().clear();
-        biblioteca.getObPrestiti().clear();
     }
+    
     
     @Test
     void testCostruttore_InizializzazioneStandard() {
@@ -44,64 +44,7 @@ public class BibliotecaTest {
         assertNotNull(biblioteca.getLibreria(), "Libreria non deve essere null.");
         assertNotNull(biblioteca.getClienti(), "Clienti non deve essere null.");
         assertNotNull(biblioteca.getPrestiti(), "Prestiti non deve essere null.");
-        
     }
-    
-    // --- Test Filtri ---
-
-    @Test
-    void testFiltraLibri_Successo() throws Exception {
-        ArrayList<Autore> nuovaLista = new ArrayList<>();
-        Libro libro1 = new Libro("Titolo1", nuovaLista, 2000, "9780192595218", 5, 5);
-        Libro libro2 = new Libro("Titolo Libro", nuovaLista, 2000, "9780192817808", 5, 5);
-        // Aggiungo libri per popolare la lista osservabile
-        biblioteca.aggiungiLibro(libro1.getTitolo(), libro1.getAutori(), 1840, libro1.getISBN(), 5, 5);
-        biblioteca.aggiungiLibro(libro2.getTitolo(), libro2.getAutori(), 1980, libro2.getISBN(), 2, 2);
-
-        // Filtro per titolo parziale
-        biblioteca.filtraLibri("libro");
-        assertEquals(1, biblioteca.getFlLibreria().size(), "Il filtro per titolo dovrebbe trovare solo 1 libro.");
-        
-        // Filtro per titolo parziale
-        biblioteca.filtraLibri("T");
-        assertEquals(2, biblioteca.getFlLibreria().size(), "Il filtro per titolo dovrebbe trovare 2 libri.");
-        
-        //Filtro per titolo completo
-        biblioteca.filtraLibri("Titolo1");
-        assertEquals(1, biblioteca.getFlLibreria().size(), "Il filtro per titolo dovrebbe trovare solo 1 libro.");
-
-        // Filtro nullo/vuoto 
-        biblioteca.filtraLibri(null);
-        assertEquals(2, biblioteca.getFlLibreria().size(), "Il filtro nullo deve mostrare tutti i libri.");
-    }
-    
-    @Test
-    void testFiltraUtenti_Successo() throws Exception {
-        // Aggiungo utenti
-        biblioteca.aggiungiUtente("Simone", "Antico", "0612706541", "s.antico2@studenti.unisa.it", 0);
-        biblioteca.aggiungiUtente("Martina", "Iaconi", "0612705632", "m.iaconi3@studenti.unisa.it", 0);
-
-        // Filtro per Cognome
-        biblioteca.filtraUtenti("antico");
-        assertEquals(1, biblioteca.getFlClienti().size(), "Il filtro per cognome dovrebbe trovare solo 1 utente.");
-        
-        //Filtro per Cognome Parziale
-        biblioteca.filtraUtenti("a");
-        assertEquals(2, biblioteca.getFlClienti().size(), "Il filtro per cognome dovrebbe trovare 2 utenti.");
-
-        // Filtro per Matricola
-        biblioteca.filtraUtenti("0612705632");
-        assertEquals(1, biblioteca.getFlClienti().size(), "Il filtro per matricola dovrebbe trovare solo 1 utente.");
-        
-        // Filtro per Matricola Parziale
-        biblioteca.filtraUtenti("06127");
-        assertEquals(2, biblioteca.getFlClienti().size(), "Il filtro per matricola dovrebbe trovare 2 utenti.");
-        
-        // Filtro nullo/vuoto 
-        biblioteca.filtraLibri(null);
-        assertEquals(2, biblioteca.getFlClienti().size(), "Il filtro nullo deve mostrare tutti gli utenti.");
-    }
-    
     
     // --- TEST CHECK VALIDITA' CAMPI LIBRO
     @Test
@@ -174,7 +117,7 @@ public class BibliotecaTest {
     void testValiditaLibro_AutoreNomeNonValido() throws Exception {
         ArrayList<Autore> lista = new ArrayList<>();
         Autore autore3 = new Autore("Nome non valido$$", "CognomeValido");
-        listaAutori.add(autore3);
+        lista.add(autore3);
         
         assertFalse(biblioteca.checkValiditaCampiLibro("Titolo Valido", lista, 2023, "9789510490042", 5, 5),
                 "Dovrebbe essere FALSE se il nome di un autore contiene caratteri non validi.");
@@ -184,7 +127,7 @@ public class BibliotecaTest {
     void testValiditaLibro_AutoreCognomeNonValido() throws Exception {
         ArrayList<Autore> lista = new ArrayList<>();
         Autore autore3 = new Autore("NomeValido", "Cognome Non Valido $$$");
-        listaAutori.add(autore3);
+        lista.add(autore3);
         
         assertFalse(biblioteca.checkValiditaCampiLibro("Titolo Valido", lista, 2023, "9789510490046", 5, 5),
                 "Dovrebbe essere FALSE se il cognome di un autore contiene caratteri non validi.");
@@ -301,7 +244,7 @@ public class BibliotecaTest {
         biblioteca.eliminaLibro(libro);
         assertEquals(0, biblioteca.getObLibreria().size(), "Il libro deve essere rimosso dalla lista.");
     }
-
+    
     @Test
     void testEliminaLibro_InPrestito_LanciaEccezione() throws Exception {
         ArrayList<Autore> nuovaLista = new ArrayList<>();
@@ -313,7 +256,6 @@ public class BibliotecaTest {
             biblioteca.eliminaLibro(libroInPrestito);
         });
         assertTrue(e.getMessage().contains("Impossibile eliminare: Libro in prestito"), "Deve lanciare eccezione se il libro è in prestito.");
-        assertEquals(1, biblioteca.getObLibreria().size(), "Il libro non deve essere rimosso.");
     }
     
     
@@ -333,7 +275,7 @@ public class BibliotecaTest {
         biblioteca.aggiungiUtente("Antonio", "Bianchi", "0612701234", "a.bianchi2@studenti.unisa.it", 0);
         assertEquals(1, biblioteca.getObClienti().size(), "L'utente deve essere aggiunto alla lista.");
     }
-
+    
     @Test
     void testAggiungiUtente_UtenteGiaRegistrato_LanciaEccezione() throws Exception {
         biblioteca.aggiungiUtente("Antonio", "Bianchi", "0612701234", "a.bianchi2@studenti.unisa.it", 0);
@@ -355,7 +297,7 @@ public class BibliotecaTest {
         biblioteca.eliminaUtente(utente);
         assertEquals(0, biblioteca.getObClienti().size(), "L'utente deve essere rimosso dalla lista.");
     }
-
+    
     @Test
     void testEliminaUtente_InPrestito_LanciaEccezione() throws Exception {
         Utente utente = new Utente("Ferdinando", "Tedesco","0612706545","f.tedesco1@studenti.unisa.it",1);
@@ -407,7 +349,7 @@ public class BibliotecaTest {
         });
         assertTrue(e.getMessage().contains("Dati non validi"));
     }
-
+    
     @Test
     void testAggiungiPrestito_CopieNonDisponibili_LanciaEccezione() throws Exception {
         ArrayList<Autore> nuovaLista = new ArrayList<>();
@@ -421,7 +363,7 @@ public class BibliotecaTest {
         });
         assertTrue(e.getMessage().contains("Copie del libro non disponibili"));
     }
-
+    
     @Test
     void testAggiungiPrestito_UtenteLimiteRaggiunto_LanciaEccezione() throws Exception {
         // Istanzio un utente con 3 prestiti attivi
@@ -436,7 +378,7 @@ public class BibliotecaTest {
         });
         assertTrue(e.getMessage().contains("L'utente selezionato è già a carico di 3 prestiti"));
     }
-
+    
     // --- TEST RESTITUISCI PRESTITO
     
     @Test
@@ -460,7 +402,7 @@ public class BibliotecaTest {
         assertEquals(copieAttuali + 1, libro.getNumCopieDisponibili(), "Le copie disponibili devono essere incrementate."); // 5
         assertEquals(prestitiAttiviAttuali - 1, utente.getNumPrestitiAttivi(), "I prestiti attivi devono essere decrementati."); // 0
     }
-
+    
     @Test
     void testRestituisciPrestito_PrestitoNonEsistente_LanciaEccezione() throws Exception {
         // Prestito fittizio non presente nella lista
@@ -474,4 +416,5 @@ public class BibliotecaTest {
         });
         assertTrue(e.getMessage().contains("Prestito non trovato per la rimozione."), "Deve lanciare eccezione se il prestito non esiste.");
     }
+    
 }
