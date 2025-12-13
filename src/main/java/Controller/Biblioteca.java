@@ -132,7 +132,7 @@ public class Biblioteca implements Serializable{
      * @param copieDisp Il numero di copie disponibili.
      * @return true se i campi sono validi, false altrimenti.
      */
-    private boolean checkValiditaCampiLibro(String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) {
+    public boolean checkValiditaCampiLibro(String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) {
         
         if(!ISBN.matches("^\\d{13}$") || copieTot < copieDisp || anno <= 0 || !titolo.trim().matches("^[\\p{L}\\p{N}'\":\\-.,?! ]+$"))
             return false;
@@ -155,7 +155,7 @@ public class Biblioteca implements Serializable{
      * @return true se i campi sono validi, false altrimenti.
      */
     
-    private boolean checkValiditaCampiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi){
+    public boolean checkValiditaCampiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi){
         
         return nome.matches("^[\\p{L}' ]+$") 
                 && cognome.matches("^[\\p{L}' ]+$") 
@@ -279,7 +279,7 @@ public class Biblioteca implements Serializable{
      */
     public void aggiungiPrestito(Utente u, Libro l, LocalDate data) throws Exception {
         if(u == null || l == null || data == null) throw new Exception("Dati non validi");
-        if(l.getNumCopieDisponibili() < 0) throw new Exception("Copie del libro non disponibili");
+        if(l.getNumCopieDisponibili() <= 0) throw new Exception("Copie del libro non disponibili");
         if(u.getNumPrestitiAttivi() >= 3) throw new Exception("L'utente selezionato è già a carico di 3 prestiti");
         
         Prestito p = new Prestito(u, l, data);
@@ -305,6 +305,9 @@ public class Biblioteca implements Serializable{
      * viene decrementato e il numero di copie del libro incrementato.
      */
     public void restituisciPrestito(Prestito p) throws Exception {
+        if (!obPrestiti.contains(p)) {
+            throw new Exception("Prestito non trovato per la rimozione.");
+        }
         prestiti.rimuoviPrestito(p);
         obPrestiti.remove(p);
         

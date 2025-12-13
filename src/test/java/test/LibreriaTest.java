@@ -24,8 +24,8 @@ public class LibreriaTest {
         Collections.addAll(autori2, new Autore("Paolo","Marcellini"),new Autore("Carlo","Sbordone"));
         
         //Oggetti libro
-        libro1 = new Libro("Manuale di Diritto Privato", autori1, 2025, "9788828869269", 10, 9);
-        libro2 = new Libro("Elementi di Analisi Matematica", autori2, 2002, "9788820733834", 10, 9);
+        libro1 = new Libro("Manuale di Diritto Privato", autori1, 2025, "9788828869269", 10, 10);
+        libro2 = new Libro("Elementi di Analisi Matematica", autori2, 2002, "9788820733834", 10, 10);
        
         //Oggetto libreria
         libreria = new Libreria();
