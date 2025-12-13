@@ -364,7 +364,8 @@ public class MainController {
                         tNome.getText(), 
                         tCognome.getText(), 
                         tMatricola.getText(), 
-                        tEmail.getText()
+                        tEmail.getText(),
+                        0
                     );
                 } catch (Exception e) {
                     alertErrore("Errore inserimento: " + e.getMessage());

@@ -226,13 +226,14 @@ public class Biblioteca implements Serializable{
      * @param cognome Il cognome dell'utente.
      * @param matricola La matricola dell'utente.
      * @param email L'indirizzo email.
+     * @param numPrestitiAttivi Numero di prestiti attivi.
      * @throws Exception Se i dati non sono validi o la matricola esiste già.
      * @post L'utente è aggiunto a Clienti e a obClienti.
      */
-    public void aggiungiUtente(String nome, String cognome, String matricola, String email) throws Exception {
-       if(!checkValiditaCampiUtente(nome, cognome, matricola, email, 0)) throw new Exception("Campi non validi!");
+    public void aggiungiUtente(String nome, String cognome, String matricola, String email, int numPrestitiAttivi) throws Exception {
+       if(!checkValiditaCampiUtente(nome, cognome, matricola, email, numPrestitiAttivi)) throw new Exception("Campi non validi!");
        
-       Utente u = new Utente(nome, cognome, matricola, email, 0);
+       Utente u = new Utente(nome, cognome, matricola, email, numPrestitiAttivi);
        
        if(clienti.esisteUtente(u)) throw new Exception("Utente già registrato");
        
