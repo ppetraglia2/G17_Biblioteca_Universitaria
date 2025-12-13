@@ -110,7 +110,7 @@ public class MainController {
     public void configuraLibri() {
         colLibTitolo.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTitolo()));
         // Si assume che Libro abbia un metodo getAutoriFormatted() o simile
-        colLibAutori.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getAutori().toString())); 
+        colLibAutori.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().autoriToString())); 
         colLibAnno.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getAnno()));
         colLibIsbn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getISBN()));
         colLibCopie.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNumCopieDisponibili() + "/" + d.getValue().getNumCopieTotali()));
@@ -430,7 +430,7 @@ public class MainController {
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
         
         TextField tTitolo = new TextField(l.getTitolo());
-        TextField tAutori = new TextField(l.getAutori().toString());
+        TextField tAutori = new TextField(l.autoriToString());
         TextField tAnno = new TextField(String.valueOf(l.getAnno()));
         TextField tIsbn = new TextField(l.getISBN());
         TextField tCopie = new TextField(String.valueOf(l.getNumCopieTotali()));
