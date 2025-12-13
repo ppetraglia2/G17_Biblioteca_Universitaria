@@ -244,9 +244,55 @@ public class LibroTest {
     @Test
     public void testToString(){
         String expectedString = String.format("%s (Autori : %s) [ISBN: %s]\n",
-                TITOLO_INIZIALE, listaAutori.toString(), ISBN_INIZIALE);
+                TITOLO_INIZIALE, libro.autoriToString(), ISBN_INIZIALE);
         //Assert
         assertEquals(expectedString, libro.toString(), "toString() deve restituire la stringa formattata.");
+    }
+    
+    // --- Test di autoriToString() ---
+    @Test
+    void autoriToString_AutoreSingolo_FormatoCorrettoConVirgolaFinale() {
+        Autore a1 = new Autore("Nome","Cognome");
+        ArrayList<Autore> singoloAutore = new ArrayList<>();
+        singoloAutore.add(a1);
+        
+        Libro libro = new Libro("Titolo", singoloAutore, 2000, "1111111111111", 1, 1);
+        
+        String result = libro.autoriToString();
+        
+        // Risultato atteso, inclusa la virgola e lo spazio finali non rimossi dal metodo
+        String expected = "Nome Cognome, "; 
+        
+        assertEquals(expected, result, "autoriToString non formatta correttamente autori multipli.");
+    }
+    
+    @Test
+    void autoriToString_ListaVuota_RitornaStringaVuota() {
+        Libro libroSenzaAutori = new Libro("Anonimo", new ArrayList<>(), 2000, "2222222222222", 1, 1);
+        
+        String result = libroSenzaAutori.autoriToString();
+        
+        String expected = "";
+        
+        assertEquals(expected, result, "autoriToString con lista vuota deve ritornare una stringa vuota.");
+    }
+    
+    @Test
+    void autoriToString_AutoriMultipli_FormatoCorrettoConVirgolaFinale() {
+        Autore a1 = new Autore("Nome","Cognome");
+        Autore a2 = new Autore("Nome2", "Cognome2");
+        ArrayList<Autore> piuAutori = new ArrayList<>();
+        piuAutori.add(a1);
+        piuAutori.add(a2);
+        
+        Libro libro = new Libro("Titolo", piuAutori, 2000, "1111111111111", 1, 1);
+        
+        String result = libro.autoriToString();
+        
+        // Risultato atteso, inclusa la virgola e lo spazio finali non rimossi dal metodo
+        String expected = "Nome Cognome, Nome2 Cognome2, "; 
+        
+        assertEquals(expected, result, "autoriToString non formatta correttamente autori multipli.");
     }
     
     

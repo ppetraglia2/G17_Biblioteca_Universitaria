@@ -71,10 +71,19 @@ public class Clienti implements Serializable{
      * 
      * @post Campi dell'utente modificati
      * 
-     * @param u È l'utente a cui bisogna modificare i campi
+     * @param u E' l'utente a cui bisogna modificare i campi
+     * @param nome E' il nome dell'utente da modificare
+     * @param cognome E' il cognome dell'utente da modificare
+     * @param matricola E' la matricola dell'utente da modificare
+     * @param email E' la matricola dell'utente da modificare
      */
-    public void modificaUtente(Utente u, String nome, String cognome, String matricola, String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void modificaUtente(Utente u, String nome, String cognome, String matricola, String email) throws Exception{
+        if(!esisteUtente(u)) throw new Exception("ERRORE: Utente non trovato per la modifica!");
+        
+        u.setNome(nome);
+        u.setCognome(cognome);
+        u.setMatricola(matricola);
+        u.setEmail(email);
     }
 
     /**

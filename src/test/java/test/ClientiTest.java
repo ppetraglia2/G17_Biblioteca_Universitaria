@@ -106,7 +106,49 @@ public class ClientiTest {
         assertTrue(exception.getMessage().contains("IMPOSSIBILE ELIMINARE UTENTE! Utente : " + utente1.toString() + " non presente nella lista!"));
     }
     
-    // --- Test Modifica Utente --- ?
+    // --- Test Modifica Utente --- 
+    @Test
+    void modificaUtente_Successo_AggiornaTuttiICampi() {
+        // Dati modificati
+        String nuovoNome = "Marco";
+        String nuovoCognome = "Bianchi";
+        String nuovaMatricola = "1112223334";
+        String nuovaEmail = "m.bianchi4@studenti.unisa.it";
+        
+
+        try {
+            clienti.aggiungiUtente(utente1);
+            clienti.modificaUtente(utente1, nuovoNome,nuovoCognome, nuovaMatricola, nuovaEmail);
+
+            // 1. Verifica che l'oggetto in memoria sia stato modificato
+            assertEquals(nuovoNome, utente1.getNome(), "Il nome non è stato aggiornato.");
+            assertEquals(nuovoCognome, utente1.getCognome(), "Il cognome non è stato aggiornato.");
+            assertEquals(nuovaMatricola, utente1.getMatricola(), "La matricola non è stata aggiornata.");
+            assertEquals(nuovaEmail, utente1.getEmail(), "L'email non è stata aggiornata.");
+            
+        } catch (Exception e) {
+            fail("La modifica dell'utente esistente non dovrebbe lanciare eccezioni: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    void modificaUtente_Fallimento_UtenteNonEsistente_DeveLanciareEccezione() {
+        Utente utente3 = new Utente("Gaia", "Rossomando", "0612708972", "g.rossomando9@studenti.unisa.it", 0);
+        Exception exception = assertThrows(Exception.class, () -> {
+            // Tentativo di modifica su un utente mai aggiunto:
+            clienti.modificaUtente(
+                utente3, 
+                "Maria", 
+                "Petraglia", 
+                "0612708975", 
+                "m.petraglia3@studenti.unisa.it"
+            );
+        }, "Il metodo avrebbe dovuto lanciare una Exception per utente non presente.");
+
+        //Verifica che il messaggio contenga l'errore specifico atteso dal codice:
+        assertTrue(exception.getMessage().contains("ERRORE: Utente non trovato per la modifica!"), 
+                   "Il messaggio di errore non è quello previsto.");
+    }
     
     // --- Test Esiste Utente ---
     

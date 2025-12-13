@@ -7,6 +7,7 @@ import Model.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class LibreriaTest {
@@ -112,7 +113,56 @@ public class LibreriaTest {
         }, "Deve lanciare un'eccezione se il libro non è presente.");
     }
     
-    // --- Test Modifica Libro --- ?
+    // --- Test Modifica Libro --- 
+    @Test
+    void modificaLibro_Successo_AggiornaTuttiICampi() {
+        // Dati modificati
+        Autore a = new Autore("Italo","Calvino");
+        String nuovoTitolo = "Il Sentiero dei Nidi di Ragno (Nuovo)";
+        ArrayList<Autore> nuoviAutori = new ArrayList<>(Arrays.asList(a)); //Cambio autore
+        int nuovoAnno = 2020;
+        String nuovoIsbn = "9876543210987";
+        int nuoveCopie = 10;
+
+        try {
+            libreria.aggiungiLibro(libro1);
+            libreria.modificaLibro(libro1, nuovoTitolo, nuoviAutori, nuovoAnno, nuovoIsbn, nuoveCopie);
+
+            // Verifica dell'aggiornamento dei campi
+            assertEquals(nuovoTitolo, libro1.getTitolo(), "Il titolo non è stato aggiornato.");
+            assertEquals(nuoviAutori, libro1.getAutori(), "La lista autori non è stata aggiornata.");
+            assertEquals(nuovoAnno, libro1.getAnno(), "L'anno non è stato aggiornato.");
+            assertEquals(nuovoIsbn, libro1.getISBN(), "L'ISBN non è stato aggiornato.");
+            assertEquals(nuoveCopie, libro1.getNumCopieTotali(), "Il numero totale di copie non è stato aggiornato.");
+
+        } catch (Exception e) {
+            fail("La modifica del libro esistente non dovrebbe lanciare eccezioni: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    void modificaLibro_Fallimento_LibroNonEsistente_DeveLanciareEccezione() {
+        
+        ArrayList<Autore> nuoviAutori = new ArrayList<>();
+        Autore a = new Autore("Nome","Cognome");
+        Libro libro3 = new Libro("Titolo",new ArrayList<>(), 1978,"9876543210981",10,10);
+        Exception exception = assertThrows(Exception.class, () -> {
+            libreria.modificaLibro(
+                libro3, 
+                "Titolo Nuovo", 
+                Arrays.asList(a), 
+                2020, 
+                "9876543210982", 
+                1
+            );
+        }, "Il metodo avrebbe dovuto lanciare una Exception per libro non presente.");
+
+        // Verifica il messaggio dell'eccezione
+        assertTrue(exception.getMessage().contains("ERRORE: Libro non trovato per la modifica!"), 
+                   "Il messaggio di errore non è quello previsto.");
+       
+    }
+    
     
     // --- Test Esiste Libro ---
     

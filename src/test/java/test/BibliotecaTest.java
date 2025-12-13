@@ -262,27 +262,54 @@ public class BibliotecaTest {
     // --- TEST AGGIUNTI UTENTE ---
     
     @Test
-    void testAggiungiUtente_CampiNonValidi_LanciaEccezione() {
+    void testAggiungiUtente_MatricolaNonValida_LanciaEccezione() {
         // Matricola non valida 
         Exception e = assertThrows(Exception.class, () -> {
-            biblioteca.aggiungiUtente("Giacomo", "Palladino", "12345", "g.palladino8@studenti.unisa.it", 0);
+            biblioteca.aggiungiUtente("Giacomo", "Palladino", "111111", "g.palladino8@studenti.unisa.it");
+        });
+        assertTrue(e.getMessage().contains("Campi non validi!"), "AggiungiUtente deve fallire per campi non validi.");
+    }
+    
+    @Test
+    void testAggiungiUtente_NomeNonValido_LanciaEccezione() {
+        // Nome non valido 
+        Exception e = assertThrows(Exception.class, () -> {
+            biblioteca.aggiungiUtente("Giaco11", "Palladino", "1111111111111", "g.palladino8@studenti.unisa.it");
+        });
+        assertTrue(e.getMessage().contains("Campi non validi!"), "AggiungiUtente deve fallire per campi non validi.");
+    }
+    
+    @Test
+    void testAggiungiUtente_CognomeNonValido_LanciaEccezione() {
+        // Nome non valido 
+        Exception e = assertThrows(Exception.class, () -> {
+            biblioteca.aggiungiUtente("Giacomo", "Pallad?$$", "1111111111111", "g.palladino8@studenti.unisa.it");
+        });
+        assertTrue(e.getMessage().contains("Campi non validi!"), "AggiungiUtente deve fallire per campi non validi.");
+    }
+    
+    @Test
+    void testAggiungiUtente_EmailNonValida_LanciaEccezione() {
+        // Nome non valido 
+        Exception e = assertThrows(Exception.class, () -> {
+            biblioteca.aggiungiUtente("Giacomo", "Palladino", "1111111111111", "1.palladino@studenti.unisa.it");
         });
         assertTrue(e.getMessage().contains("Campi non validi!"), "AggiungiUtente deve fallire per campi non validi.");
     }
     
     @Test
     void testAggiungiUtente_Successo_AggiornaLista() throws Exception {
-        biblioteca.aggiungiUtente("Antonio", "Bianchi", "0612701234", "a.bianchi2@studenti.unisa.it", 0);
+        biblioteca.aggiungiUtente("Antonio", "Bianchi", "0612701234", "a.bianchi2@studenti.unisa.it");
         assertEquals(1, biblioteca.getObClienti().size(), "L'utente deve essere aggiunto alla lista.");
     }
     
     @Test
     void testAggiungiUtente_UtenteGiaRegistrato_LanciaEccezione() throws Exception {
-        biblioteca.aggiungiUtente("Antonio", "Bianchi", "0612701234", "a.bianchi2@studenti.unisa.it", 0);
+        biblioteca.aggiungiUtente("Antonio", "Bianchi", "0612701234", "a.bianchi2@studenti.unisa.it");
 
         // Aggiungo un utente con la stessa matricola
         Exception e = assertThrows(Exception.class, () -> {
-            biblioteca.aggiungiUtente("Nome Diverso", "Cognome Diverso", "0612701234", "n.diverso9@studenti.unisa.it", 0);
+            biblioteca.aggiungiUtente("Nome Diverso", "Cognome Diverso", "0612701234", "n.diverso9@studenti.unisa.it");
         });
         assertTrue(e.getMessage().contains("Utente già registrato"), "Deve lanciare eccezione se l'utente esiste (stessa matricola).");
     }
@@ -291,7 +318,7 @@ public class BibliotecaTest {
     @Test
     void testEliminaUtente_Successo_AggiornaLista() throws Exception {
         Utente utente = new Utente("Maria", "Tedesco","0612706543","m.tedesco1@studenti.unisa.it",0);
-        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail(), 0);
+        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail());
         assertEquals(1, biblioteca.getObClienti().size());
 
         biblioteca.eliminaUtente(utente);
@@ -300,9 +327,10 @@ public class BibliotecaTest {
     
     @Test
     void testEliminaUtente_InPrestito_LanciaEccezione() throws Exception {
-        Utente utente = new Utente("Ferdinando", "Tedesco","0612706545","f.tedesco1@studenti.unisa.it",1);
-        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail(), 1);
-
+        Utente utente = new Utente("Ferdinando", "Tedesco","0612706545","f.tedesco1@studenti.unisa.it",0);
+        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail());
+        utente.incrementaPrestitiAttivi();
+        
         Exception e = assertThrows(Exception.class, () -> {
             biblioteca.eliminaUtente(utente);
         });
@@ -317,7 +345,7 @@ public class BibliotecaTest {
         ArrayList<Autore> nuovaLista = new ArrayList<>();
         Utente utente = new Utente("Ferdinando", "Cipriano","0612709081","f.cipriano1@studenti.unisa.it",0);
         Libro libroInPrestito = new Libro("In Prestito", nuovaLista, 2000, "1111111111111", 5, 4);
-        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail(), 0);
+        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail());
         biblioteca.aggiungiLibro(libroInPrestito.getTitolo(), libroInPrestito.getAutori(), 1840, libroInPrestito.getISBN(), 5, 5);
         
         int copieIniziali = libroInPrestito.getNumCopieDisponibili();
@@ -355,7 +383,7 @@ public class BibliotecaTest {
         ArrayList<Autore> nuovaLista = new ArrayList<>();
         Utente utente = new Utente("Vincenzo", "Cipriano","0612709082","v.cipriano1@studenti.unisa.it",0);
         Libro libroEsaurito = new Libro("Esaurito", nuovaLista, 2020, "2222222222222", 1, 0);
-        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail(), 0);
+        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail());
         biblioteca.aggiungiLibro(libroEsaurito.getTitolo(), libroEsaurito.getAutori(), 2020, libroEsaurito.getISBN(), 1, 0);
 
         Exception e = assertThrows(Exception.class, () -> {
@@ -370,7 +398,7 @@ public class BibliotecaTest {
         ArrayList<Autore> nuovaLista = new ArrayList<>();
         Utente utenteAlLimite = new Utente("Kevin", "Cipriano","0612709083","k.cipriano1@studenti.unisa.it",3);
         Libro libro = new Libro("In Prestito", nuovaLista, 2000, "1111111111111", 5, 4);
-        biblioteca.aggiungiUtente(utenteAlLimite.getNome(), utenteAlLimite.getCognome(), utenteAlLimite.getMatricola(), utenteAlLimite.getEmail(), 3);
+        biblioteca.aggiungiUtente(utenteAlLimite.getNome(), utenteAlLimite.getCognome(), utenteAlLimite.getMatricola(), utenteAlLimite.getEmail());
         biblioteca.aggiungiLibro(libro.getTitolo(), libro.getAutori(), 1840, libro.getISBN(), 5, 5);
 
         Exception e = assertThrows(Exception.class, () -> {
@@ -387,7 +415,7 @@ public class BibliotecaTest {
         Utente utente = new Utente("Antonia", "Cipriano","0612709084","a.cipriano2@studenti.unisa.it",0);
         Libro libro = new Libro("In Prestito", nuovaLista, 2000, "1111111111111", 5, 5);
         //Aggiungo un prestito
-        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail(), 0);
+        biblioteca.aggiungiUtente(utente.getNome(), utente.getCognome(), utente.getMatricola(), utente.getEmail());
         biblioteca.aggiungiLibro(libro.getTitolo(), libro.getAutori(), 1840, libro.getISBN(), 5, 5);
         biblioteca.aggiungiPrestito(utente, libro, LocalDate.now());
 
