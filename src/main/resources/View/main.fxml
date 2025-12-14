@@ -19,7 +19,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
     <center>
         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -59,7 +59,7 @@
                                                     </image>
                                                 </ImageView>
                                                 <Region prefHeight="98.0" prefWidth="48.0" />
-                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE" onAction="nuovoLibro">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE" onAction="#nuovoLibro">
                                                     <font>
                                                         <Font name="System Bold" size="15.0" />
                                                     </font>
@@ -146,7 +146,7 @@
                                                     </children>
                                                 </HBox>
                                                 <Region prefHeight="39.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
-                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE" onAction="nuovoUtente">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE" onAction="#nuovoUtente">
                                                     <HBox.margin>
                                                         <Insets />
                                                     </HBox.margin>
@@ -204,7 +204,7 @@
                                             </font>
                                         </Label>
                                         <Region prefHeight="100.0" prefWidth="374.0" />
-                                        <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE" onAction="nuovoPrestito">
+                                        <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE" onAction="#nuovoPrestito">
                                             <font>
                                                 <Font name="System Bold" size="15.0" />
                                             </font>
