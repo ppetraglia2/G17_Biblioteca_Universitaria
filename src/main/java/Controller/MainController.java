@@ -508,14 +508,8 @@ public class MainController {
                  try {
                      int newanno = Integer.parseInt(tAnno.getText().trim());
                      int newcopieTot = Integer.parseInt(tCopie.getText().trim());
+                     int newcopieDisp = l.getNumCopieDisponibili() - (l.getNumCopieTotali() - newcopieTot);
                      List<Autore> newautori = parseAutori(tAutori.getText());
-                     
-                     int newcopieDisp = l.getNumCopieDisponibili();
-                     
-                     if(l.getNumCopieTotali() > newcopieTot)
-                         newcopieDisp = l.getNumCopieDisponibili() - (l.getNumCopieTotali() - newcopieTot);
-                     else if(l.getNumCopieTotali() < newcopieTot)
-                         newcopieDisp = l.getNumCopieDisponibili() + (newcopieTot - l.getNumCopieTotali());
                      
                      biblioteca.modificaLibro(l, tTitolo.getText(), newautori, newanno, tIsbn.getText(), newcopieTot, newcopieDisp);
                      tableLibri.refresh();
