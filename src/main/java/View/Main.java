@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import javafx.scene.Scene;
 import java.io.*;
 import Controller.*;
@@ -22,6 +23,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.primaryStage = stage;
+        this.primaryStage.setTitle("Gestione Biblioteca Universitaria");
+        
+        try {
+            Image icon = new Image(getClass().getResourceAsStream("/View/icon.png"));
+            primaryStage.getIcons().add(icon);
+            
+        } catch (Exception e) {
+            System.err.println("Errore nel caricamento dell'icona: " + e.getMessage());
+        }
 
         // 1. Avvia la schermata di Accesso
         mostraSchermataAccesso();

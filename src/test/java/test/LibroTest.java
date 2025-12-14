@@ -261,7 +261,7 @@ public class LibroTest {
         String result = libro.autoriToString();
         
         // Risultato atteso, inclusa la virgola e lo spazio finali non rimossi dal metodo
-        String expected = "Nome Cognome, "; 
+        String expected = "Nome Cognome"; 
         
         assertEquals(expected, result, "autoriToString non formatta correttamente autori multipli.");
     }
@@ -290,7 +290,7 @@ public class LibroTest {
         String result = libro.autoriToString();
         
         // Risultato atteso, inclusa la virgola e lo spazio finali non rimossi dal metodo
-        String expected = "Nome Cognome, Nome2 Cognome2, "; 
+        String expected = "Nome Cognome, Nome2 Cognome2"; 
         
         assertEquals(expected, result, "autoriToString non formatta correttamente autori multipli.");
     }
