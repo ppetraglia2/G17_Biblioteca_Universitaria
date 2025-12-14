@@ -10,6 +10,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+import java.util.Iterator;
 
 public class Libro implements Serializable{
 
@@ -172,10 +173,17 @@ public class Libro implements Serializable{
      * @brief Ritorna una rappresentazione in stringa della lista di Autori.
      * @return Una stringa contenente Nome e Cognome degli Autori.
      */
-    public String autoriToString(){
+    public String autoriToString() {
         StringBuffer sb = new StringBuffer();
-        for(Autore a : autori){
-            sb.append(a.getNome()).append(" ").append(a.getCognome()).append(", ");
+        Iterator<Autore> it = autori.iterator();
+
+        while (it.hasNext()) {
+            Autore a = it.next();
+            sb.append(a.getNome()).append(" ").append(a.getCognome());
+            
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
         }
         return sb.toString();
     }

@@ -1,6 +1,6 @@
 /* Design System */
 
-:root {
+.root {
     -primary-color: #B3E5FC; /* Alternativa: #E1F5FE*/
     -accent-color: #0288D1;
     -text-color: #303C42;
