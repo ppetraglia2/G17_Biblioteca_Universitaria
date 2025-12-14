@@ -77,7 +77,7 @@ public class AccessoController {
              String mainViewPath = "/View/main.fxml"; 
              Parent mainView = FXMLLoader.load(getClass().getResource(mainViewPath));
              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-             Scene scene = new Scene(mainView, stage.getWidth(), stage.getHeight()); // Mantiene le dimensioni attuali
+             Scene scene = new Scene(mainView, stage.getWidth(), stage.getHeight()); 
 
              stage.setScene(scene);
              stage.setTitle("Sistema di Gestione Biblioteca Universitaria");
