@@ -34,6 +34,7 @@ public class MainController {
     private Biblioteca biblioteca;
     
     // --- ELEMENTI GRAFICI (Iniettati da FXML) ---
+
     // Pannelli principali
     @FXML private AnchorPane paneLibri;
     @FXML private AnchorPane paneUtenti;
