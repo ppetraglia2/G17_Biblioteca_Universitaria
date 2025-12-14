@@ -12,35 +12,71 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import java.io.*;
+import Controller.*;
 
-public class Main extends Application{
-    
-    /**
-     * @brief Metodo principale per l'avvio dell'applicazione JavaFX.
-     *
-     * Questo metodo viene chiamato dal framework JavaFX dopo l'inizializzazione.
-     * Imposta la scena e mostra la finestra (Stage).
-     *
-     * @param primaryStage Lo stage (finestra) principale dell'applicazione.
-     * @throws Exception Se si verifica un errore durante il caricamento dell'FXML.
-     */
+public class Main extends Application {
+
+    private Stage primaryStage; // Manteniamo un riferimento allo Stage principale
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Accesso.fxml"));
-        Parent root = loader.load();
+    public void start(Stage stage) throws Exception {
+        this.primaryStage = stage;
 
-        primaryStage.setTitle("Gestione Biblioteca");
-        primaryStage.setScene(new Scene(root, 1000, 600));
-        primaryStage.show();
+        // 1. Avvia la schermata di Accesso
+        mostraSchermataAccesso();
     }
 
     /**
-     * @brief Metodo statico main.
-     *
-     * Metodo standard per l'applicazione Java.
-     *
-     * @param args Array di argomenti passati dalla linea di comando.
+     * Carica e visualizza la schermata di login.
      */
+    public void mostraSchermataAccesso() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("accesso.fxml")
+            );
+            Parent root = loader.load();
+
+            AccessoController controller = loader.getController();
+            if (controller != null) {
+                controller.setupController(); 
+            }
+
+            primaryStage.setScene(new Scene(root));
+            primaryStage.sizeToScene();
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Gestione dell'errore di caricamento FXML
+        }
+    }
+
+    /**
+     * Carica e visualizza la homepage, sostituendo la schermata di login.
+     */
+    public void mostraHomepage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("main.fxml")
+            );
+            Parent root = loader.load();
+
+            // Opzionale: Ottieni il controller Main se devi passargli dati
+            // MainController controller = loader.getController();
+            // controller.setDatiUtente(utenteLoggato);
+
+            // Cambia la Scena corrente dello Stage
+            primaryStage.setTitle("Homepage Applicazione");
+            primaryStage.setScene(new Scene(root));
+            primaryStage.sizeToScene();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Gestione dell'errore di caricamento FXML
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

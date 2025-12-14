@@ -6,32 +6,33 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #66c2ff;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox alignment="CENTER" layoutX="46.0" layoutY="35.0" prefHeight="332.0" prefWidth="513.0">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #66c2ff;"
+    xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" 
+    fx:controller="Controller.AccessoController">
+    <children>
+        <VBox alignment="CENTER" spacing="10.0" maxHeight="Infinity" maxWidth="Infinity">
          <children>
-            <ImageView fitHeight="146.0" fitWidth="216.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoImage" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo.png" />
                </image>
             </ImageView>
             <Region prefHeight="22.0" prefWidth="477.0" />
-            <Label text="Benvenuto nel sistema di gestione della Biblioteca Universitaria.">
+            <Label fx:id="labelBenvenuto" text="Benvenuto nel sistema di gestione della Biblioteca Universitaria.">
                <font>
                   <Font name="Roboto" size="14.0" />
                </font>
             </Label>
             <Region prefHeight="7.0" prefWidth="513.0" />
-            <Separator maxWidth="-Infinity" prefHeight="0.0" prefWidth="433.0" style="-fx-background-color: black;" />
-            <Region prefHeight="19.0" prefWidth="477.0" />
-            <Button alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" graphicTextGap="2.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="141.0" style="-fx-background-color: white;" styleClass="start-button" text="ENTRA NEL SISTEMA">
+            <Separator fx:id="separatorBenvenuto" maxWidth="Infinity" prefHeight="0.0" style="-fx-background-color: black;" />
+            <Region  prefHeight="19.0" prefWidth="477.0" />
+            <Button fx:id="btnEntra" alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" graphicTextGap="2.0" mnemonicParsing="false" onAction="#handleEntraNelSistema" style="-fx-background-color: white;" styleClass="start-button" text="ENTRA NEL SISTEMA">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -49,4 +50,4 @@
          </color>
       </InnerShadow>
    </effect>
-</AnchorPane>
+</StackPane>

@@ -13,15 +13,20 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane; // Modificato per compatibilità con FXML
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane; 
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import java.util.Optional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
+// AGGIUNTA IMPORT NECESSARIA PER I BINDING
+import javafx.scene.layout.BorderPane; 
 
 public class MainController {
     
@@ -29,12 +34,15 @@ public class MainController {
     private Biblioteca biblioteca;
     
     // --- ELEMENTI GRAFICI (Iniettati da FXML) ---
-    
     // Pannelli principali
-    // NOTA: Cambiati da VBox a AnchorPane per corrispondere al main.fxml
     @FXML private AnchorPane paneLibri;
     @FXML private AnchorPane paneUtenti;
     @FXML private AnchorPane panePrestiti;
+
+    // Bottoni Sidebar (Devono essere aggiunti se non ci sono)
+    @FXML private Button btnLibri;
+    @FXML private Button btnUtenti;
+    @FXML private Button btnPrestiti;
 
     // Campi di Ricerca
     @FXML private TextField searchLibri;
@@ -65,6 +73,94 @@ public class MainController {
     @FXML private TableColumn<Prestito, String> colPresStato;
     @FXML private TableColumn<Prestito, Void> colPresAzioni;
     
+    // Riferimento al contenitore principale (BorderPane)
+    // Non è necessario un fx:id se lo usiamo per i binding del pane centrale.
+
+    
+    /**
+     * @brief Configura i binding per l'adattabilità (responsiveness) dell'interfaccia.
+     */
+    public void setupController() {
+
+        // --- 1. CONFIGURAZIONE TABELLE (Politica di ridimensionamento) ---
+        // IMPEDISCE ALL'UTENTE DI RIDIMENSIONARE LE COLONNE E FORZA L'ADATTAMENTO ALLA LARGHEZZA
+        if (tableLibri != null) {
+            tableLibri.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        }
+        if (tableUtenti != null) {
+            tableUtenti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        }
+        if (tablePrestiti != null) {
+            tablePrestiti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        }
+
+        // --- 2. BINDING PER L'ADATTAMENTO DEI PANNELLI CENTRALI ---
+        // Se il tuo file FXML ha il BorderPane come root e gli AnchorPane dei dati 
+        // sono contenuti in un unico StackPane (che è la configurazione standard),
+        // devi vincolare gli AnchorPane a questo StackPane.
+        
+        // Poiché gli AnchorPane dei dati (paneLibri, paneUtenti, panePrestiti) sono
+        // anch'essi i contenitori RADICE per la loro vista specifica, devono essere
+        // vincolati al loro genitore (lo StackPane) per occupare tutto lo spazio.
+        
+        // BINDING PANELLI DATI (Larghezza e Altezza)
+        // Ipotizzando che il genitore diretto di questi AnchorPane sia uno StackPane che
+        // si adatta al centro del BorderPane, questo garantisce l'espansione.
+        
+        if (paneLibri != null && paneLibri.getParent() != null) {
+            Pane parent = (Pane) paneLibri.getParent();
+            
+            // Larghezza: Vincola la larghezza dei pannelli alla larghezza del loro genitore
+            paneLibri.prefWidthProperty().bind(parent.widthProperty());
+            paneUtenti.prefWidthProperty().bind(parent.widthProperty());
+            panePrestiti.prefWidthProperty().bind(parent.widthProperty());
+
+            // Altezza: Vincola l'altezza dei pannelli all'altezza del loro genitore
+            paneLibri.prefHeightProperty().bind(parent.heightProperty());
+            paneUtenti.prefHeightProperty().bind(parent.heightProperty());
+            panePrestiti.prefHeightProperty().bind(parent.heightProperty());
+        }
+
+
+        // --- 3. BINDING COMPONENTI INTERNI (Ricerca e Tabelle) ---
+        // La TableView e il campo di ricerca devono espandersi all'interno dei loro AnchorPane contenitori.
+        
+        // A. TableView: Vincolata agli angoli dell'AnchorPane
+        // Nel tuo FXML, le TableView sono già ancorate (bottom, left, right, top).
+        // Se si utilizza un layout VBox/AnchorPane come genitore della TableView, 
+        // possiamo assicurarci che si adattino alla larghezza del pannello. 
+        // Visto che l'FXML usa AnchorPane come contenitore della TableView con 
+        // AnchorPane.setBottom, ecc., non servono binding espliciti qui, ma li 
+        // aggiungiamo per sicurezza sulla larghezza.
+        
+        if (tableLibri != null) {
+            tableLibri.prefWidthProperty().bind(paneLibri.widthProperty());
+        }
+        if (tableUtenti != null) {
+            tableUtenti.prefWidthProperty().bind(paneUtenti.widthProperty());
+        }
+        if (tablePrestiti != null) {
+            tablePrestiti.prefWidthProperty().bind(panePrestiti.widthProperty());
+        }
+        
+        // B. Campo di Ricerca Libri (per espandere il TextField)
+        // Questo binding espanderà il TextField di ricerca in base alla larghezza del pannello Libri.
+        if (searchLibri != null && paneLibri != null) {
+             // Sottrai la larghezza fissa degli altri elementi (Label, Button, Margini, ecc.)
+             // Questo è un calcolo approssimativo e può richiedere fine-tuning con l'FXML
+             // Larghezza Totale PaneLibri - (Larghezza Label + Larghezza Button + Spazi Fissi)
+             // Nel tuo FXML (HBox): Cerca(54) + 2 Regioni(25+48) + Img(39) + Button(143) + Margini(15*4) = ~ 370px
+             searchLibri.prefWidthProperty().bind(paneLibri.widthProperty().subtract(370));
+        }
+        
+         // C. Campo di Ricerca Utenti (per espandere il TextField)
+         if (searchUtenti != null && paneUtenti != null) {
+             // Larghezza Totale PaneUtenti - (Larghezza Label + Button + Spazi Fissi)
+             // Nel tuo FXML (HBox): Cerca(83) + HBox Img(53) + 2 Regioni(81) + Button(158) + Margini(15*4) = ~ 435px
+             searchUtenti.prefWidthProperty().bind(paneUtenti.widthProperty().subtract(435));
+        }
+
+    }
     
     // --- Metodi di Inizializzazione ---
     
@@ -84,6 +180,9 @@ public class MainController {
         configuraUtenti();
         configuraPrestiti();
 
+        // Applica i binding e la logica di ridimensionamento (CHIAMATA AGGIUNTA/RIPOSIZIONATA)
+        setupController();
+
         // Collega i dati del modello alle tabelle
         if (biblioteca.getFlLibreria() != null)
             tableLibri.setItems(biblioteca.getFlLibreria());
@@ -101,6 +200,8 @@ public class MainController {
         if (searchUtenti != null) {
             searchUtenti.textProperty().addListener((obs, oldVal, newVal) -> biblioteca.filtraUtenti(newVal));
         }
+        
+        mostraLibri();
     }
 
     /**
@@ -109,16 +210,16 @@ public class MainController {
      * Collega la lista filtrata dei Libri (flLibreria) alla TableView.
      */
     public void configuraLibri() {
-        colLibTitolo.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTitolo()));
-        colLibAutori.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().autoriToString())); 
-        colLibAnno.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getAnno()));
-        colLibIsbn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getISBN()));
+        if (colLibTitolo != null) colLibTitolo.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getTitolo()));
+        if (colLibAutori != null) colLibAutori.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().autoriToString())); 
+        if (colLibAnno != null) colLibAnno.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getAnno()));
+        if (colLibIsbn != null) colLibIsbn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getISBN()));
         // Mostra copie disponibili / totali
-        colLibCopie.setCellValueFactory(d -> new SimpleStringProperty(
+        if (colLibCopie != null) colLibCopie.setCellValueFactory(d -> new SimpleStringProperty(
             d.getValue().getNumCopieDisponibili() + "/" + d.getValue().getNumCopieTotali()));
 
         // Colonna Azioni
-        colLibAzioni.setCellFactory(param -> new TableCell<Libro, Void>() {
+        if (colLibAzioni != null) colLibAzioni.setCellFactory(param -> new TableCell<Libro, Void>() {
             private final Button btnEdit = new Button("Modif.");
             private final Button btnDel = new Button("Elim.");
             private final HBox pane = new HBox(5, btnEdit, btnDel);
@@ -153,12 +254,12 @@ public class MainController {
      * Collega la lista filtrata degli Utenti (flClienti) alla TableView.
      */
     public void configuraUtenti() {
-        colUtNome.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNome()));
-        colUtCognome.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getCognome()));
-        colUtMatr.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getMatricola()));
-        colUtPrestiti.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getNumPrestitiAttivi()));
+        if (colUtNome != null) colUtNome.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNome()));
+        if (colUtCognome != null) colUtCognome.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getCognome()));
+        if (colUtMatr != null) colUtMatr.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getMatricola()));
+        if (colUtPrestiti != null) colUtPrestiti.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getNumPrestitiAttivi()));
 
-        colUtAzioni.setCellFactory(param -> new TableCell<Utente, Void>() {
+        if (colUtAzioni != null) colUtAzioni.setCellFactory(param -> new TableCell<Utente, Void>() {
             private final Button btnEdit = new Button("Modif.");
             private final Button btnDel = new Button("Elim.");
             private final HBox pane = new HBox(5, btnEdit, btnDel);
@@ -193,12 +294,13 @@ public class MainController {
      * Collega la lista completa dei Prestiti (obPrestiti) alla TableView.
      */
     private void configuraPrestiti() {
-        colPresUtente.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUtente().getCognome()));
-        colPresLibro.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getLibro().getTitolo()));
-        colPresData.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDataRestituzione().toString()));
+        if (colPresUtente != null) colPresUtente.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getUtente().getCognome()));
+        if (colPresLibro != null) colPresLibro.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getLibro().getTitolo()));
+        // Colonna scadenza
+        if (colPresData != null) colPresData.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDataRestituzione().toString()));
 
         // Configurazione stato (Verde = OK, Rosso = Ritardo)
-        colPresStato.setCellFactory(c -> new TableCell<Prestito, String>() {
+        if (colPresStato != null) colPresStato.setCellFactory(c -> new TableCell<Prestito, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -215,7 +317,7 @@ public class MainController {
         });
 
         // Tasto restituzione
-        colPresAzioni.setCellFactory(p -> new TableCell<Prestito, Void>() {
+        if (colPresAzioni != null) colPresAzioni.setCellFactory(p -> new TableCell<Prestito, Void>() {
             private final Button btnRet = new Button("Rientro");
             {
                 btnRet.setOnAction(e -> {
@@ -281,6 +383,7 @@ public class MainController {
     }
     
     // --- Metodi per gestire le Azioni (Event Handlers) ---
+    // Questi metodi ora sono chiamati dai bottoni "+ Nuovo" nell'FXML
 
     /**
      * @brief Avvia il flusso per l'aggiunta di un nuovo Libro.
@@ -301,83 +404,87 @@ public class MainController {
         TextField tCopie = new TextField();
         
         g.addRow(0, new Label("Titolo:"), tTitolo);
-        g.addRow(1, new Label("Autori (virgola):"), tAutori);
+        g.addRow(1, new Label("Autori (separati da ,):"), tAutori);
         g.addRow(2, new Label("Anno:"), tAnno);
         g.addRow(3, new Label("ISBN:"), tIsbn);
-        g.addRow(4, new Label("Copie:"), tCopie);
+        g.addRow(4, new Label("Numero Copie:"), tCopie);
         
         d.getDialogPane().setContent(g);
         
-        d.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    List<Autore> newautori = parseAutori(tAutori.getText());
-                    // Gestione base per la conversione intero
-                    int newanno = Integer.parseInt(tAnno.getText().trim());
-                    int newcopie = Integer.parseInt(tCopie.getText().trim());
-                    
-                    biblioteca.aggiungiLibro(
-                        tTitolo.getText(), 
-                        newautori, 
-                        newanno,
-                        tIsbn.getText(), 
-                        newcopie,
-                        newcopie
-                    );
-                } catch (NumberFormatException ne) {
-                    alertErrore("Errore: Anno e Copie devono essere numeri interi.");
-                } catch (Exception e) {
-                    alertErrore("Errore inserimento: " + e.getMessage());
-                }
+        Optional<ButtonType> result = d.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Logica per creare e aggiungere il libro
+            try {
+                // Esempio: gestisci l'input dell'anno e delle copie come numeri
+                int anno = Integer.parseInt(tAnno.getText());
+                int copie = Integer.parseInt(tCopie.getText());
+                //List<String> autori = Arrays.asList(tAutori.getText().split(","));
+                
+                //Libro nuovoLibro = new Libro(tTitolo.getText(), (List<Autore>) autori, anno, tIsbn.getText(), copie);
+                // Ho modificato l'uso di List.of per Autori, assumendo che tu abbia un costruttore o metodo 
+                // in Biblioteca che gestisca la conversione da List<String> a List<Autore> se necessario.
+                // Usando il tuo codice fornito:
+                List<Autore> newautori = parseAutori(tAutori.getText());
+                biblioteca.aggiungiLibro(
+                    tTitolo.getText(), 
+                    newautori, 
+                    anno, 
+                    tIsbn.getText(), 
+                    copie, 
+                    copie
+                );
+                
+                tableLibri.refresh();
+            } catch (NumberFormatException e) {
+                alertErrore("Anno e Copie devono essere numeri validi.");
+            } catch (Exception e) {
+                 alertErrore("Errore durante l'aggiunta del libro: " + e.getMessage());
             }
-        });
+        }
     }
 
     /**
      * @brief Avvia il flusso per l'aggiunta di un nuovo Utente.
-     *
-     * Apre una finestra per l'inserimento dei dati.
      */
     @FXML
     public void nuovoUtente() {
-        Dialog<ButtonType> d = new Dialog<>();
-        d.setTitle("Nuovo Utente");
-        d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        
-        GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
-        TextField tNome = new TextField();
-        TextField tCognome = new TextField();
-        TextField tMatricola = new TextField();
-        TextField tEmail = new TextField();
-        
-        g.addRow(0, new Label("Nome:"), tNome);
-        g.addRow(1, new Label("Cognome:"), tCognome);
-        g.addRow(2, new Label("Matricola:"), tMatricola);
-        g.addRow(3, new Label("Email:"), tEmail);
-        
-        d.getDialogPane().setContent(g);
-        
-        d.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    biblioteca.aggiungiUtente(
-                        tNome.getText(), 
-                        tCognome.getText(), 
-                        tMatricola.getText(), 
-                        tEmail.getText(),
-                        0
-                    );
-                } catch (Exception e) {
-                    alertErrore("Errore inserimento: " + e.getMessage());
-                }
-            }
-        });
+         Dialog<ButtonType> d = new Dialog<>();
+         d.setTitle("Nuovo Utente");
+         d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+         
+         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+         TextField tNome = new TextField();
+         TextField tCognome = new TextField();
+         TextField tMatricola = new TextField();
+         TextField tEmail = new TextField();
+         
+         g.addRow(0, new Label("Nome:"), tNome);
+         g.addRow(1, new Label("Cognome:"), tCognome);
+         g.addRow(2, new Label("Matricola:"), tMatricola);
+         g.addRow(3, new Label("Email:"), tEmail);
+         
+         d.getDialogPane().setContent(g);
+         
+         d.showAndWait().ifPresent(response -> {
+             if (response == ButtonType.OK) {
+                 try {
+                     biblioteca.aggiungiUtente(
+                         tNome.getText(), 
+                         tCognome.getText(), 
+                         tMatricola.getText(), 
+                         tEmail.getText(),
+                         0
+                     );
+                     tableUtenti.refresh();
+                 } catch (Exception e) {
+                     alertErrore("Errore inserimento: " + e.getMessage());
+                 }
+             }
+         });
     }
 
     /**
-     * @brief Avvia il flusso per la registrazione di un nuovo Prestito.
-     *
-     * Apre una finestra per l'inserimento dei dati.
+     * @brief Avvia il flusso per la creazione di un nuovo Prestito.
      */
     @FXML
     public void nuovoPrestito() {
@@ -387,6 +494,7 @@ public class MainController {
         
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
         
+        // Assicurati che i metodi getObClienti() e getObLibreria() restituiscano ObservableList<T>
         ComboBox<Utente> comboUtenti = new ComboBox<>(biblioteca.getObClienti());
         ComboBox<Libro> comboLibri = new ComboBox<>(biblioteca.getObLibreria());
         DatePicker datePicker = new DatePicker(LocalDate.now().plusDays(30)); 
@@ -408,6 +516,9 @@ public class MainController {
                         comboLibri.getValue(), 
                         datePicker.getValue()
                     );
+                    tablePrestiti.refresh();
+                    tableLibri.refresh(); // Aggiorna il conteggio copie
+                    tableUtenti.refresh(); // Aggiorna il conteggio prestiti
                 } catch (Exception e) {
                     alertErrore(e.getMessage());
                 }
@@ -415,87 +526,79 @@ public class MainController {
         });
     }
 
-    /**
-     * @brief Avvia il flusso per la modifica di un Libro esistente.
-     *
-     * @param l L'oggetto Libro da modificare (selezionato dalla tabella).
-     */
-    @FXML
-    public void modificaLibro(Libro l) {
-        if (l == null) return;
+    // --- Metodi Helper (per le azioni delle tabelle) ---
 
-        Dialog<ButtonType> d = new Dialog<>();
-        d.setTitle("Modifica Libro");
-        d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        
-        GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
-        
-        TextField tTitolo = new TextField(l.getTitolo());
-        TextField tAutori = new TextField(l.autoriToString());
-        TextField tAnno = new TextField(String.valueOf(l.getAnno()));
-        TextField tIsbn = new TextField(l.getISBN());
-        TextField tCopie = new TextField(String.valueOf(l.getNumCopieTotali()));
-        
-        g.addRow(0, new Label("Titolo:"), tTitolo);
-        g.addRow(1, new Label("Autori:"), tAutori);
-        g.addRow(2, new Label("Anno:"), tAnno);
-        g.addRow(3, new Label("ISBN:"), tIsbn);
-        g.addRow(4, new Label("Copie Tot:"), tCopie);
-        
-        d.getDialogPane().setContent(g);
-        
-        d.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    int newanno = Integer.parseInt(tAnno.getText().trim());
-                    int newcopie = Integer.parseInt(tCopie.getText().trim());
-                    List<Autore> newautori = parseAutori(tAutori.getText());
-                    
-                    biblioteca.modificaLibro(l, tTitolo.getText(), newautori, newanno, tIsbn.getText(), newcopie);
-                    tableLibri.refresh();
-                } catch (Exception e) {
-                    alertErrore(e.getMessage());
-                }
-            }
-        });
+    private void modificaLibro(Libro l) {
+         // Implementazione di modificaLibro
+         if (l == null) return;
+
+         Dialog<ButtonType> d = new Dialog<>();
+         d.setTitle("Modifica Libro");
+         d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+         
+         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+         
+         TextField tTitolo = new TextField(l.getTitolo());
+         TextField tAutori = new TextField(l.autoriToString());
+         TextField tAnno = new TextField(String.valueOf(l.getAnno()));
+         TextField tIsbn = new TextField(l.getISBN());
+         TextField tCopie = new TextField(String.valueOf(l.getNumCopieTotali()));
+         
+         g.addRow(0, new Label("Titolo:"), tTitolo);
+         g.addRow(1, new Label("Autori:"), tAutori);
+         g.addRow(2, new Label("Anno:"), tAnno);
+         g.addRow(3, new Label("ISBN:"), tIsbn);
+         g.addRow(4, new Label("Copie Tot:"), tCopie);
+         
+         d.getDialogPane().setContent(g);
+         
+         d.showAndWait().ifPresent(response -> {
+             if (response == ButtonType.OK) {
+                 try {
+                     int newanno = Integer.parseInt(tAnno.getText().trim());
+                     int newcopie = Integer.parseInt(tCopie.getText().trim());
+                     List<Autore> newautori = parseAutori(tAutori.getText());
+                     
+                     biblioteca.modificaLibro(l, tTitolo.getText(), newautori, newanno, tIsbn.getText(), newcopie);
+                     tableLibri.refresh();
+                 } catch (Exception e) {
+                     alertErrore(e.getMessage());
+                 }
+             }
+         });
     }
+    
+    private void modificaUtente(Utente u) {
+         if (u == null) return;
 
-    /**
-     * @brief Avvia il flusso per la modifica di un Utente esistente.
-     *
-     * @param u L'oggetto Utente da modificare (selezionato dalla tabella).
-     */
-    @FXML
-    public void modificaUtente(Utente u) {
-        if (u == null) return;
-
-        Dialog<ButtonType> d = new Dialog<>();
-        d.setTitle("Modifica Utente");
-        d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        
-        GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
-        
-        TextField tNome = new TextField(u.getNome());
-        TextField tCognome = new TextField(u.getCognome());
-        TextField tMatricola = new TextField(u.getMatricola());
-        TextField tEmail = new TextField(u.getEmail());
-        
-        g.addRow(0, new Label("Nome:"), tNome);
-        g.addRow(1, new Label("Cognome:"), tCognome);
-        g.addRow(2, new Label("Email:"), tEmail);
-        
-        d.getDialogPane().setContent(g);
-        
-        d.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    biblioteca.modificaUtente(u, tNome.getText(), tCognome.getText(), tMatricola.getText(), tEmail.getText());
-                    tableUtenti.refresh();
-                } catch (Exception e) {
-                    alertErrore(e.getMessage());
-                }
-            }
-        });
+         Dialog<ButtonType> d = new Dialog<>();
+         d.setTitle("Modifica Utente");
+         d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+         
+         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+         
+         TextField tNome = new TextField(u.getNome());
+         TextField tCognome = new TextField(u.getCognome());
+         TextField tMatricola = new TextField(u.getMatricola());
+         TextField tEmail = new TextField(u.getEmail());
+         
+         g.addRow(0, new Label("Nome:"), tNome);
+         g.addRow(1, new Label("Cognome:"), tCognome);
+         g.addRow(2, new Label("Matricola:"), tMatricola);
+         g.addRow(3, new Label("Email:"), tEmail);
+         
+         d.getDialogPane().setContent(g);
+         
+         d.showAndWait().ifPresent(response -> {
+             if (response == ButtonType.OK) {
+                 try {
+                     biblioteca.modificaUtente(u, tNome.getText(), tCognome.getText(), tMatricola.getText(), tEmail.getText());
+                     tableUtenti.refresh();
+                 } catch (Exception e) {
+                     alertErrore(e.getMessage());
+                 }
+             }
+         });
     }
     
     /**
@@ -524,8 +627,8 @@ public class MainController {
                     nome = s;
                     cognome = ""; 
                 } else {
-                    nome = s.substring(0, ultimoSpazio);
-                    cognome = s.substring(ultimoSpazio + 1);
+                    nome = s.substring(0, ultimoSpazio).trim();
+                    cognome = s.substring(ultimoSpazio + 1).trim();
                 }
                 listaAutori.add(new Autore(nome, cognome));
             }
@@ -533,16 +636,19 @@ public class MainController {
         return listaAutori;
     }
 
-    /**
-     * @brief Visualizza un Alert di errore all'utente.
-     *
-     * @param msg Il messaggio di errore da mostrare.
-     */
-    public void alertErrore(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText("Operazione fallita");
-        alert.setContentText(msg);
-        alert.showAndWait();
+    private void alertErrore(String messaggio) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Errore di Sistema");
+        a.setHeaderText(null);
+        a.setContentText(messaggio);
+        a.showAndWait();
+    }
+    
+     private void alertInfo(String messaggio) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Informazione");
+        a.setHeaderText(null);
+        a.setContentText(messaggio);
+        a.showAndWait();
     }
 }
