@@ -122,18 +122,20 @@ public class LibreriaTest {
         ArrayList<Autore> nuoviAutori = new ArrayList<>(Arrays.asList(a)); //Cambio autore
         int nuovoAnno = 2020;
         String nuovoIsbn = "9876543210987";
-        int nuoveCopie = 10;
+        int nuoveCopieTotali = 10;
+        int nuoveCopieDisponibili = 10;
 
         try {
             libreria.aggiungiLibro(libro1);
-            libreria.modificaLibro(libro1, nuovoTitolo, nuoviAutori, nuovoAnno, nuovoIsbn, nuoveCopie);
+            libreria.modificaLibro(libro1, nuovoTitolo, nuoviAutori, nuovoAnno, nuovoIsbn, nuoveCopieTotali,nuoveCopieDisponibili);
 
             // Verifica dell'aggiornamento dei campi
             assertEquals(nuovoTitolo, libro1.getTitolo(), "Il titolo non è stato aggiornato.");
             assertEquals(nuoviAutori, libro1.getAutori(), "La lista autori non è stata aggiornata.");
             assertEquals(nuovoAnno, libro1.getAnno(), "L'anno non è stato aggiornato.");
             assertEquals(nuovoIsbn, libro1.getISBN(), "L'ISBN non è stato aggiornato.");
-            assertEquals(nuoveCopie, libro1.getNumCopieTotali(), "Il numero totale di copie non è stato aggiornato.");
+            assertEquals(nuoveCopieTotali, libro1.getNumCopieTotali(), "Il numero totale di copie non è stato aggiornato.");
+            assertEquals(nuoveCopieDisponibili, libro1.getNumCopieDisponibili(), "Il numero di copie disponibili non è stato aggiornato.");
 
         } catch (Exception e) {
             fail("La modifica del libro esistente non dovrebbe lanciare eccezioni: " + e.getMessage());
@@ -153,6 +155,7 @@ public class LibreriaTest {
                 Arrays.asList(a), 
                 2020, 
                 "9876543210982", 
+                1,
                 1
             );
         }, "Il metodo avrebbe dovuto lanciare una Exception per libro non presente.");
