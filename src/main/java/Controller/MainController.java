@@ -273,7 +273,7 @@ public class MainController {
                     Prestito p = (Prestito) getTableRow().getItem();
                     boolean ritardo = p.controllaRitardo();
                     setText(ritardo ? "RITARDO" : "Attivo");
-                    setTextFill(ritardo ? Color.RED : Color.GREEN);
+                    setTextFill(ritardo ? Color.RED: Color.GREEN);
                 }
             }
         });

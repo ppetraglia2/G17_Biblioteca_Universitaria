@@ -82,12 +82,12 @@
                                     <children>
                                         <TableView fx:id="tableLibri" layoutY="1.3333333333333333" prefHeight="740.0" prefWidth="856.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                                             <columns>
-                                                <TableColumn fx:id="colLibTitolo" prefWidth="75.0" style="-fx-background-color: white;" text="Titolo" />
-                                                <TableColumn fx:id="colLibAutori" prefWidth="75.0" style="-fx-background-color: white;" text="Autori" />
-                                                <TableColumn fx:id="colLibAnno" prefWidth="75.0" style="-fx-background-color: white;" text="Anno" />
-                                                <TableColumn fx:id="colLibIsbn" prefWidth="75.0" style="-fx-background-color: white;" text="ISBN" />
-                                                <TableColumn fx:id="colLibCopie" prefWidth="75.0" style="-fx-background-color: white;" text="Copie (D/T)" />
-                                                <TableColumn fx:id="colLibAzioni" prefWidth="75.0" style="-fx-background-color: white;" text="Azioni" />
+                                                <TableColumn fx:id="colLibTitolo" prefWidth="75.0" text="Titolo" />
+                                                <TableColumn fx:id="colLibAutori" prefWidth="75.0" text="Autori" />
+                                                <TableColumn fx:id="colLibAnno" prefWidth="75.0"  text="Anno" />
+                                                <TableColumn fx:id="colLibIsbn" prefWidth="75.0" text="ISBN" />
+                                                <TableColumn fx:id="colLibCopie" prefWidth="75.0"  text="Copie (D/T)" />
+                                                <TableColumn fx:id="colLibAzioni" prefWidth="75.0"  text="Azioni" />
                                             </columns>
                                             <effect>
                                                 <InnerShadow height="21.59" radius="6.0525" width="4.62" />
@@ -171,11 +171,11 @@
                                 </VBox>
                                 <TableView fx:id="tableUtenti" editable="true" prefHeight="763.0" prefWidth="856.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                     <columns>
-                                        <TableColumn fx:id="colUtCognome" prefWidth="123.33326470851898" style="-fx-background-color: white;" text="Cognome" />
-                                        <TableColumn fx:id="colUtNome" prefWidth="132.66661834716797" style="-fx-background-color: white;" text="Nome" />
-                                        <TableColumn fx:id="colUtMatr" prefWidth="132.66671752929688" style="-fx-background-color: white;" text="Matricola" />
-                                        <TableColumn fx:id="colUtPrestiti" prefWidth="136.00003051757812" style="-fx-background-color: white;" text="Prestiti" />
-                                        <TableColumn fx:id="colUtAzioni" prefWidth="154.0001220703125" style="-fx-background-color: white;" text="Azioni" />
+                                        <TableColumn fx:id="colUtCognome" prefWidth="123.33326470851898"  text="Cognome" />
+                                        <TableColumn fx:id="colUtNome" prefWidth="132.66661834716797" text="Nome" />
+                                        <TableColumn fx:id="colUtMatr" prefWidth="132.66671752929688"  text="Matricola" />
+                                        <TableColumn fx:id="colUtPrestiti" prefWidth="136.00003051757812"  text="Prestiti" />
+                                        <TableColumn fx:id="colUtAzioni" prefWidth="154.0001220703125"  text="Azioni" />
                                     </columns>
                                     <effect>
                                         <InnerShadow blurType="GAUSSIAN" choke="0.37" height="18.61" radius="5.3125" width="4.64">
@@ -223,11 +223,11 @@
                                     <children>
                                         <TableView fx:id="tablePrestiti" layoutX="-0.6666666666666666" prefHeight="745.0" prefWidth="859.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn fx:id="colPresUtente" prefWidth="75.0" style="-fx-background-color: white;" text="Utente" />
-                                                <TableColumn fx:id="colPresLibro" prefWidth="75.0" style="-fx-background-color: white;" text="Libro" />
-                                                <TableColumn fx:id="colPresData" prefWidth="75.0" style="-fx-background-color: white;" text="Scadenza" />
-                                                <TableColumn fx:id="colPresStato" prefWidth="75.0" style="-fx-background-color: white;" text="Stato" />
-                                                <TableColumn fx:id="colPresAzioni" prefWidth="75.0" style="-fx-background-color: white;" text="Azioni" />
+                                                <TableColumn fx:id="colPresUtente" prefWidth="75.0"  text="Utente" />
+                                                <TableColumn fx:id="colPresLibro" prefWidth="75.0"  text="Libro" />
+                                                <TableColumn fx:id="colPresData" prefWidth="75.0"  text="Scadenza" />
+                                                <TableColumn fx:id="colPresStato" prefWidth="75.0"  text="Stato" />
+                                                <TableColumn fx:id="colPresAzioni" prefWidth="75.0" text="Azioni" />
                                             </columns>
                                             <effect>
                                                 <InnerShadow height="20.6" radius="5.805000000000001" width="4.62" />

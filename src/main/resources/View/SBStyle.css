@@ -1,7 +1,7 @@
 /* Design System */
 
 .root {
-    -primary-color: #33ADFF; /* Alternativa: #E1F5FE*/
+    -primary-color: #33ADFF;
     -accent-color: #7A7A7A;
     -text-color: #303C42;
     -text-bg-color: #FAFAFA;
@@ -116,13 +116,44 @@
 
 .table-view:focused .table-row-cell:filled:selected, 
 .table-row-cell:filled:selected:hover {
-    -fx-background-color: #E1F5FE;
+    -fx-background-color: lightgrey;
     -fx-background-insets: 0;
     -fx-text-fill: -text-color; 
+}
+
+/* Seleziona il testo all'interno di una cella, se la riga è selezionata */
+
+.table-view:focused .table-row-cell:filled:selected .table-cell,
+.table-row-cell:filled:selected:hover .table-cell {
+    -fx-text-fill: -text-color;
+}
+
+/* Seleziona i label all'interno di una cella, se la riga è selezionata */
+
+.table-view:focused .table-row-cell:filled:selected .table-cell .label,
+.table-row-cell:filled:selected:hover .table-cell .label {
+    -fx-text-fill: -text-color;
 }
 
 /* Riga all'hover del mouse */
 
 .table-row-cell:filled:hover {
     -fx-background-color: -text-bg-color;
+}
+
+/* Righe In Ritardo */
+
+/* Applica lo sfondo rosso alla riga della tabella quando ha la classe 'RITARDO' */
+.table-row-cell.in-ritardo {
+    -fx-background-color: #FFCCCC; /* Rosso molto chiaro */
+    -fx-background-insets: 0;
+}
+
+.table-row-cell.in-ritardo .table-cell {
+    -fx-text-fill: -text-color; 
+}
+
+.table-row-cell.in-ritardo:selected,
+.table-row-cell.in-ritardo:filled:selected:hover {
+    -fx-background-color: #FF9999;
 }
