@@ -121,7 +121,7 @@
                                                         <Font size="17.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="searchUtenti" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="521.0" promptText="Cognome, Matricola..." styleClass="textfield" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="searchUtenti" style="-fx-background-color: white;" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="521.0" promptText="Cognome, Matricola..." styleClass="textfield" HBox.hgrow="ALWAYS" >
                                                     <HBox.margin>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </HBox.margin>
