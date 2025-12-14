@@ -59,7 +59,7 @@
                                                     </image>
                                                 </ImageView>
                                                 <Region prefHeight="98.0" prefWidth="48.0" />
-                                                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#nuovoLibro" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#nuovoLibro" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="15.0" />
                                                     </font>
@@ -84,10 +84,10 @@
                                             <columns>
                                                 <TableColumn fx:id="colLibTitolo" prefWidth="75.0" text="Titolo" />
                                                 <TableColumn fx:id="colLibAutori" prefWidth="75.0" text="Autori" />
-                                                <TableColumn fx:id="colLibAnno" prefWidth="75.0"  text="Anno" />
+                                                <TableColumn fx:id="colLibAnno" prefWidth="75.0" text="Anno" />
                                                 <TableColumn fx:id="colLibIsbn" prefWidth="75.0" text="ISBN" />
-                                                <TableColumn fx:id="colLibCopie" prefWidth="75.0"  text="Copie (D/T)" />
-                                                <TableColumn fx:id="colLibAzioni" prefWidth="75.0"  text="Azioni" />
+                                                <TableColumn fx:id="colLibCopie" prefWidth="75.0" text="Copie (D/T)" />
+                                                <TableColumn fx:id="colLibAzioni" prefWidth="75.0" text="Azioni" />
                                             </columns>
                                             <effect>
                                                 <InnerShadow height="21.59" radius="6.0525" width="4.62" />
@@ -171,11 +171,11 @@
                                 </VBox>
                                 <TableView fx:id="tableUtenti" editable="true" prefHeight="763.0" prefWidth="856.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                     <columns>
-                                        <TableColumn fx:id="colUtCognome" prefWidth="123.33326470851898"  text="Cognome" />
+                                        <TableColumn fx:id="colUtCognome" prefWidth="123.33326470851898" text="Cognome" />
                                         <TableColumn fx:id="colUtNome" prefWidth="132.66661834716797" text="Nome" />
-                                        <TableColumn fx:id="colUtMatr" prefWidth="132.66671752929688"  text="Matricola" />
-                                        <TableColumn fx:id="colUtPrestiti" prefWidth="136.00003051757812"  text="Prestiti" />
-                                        <TableColumn fx:id="colUtAzioni" prefWidth="154.0001220703125"  text="Azioni" />
+                                        <TableColumn fx:id="colUtMatr" prefWidth="132.66671752929688" text="Matricola" />
+                                        <TableColumn fx:id="colUtPrestiti" prefWidth="136.00003051757812" text="Prestiti" />
+                                        <TableColumn fx:id="colUtAzioni" prefWidth="154.0001220703125" text="Azioni" />
                                     </columns>
                                     <effect>
                                         <InnerShadow blurType="GAUSSIAN" choke="0.37" height="18.61" radius="5.3125" width="4.64">
@@ -223,10 +223,10 @@
                                     <children>
                                         <TableView fx:id="tablePrestiti" layoutX="-0.6666666666666666" prefHeight="745.0" prefWidth="859.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn fx:id="colPresUtente" prefWidth="75.0"  text="Utente" />
-                                                <TableColumn fx:id="colPresLibro" prefWidth="75.0"  text="Libro" />
-                                                <TableColumn fx:id="colPresData" prefWidth="75.0"  text="Scadenza" />
-                                                <TableColumn fx:id="colPresStato" prefWidth="75.0"  text="Stato" />
+                                                <TableColumn fx:id="colPresUtente" prefWidth="75.0" text="Utente" />
+                                                <TableColumn fx:id="colPresLibro" prefWidth="75.0" text="Libro" />
+                                                <TableColumn fx:id="colPresData" prefWidth="75.0" text="Scadenza" />
+                                                <TableColumn fx:id="colPresStato" prefWidth="75.0" text="Stato" />
                                                 <TableColumn fx:id="colPresAzioni" prefWidth="75.0" text="Azioni" />
                                             </columns>
                                             <effect>
@@ -244,13 +244,13 @@
     </center>
     
     <left>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #66c2ff;" styleClass="anchorpane" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="875.0" prefWidth="244.0" style="-fx-background-color: #66c2ff;" styleClass="anchorpane" BorderPane.alignment="CENTER">
             <children>
-                <VBox alignment="CENTER" layoutX="24.0" layoutY="229.0" prefHeight="141.0" prefWidth="155.0" spacing="15.0" styleClass="sidebar-vbox" AnchorPane.topAnchor="229.0">
+                <VBox alignment="CENTER" layoutX="24.0" layoutY="229.0" prefHeight="141.0" prefWidth="196.0" spacing="15.0" styleClass="sidebar-vbox" AnchorPane.topAnchor="229.0">
                     <children>
                         <Button fx:id="btnLibri" alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostraLibri" prefHeight="29.0" prefWidth="167.0" style="-fx-background-color: white;" styleClass="standard-button" text="Gestione Libri" textAlignment="CENTER" textFill="#434040">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font name="System Bold" size="20.0" />
                             </font>
                             <effect>
                                 <InnerShadow choke="0.63" height="7.65" radius="4.23" width="11.27" />
@@ -258,7 +258,7 @@
                         </Button>
                         <Button fx:id="btnUtenti" blendMode="HARD_LIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostraUtenti" prefHeight="31.0" prefWidth="169.0" style="-fx-background-color: white;" styleClass="standard-button" text="Gestione Utenti" textFill="#434040">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font name="System Bold" size="20.0" />
                             </font>
                             <effect>
                                 <InnerShadow choke="0.63" height="4.02" radius="3.3225" width="11.27" />
@@ -266,7 +266,7 @@
                         </Button>
                         <Button fx:id="btnPrestiti" blendMode="HARD_LIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostraPrestiti" style="-fx-background-color: white;" styleClass="standard-button" text="Gestione Prestiti" textFill="#434040">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font name="System Bold" size="20.0" />
                             </font>
                             <effect>
                                 <InnerShadow choke="0.63" height="7.65" radius="4.23" width="11.27" />
@@ -274,12 +274,12 @@
                         </Button>
                     </children>
                 </VBox>
-                <ImageView fitHeight="130.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: SRC_OVER;">
+                <ImageView fitHeight="212.0" fitWidth="244.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: SRC_OVER;">
                     <image>
                         <Image url="@logo.png" />
                     </image>
                 </ImageView>
-                <Separator layoutX="-6.0" layoutY="125.0" prefHeight="12.0" prefWidth="209.0" />
+                <Separator layoutX="-3.0" layoutY="139.0" prefHeight="12.0" prefWidth="245.0" />
             </children>
             <effect>
                 <InnerShadow blurType="GAUSSIAN" height="255.0" radius="90.9875" width="110.95">

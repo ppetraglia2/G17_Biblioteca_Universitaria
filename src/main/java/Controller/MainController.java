@@ -119,12 +119,41 @@ public class MainController {
              searchLibri.prefWidthProperty().bind(paneLibri.widthProperty().subtract(370));
         }
         
-         if (searchUtenti != null && paneUtenti != null) {
+        if (searchUtenti != null && paneUtenti != null) {
              // Larghezza Totale PaneUtenti - (Larghezza Label + Button + Spazi Fissi)
              //(HBox): Cerca(83) + HBox Img(53) + 2 Regioni(81) + Button(158) + Margini(15*4) = 435px
              searchUtenti.prefWidthProperty().bind(paneUtenti.widthProperty().subtract(435));
         }
-
+        
+        if (tableLibri != null && paneLibri != null) {
+        
+            javafx.beans.property.ReadOnlyDoubleProperty containerWidth = paneLibri.widthProperty();
+            javafx.beans.binding.DoubleBinding dynamicFontSize = containerWidth.divide(75);
+            
+            tableLibri.styleProperty().bind(
+                dynamicFontSize.asString("-fx-font-size: 18px;")
+            );  
+        }
+        
+        if (tableUtenti != null && paneUtenti != null) {
+        
+            javafx.beans.property.ReadOnlyDoubleProperty containerWidth = paneUtenti.widthProperty();
+            javafx.beans.binding.DoubleBinding dynamicFontSize = containerWidth.divide(75);
+            
+            tableUtenti.styleProperty().bind(
+                dynamicFontSize.asString("-fx-font-size: 18px;")
+            );  
+        }
+        
+        if (tablePrestiti != null && panePrestiti != null) {
+        
+            javafx.beans.property.ReadOnlyDoubleProperty containerWidth = panePrestiti.widthProperty();
+            javafx.beans.binding.DoubleBinding dynamicFontSize = containerWidth.divide(75);
+            
+            tablePrestiti.styleProperty().bind(
+                dynamicFontSize.asString("-fx-font-size: 18px;")
+            );  
+        }
     }
     
     // --- Metodi di Inizializzazione ---
@@ -194,10 +223,20 @@ public class MainController {
                 });
                 btnDel.setOnAction(event -> {
                     Libro l = getTableView().getItems().get(getIndex());
-                    try {
-                        biblioteca.eliminaLibro(l);
-                    } catch (Exception ex) {
-                        alertErrore(ex.getMessage());
+                    
+                    Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                    a.setTitle("Conferma Eliminazione");
+                    a.setHeaderText("Eliminazione Libro");
+                    a.setContentText("Sei sicuro di voler eliminare il libro: " + l.getTitolo() + "?");
+                    
+                    Optional<ButtonType> result = a.showAndWait();
+                   
+                    if (result.isPresent() && result.get() == ButtonType.OK) {
+                        try {
+                            biblioteca.eliminaLibro(l);
+                        } catch (Exception ex) {
+                            alertErrore(ex.getMessage());
+                        }
                     }
                 });
             }
@@ -234,10 +273,20 @@ public class MainController {
                 });
                 btnDel.setOnAction(event -> {
                     Utente u = getTableView().getItems().get(getIndex());
-                    try {
-                        biblioteca.eliminaUtente(u);
-                    } catch (Exception ex) {
-                        alertErrore(ex.getMessage());
+                    
+                    Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                    a.setTitle("Conferma Eliminazione");
+                    a.setHeaderText("Eliminazione Utente");
+                    a.setContentText("Sei sicuro di voler eliminare l'utente: " + u.getNome() +" "+ u.getCognome()+ "?");
+                    
+                    Optional<ButtonType> result = a.showAndWait();
+                    
+                    if(result.isPresent() && result.get() == ButtonType.OK){
+                        try {
+                            biblioteca.eliminaUtente(u);
+                        } catch (Exception ex) {
+                            alertErrore(ex.getMessage());
+                        }
                     }
                 });
             }
@@ -300,14 +349,24 @@ public class MainController {
             {
                 btnRet.setOnAction(e -> {
                     Prestito prestito = getTableView().getItems().get(getIndex());
-                    try {
-                        biblioteca.restituisciPrestito(prestito);
+                    
+                    Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                    a.setTitle("Conferma Restituzione");
+                    a.setHeaderText("Restituzione Libro");
+                    a.setContentText("Sei sicuro di voler registrare la restituzione del libro : " + prestito.getLibro().getTitolo() + "?");
+                    
+                    Optional<ButtonType> result = a.showAndWait();
+                    
+                    if (result.isPresent() && result.get() == ButtonType.OK) {
+                        try {
+                            biblioteca.restituisciPrestito(prestito);
 
-                        tablePrestiti.refresh();
-                        tableLibri.refresh();
-                        tableUtenti.refresh();
-                    } catch (Exception ex) {
-                        alertErrore(ex.getMessage());
+                            tablePrestiti.refresh();
+                            tableLibri.refresh();
+                            tableUtenti.refresh();
+                        } catch (Exception ex) {
+                            alertErrore(ex.getMessage());
+                        }
                     }
                 });
             }
@@ -372,8 +431,11 @@ public class MainController {
         Dialog<ButtonType> d = new Dialog<>();
         d.setTitle("Nuovo Libro");
         d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        d.getDialogPane().setStyle("-fx-font-size: 15px;");
         
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+        g.setStyle("-fx-alignment: center;");
+        
         TextField tTitolo = new TextField();
         TextField tAutori = new TextField();
         TextField tAnno = new TextField();
@@ -421,8 +483,10 @@ public class MainController {
          Dialog<ButtonType> d = new Dialog<>();
          d.setTitle("Nuovo Utente");
          d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+         d.getDialogPane().setStyle("-fx-font-size: 15px;");
          
          GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+         g.setStyle("-fx-alignment: center;");
          TextField tNome = new TextField();
          TextField tCognome = new TextField();
          TextField tMatricola = new TextField();
@@ -461,8 +525,10 @@ public class MainController {
         Dialog<ButtonType> d = new Dialog<>();
         d.setTitle("Nuovo Prestito");
         d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        d.getDialogPane().setStyle("-fx-font-size: 15px;");
         
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+        g.setStyle("-fx-alignment: center;");
         
         ComboBox<Utente> comboUtenti = new ComboBox<>(biblioteca.getObClienti());
         ComboBox<Libro> comboLibri = new ComboBox<>(biblioteca.getObLibreria());
@@ -505,6 +571,7 @@ public class MainController {
          d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
          
          GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+         g.setStyle("-fx-alignment: center;");
          
          TextField tTitolo = new TextField(l.getTitolo());
          TextField tAutori = new TextField(l.autoriToString());
@@ -545,6 +612,7 @@ public class MainController {
          d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
          
          GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
+         g.setStyle("-fx-alignment: center;");
          
          TextField tNome = new TextField(u.getNome());
          TextField tCognome = new TextField(u.getCognome());

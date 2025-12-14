@@ -21,6 +21,7 @@
     -fx-cursor: hand;
     -fx-background-color: -text-bg-color;
     -fx-effect: dropshadow(three-pass-box, -accent-color, 5, 0, 3, 3);
+    -fx-alignment: center;
 }
 
 .separator {
@@ -40,6 +41,7 @@
     -fx-background-radius: 7;
     -fx-background-color: -accent-color;
     -fx-background-color:  linear-gradient(from 0% 0% to 0% 100%, -accent-color, -primary-color);
+    -fx-text-alignment: center;
 }
 
 .add-button:hover {
@@ -110,6 +112,7 @@
     -fx-background-color: -text-bg-color;
     -fx-border-color: transparent;
     -fx-table-cell-border-color: #ECEFF1;
+    -fx-cell-size: 30px
 }
 
 /* Riga con focus */
