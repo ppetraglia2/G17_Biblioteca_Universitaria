@@ -134,7 +134,7 @@ public class Biblioteca implements Serializable{
      */
     public boolean checkValiditaCampiLibro(String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) {
         
-        if(!ISBN.matches("^\\d{13}$") || copieTot < copieDisp || anno <= 0 || !titolo.trim().matches("^[\\p{L}\\p{N}'\":\\-.,?! ]+$"))
+        if(!ISBN.matches("^\\d{13}$") || copieTot < copieDisp || copieDisp < 0 || anno <= 0 || !titolo.trim().matches("^[\\p{L}\\p{N}'\":\\-.,?! ]+$"))
             return false;
         
         for(Autore a : autori){
@@ -209,10 +209,10 @@ public class Biblioteca implements Serializable{
         salvaSuFile();
     }
     
-    public void modificaLibro(Libro l, String titolo, List<Autore> autori, int anno, String isbn, int copie) throws Exception{
-        if(!checkValiditaCampiLibro(titolo, autori, anno, isbn, copie, copie)) throw new Exception("Campi non validi!");
+    public void modificaLibro(Libro l, String titolo, List<Autore> autori, int anno, String isbn, int copieTot, int copieDisp) throws Exception{
+        if(!checkValiditaCampiLibro(titolo, autori, anno, isbn, copieTot, copieDisp)) throw new Exception("Campi non validi!");
         
-        libreria.modificaLibro(l, titolo, autori, anno, isbn, copie);
+        libreria.modificaLibro(l, titolo, autori, anno, isbn, copieTot, copieDisp);
         obLibreria.set(obLibreria.indexOf(l), l);
         salvaSuFile();
     }
