@@ -59,7 +59,7 @@
                                                     </image>
                                                 </ImageView>
                                                 <Region prefHeight="98.0" prefWidth="48.0" />
-                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE" onAction="nuovoLibro">
                                                     <font>
                                                         <Font name="System Bold" size="15.0" />
                                                     </font>
@@ -102,7 +102,7 @@
                 
                 <AnchorPane fx:id="paneUtenti" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" visible="false">
                     <children>
-                        <VBox layoutY="2.0" prefHeight="874.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
+                        <VBox layoutY="2.0" prefHeight="874.0" prefWidth="860.0" style="-fx-background-color: lightgrey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.3333333333333712">
                             <children>
                                 <VBox prefHeight="134.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
@@ -146,7 +146,7 @@
                                                     </children>
                                                 </HBox>
                                                 <Region prefHeight="39.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
-                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE" onAction="nuovoUtente">
                                                     <HBox.margin>
                                                         <Insets />
                                                     </HBox.margin>
@@ -168,7 +168,7 @@
                                         </HBox>
                                     </children>
                                 </VBox>
-                                <TableView fx:id="tableUtenti" editable="true" prefHeight="665.0" prefWidth="859.0" style="-fx-background-color: white;">
+                                <TableView fx:id="tableUtenti" editable="true" prefHeight="665.0" prefWidth="859.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                     <columns>
                                         <TableColumn fx:id="colUtCognome" prefWidth="123.33326470851898" style="-fx-background-color: #4db8ff;" text="Cognome" />
                                         <TableColumn fx:id="colUtNome" prefWidth="132.66661834716797" style="-fx-background-color: #4db8ff;" text="Nome" />
@@ -204,7 +204,7 @@
                                             </font>
                                         </Label>
                                         <Region prefHeight="100.0" prefWidth="374.0" />
-                                        <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE">
+                                        <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE" onAction="nuovoPrestito">
                                             <font>
                                                 <Font name="System Bold" size="15.0" />
                                             </font>
