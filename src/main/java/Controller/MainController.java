@@ -25,7 +25,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-// AGGIUNTA IMPORT NECESSARIA PER I BINDING
 import javafx.scene.layout.BorderPane; 
 
 public class MainController {
@@ -33,14 +32,13 @@ public class MainController {
     // --- Riferimento al Model ---
     private Biblioteca biblioteca;
     
-    // --- ELEMENTI GRAFICI (Iniettati da FXML) ---
-
+    // --- ELEMENTI GRAFICI ---
     // Pannelli principali
     @FXML private AnchorPane paneLibri;
     @FXML private AnchorPane paneUtenti;
     @FXML private AnchorPane panePrestiti;
 
-    // Bottoni Sidebar (Devono essere aggiunti se non ci sono)
+    // Bottoni Sidebar 
     @FXML private Button btnLibri;
     @FXML private Button btnUtenti;
     @FXML private Button btnPrestiti;
@@ -73,9 +71,6 @@ public class MainController {
     @FXML private TableColumn<Prestito, String> colPresData;
     @FXML private TableColumn<Prestito, String> colPresStato;
     @FXML private TableColumn<Prestito, Void> colPresAzioni;
-    
-    // Riferimento al contenitore principale (BorderPane)
-    // Non è necessario un fx:id se lo usiamo per i binding del pane centrale.
 
     
     /**
@@ -83,8 +78,6 @@ public class MainController {
      */
     public void setupController() {
 
-        // --- 1. CONFIGURAZIONE TABELLE (Politica di ridimensionamento) ---
-        // IMPEDISCE ALL'UTENTE DI RIDIMENSIONARE LE COLONNE E FORZA L'ADATTAMENTO ALLA LARGHEZZA
         if (tableLibri != null) {
             tableLibri.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
@@ -94,46 +87,19 @@ public class MainController {
         if (tablePrestiti != null) {
             tablePrestiti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
-
-        // --- 2. BINDING PER L'ADATTAMENTO DEI PANNELLI CENTRALI ---
-        // Se il tuo file FXML ha il BorderPane come root e gli AnchorPane dei dati 
-        // sono contenuti in un unico StackPane (che è la configurazione standard),
-        // devi vincolare gli AnchorPane a questo StackPane.
-        
-        // Poiché gli AnchorPane dei dati (paneLibri, paneUtenti, panePrestiti) sono
-        // anch'essi i contenitori RADICE per la loro vista specifica, devono essere
-        // vincolati al loro genitore (lo StackPane) per occupare tutto lo spazio.
-        
-        // BINDING PANELLI DATI (Larghezza e Altezza)
-        // Ipotizzando che il genitore diretto di questi AnchorPane sia uno StackPane che
-        // si adatta al centro del BorderPane, questo garantisce l'espansione.
         
         if (paneLibri != null && paneLibri.getParent() != null) {
             Pane parent = (Pane) paneLibri.getParent();
             
-            // Larghezza: Vincola la larghezza dei pannelli alla larghezza del loro genitore
             paneLibri.prefWidthProperty().bind(parent.widthProperty());
             paneUtenti.prefWidthProperty().bind(parent.widthProperty());
             panePrestiti.prefWidthProperty().bind(parent.widthProperty());
 
-            // Altezza: Vincola l'altezza dei pannelli all'altezza del loro genitore
             paneLibri.prefHeightProperty().bind(parent.heightProperty());
             paneUtenti.prefHeightProperty().bind(parent.heightProperty());
             panePrestiti.prefHeightProperty().bind(parent.heightProperty());
         }
 
-
-        // --- 3. BINDING COMPONENTI INTERNI (Ricerca e Tabelle) ---
-        // La TableView e il campo di ricerca devono espandersi all'interno dei loro AnchorPane contenitori.
-        
-        // A. TableView: Vincolata agli angoli dell'AnchorPane
-        // Nel tuo FXML, le TableView sono già ancorate (bottom, left, right, top).
-        // Se si utilizza un layout VBox/AnchorPane come genitore della TableView, 
-        // possiamo assicurarci che si adattino alla larghezza del pannello. 
-        // Visto che l'FXML usa AnchorPane come contenitore della TableView con 
-        // AnchorPane.setBottom, ecc., non servono binding espliciti qui, ma li 
-        // aggiungiamo per sicurezza sulla larghezza.
-        
         if (tableLibri != null) {
             tableLibri.prefWidthProperty().bind(paneLibri.widthProperty());
         }
@@ -144,20 +110,18 @@ public class MainController {
             tablePrestiti.prefWidthProperty().bind(panePrestiti.widthProperty());
         }
         
-        // B. Campo di Ricerca Libri (per espandere il TextField)
-        // Questo binding espanderà il TextField di ricerca in base alla larghezza del pannello Libri.
+
+
         if (searchLibri != null && paneLibri != null) {
-             // Sottrai la larghezza fissa degli altri elementi (Label, Button, Margini, ecc.)
-             // Questo è un calcolo approssimativo e può richiedere fine-tuning con l'FXML
+             // Sottrazione della larghezza fissa degli altri elementi (Label, Button, Margini, ecc.)
              // Larghezza Totale PaneLibri - (Larghezza Label + Larghezza Button + Spazi Fissi)
-             // Nel tuo FXML (HBox): Cerca(54) + 2 Regioni(25+48) + Img(39) + Button(143) + Margini(15*4) = ~ 370px
+             //(HBox): Cerca(54) + 2 Regioni(25+48) + Img(39) + Button(143) + Margini(15*4) = 370px
              searchLibri.prefWidthProperty().bind(paneLibri.widthProperty().subtract(370));
         }
         
-         // C. Campo di Ricerca Utenti (per espandere il TextField)
          if (searchUtenti != null && paneUtenti != null) {
              // Larghezza Totale PaneUtenti - (Larghezza Label + Button + Spazi Fissi)
-             // Nel tuo FXML (HBox): Cerca(83) + HBox Img(53) + 2 Regioni(81) + Button(158) + Margini(15*4) = ~ 435px
+             //(HBox): Cerca(83) + HBox Img(53) + 2 Regioni(81) + Button(158) + Margini(15*4) = 435px
              searchUtenti.prefWidthProperty().bind(paneUtenti.widthProperty().subtract(435));
         }
 
@@ -173,18 +137,15 @@ public class MainController {
      */
     @FXML
     public void initialize() {
-        // Inizializza il modello
+
         biblioteca = new Biblioteca();
         
-        // Configura le colonne delle tabelle
         configuraLibri();
         configuraUtenti();
         configuraPrestiti();
 
-        // Applica i binding e la logica di ridimensionamento (CHIAMATA AGGIUNTA/RIPOSIZIONATA)
         setupController();
 
-        // Collega i dati del modello alle tabelle
         if (biblioteca.getFlLibreria() != null)
             tableLibri.setItems(biblioteca.getFlLibreria());
         
@@ -194,7 +155,7 @@ public class MainController {
         if (biblioteca.getObPrestiti() != null)
             tablePrestiti.setItems(biblioteca.getObPrestiti());
 
-        // Listener per la ricerca in tempo reale
+
         if (searchLibri != null) {
             searchLibri.textProperty().addListener((obs, oldVal, newVal) -> biblioteca.filtraLibri(newVal));
         }
@@ -215,11 +176,11 @@ public class MainController {
         if (colLibAutori != null) colLibAutori.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().autoriToString())); 
         if (colLibAnno != null) colLibAnno.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getAnno()));
         if (colLibIsbn != null) colLibIsbn.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getISBN()));
-        // Mostra copie disponibili / totali
+
         if (colLibCopie != null) colLibCopie.setCellValueFactory(d -> new SimpleStringProperty(
             d.getValue().getNumCopieDisponibili() + "/" + d.getValue().getNumCopieTotali()));
 
-        // Colonna Azioni
+
         if (colLibAzioni != null) colLibAzioni.setCellFactory(param -> new TableCell<Libro, Void>() {
             private final Button btnEdit = new Button("Modif.");
             private final Button btnDel = new Button("Elim.");
@@ -300,7 +261,7 @@ public class MainController {
         // Colonna scadenza
         if (colPresData != null) colPresData.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDataRestituzione().toString()));
 
-        // Configurazione stato (Verde = OK, Rosso = Ritardo)
+
         if (colPresStato != null) colPresStato.setCellFactory(c -> new TableCell<Prestito, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -317,7 +278,6 @@ public class MainController {
             }
         });
 
-        // Tasto restituzione
         if (colPresAzioni != null) colPresAzioni.setCellFactory(p -> new TableCell<Prestito, Void>() {
             private final Button btnRet = new Button("Rientro");
             {
@@ -325,7 +285,7 @@ public class MainController {
                     Prestito prestito = getTableView().getItems().get(getIndex());
                     try {
                         biblioteca.restituisciPrestito(prestito);
-                        // Refresh necessario per aggiornare contatori e disponibilità
+
                         tablePrestiti.refresh();
                         tableLibri.refresh();
                         tableUtenti.refresh();
@@ -384,7 +344,6 @@ public class MainController {
     }
     
     // --- Metodi per gestire le Azioni (Event Handlers) ---
-    // Questi metodi ora sono chiamati dai bottoni "+ Nuovo" nell'FXML
 
     /**
      * @brief Avvia il flusso per l'aggiunta di un nuovo Libro.
@@ -414,18 +373,11 @@ public class MainController {
         
         Optional<ButtonType> result = d.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Logica per creare e aggiungere il libro
             try {
-                // Esempio: gestisci l'input dell'anno e delle copie come numeri
                 int anno = Integer.parseInt(tAnno.getText());
                 int copie = Integer.parseInt(tCopie.getText());
-                //List<String> autori = Arrays.asList(tAutori.getText().split(","));
-                
-                //Libro nuovoLibro = new Libro(tTitolo.getText(), (List<Autore>) autori, anno, tIsbn.getText(), copie);
-                // Ho modificato l'uso di List.of per Autori, assumendo che tu abbia un costruttore o metodo 
-                // in Biblioteca che gestisca la conversione da List<String> a List<Autore> se necessario.
-                // Usando il tuo codice fornito:
                 List<Autore> newautori = parseAutori(tAutori.getText());
+                
                 biblioteca.aggiungiLibro(
                     tTitolo.getText(), 
                     newautori, 
@@ -495,7 +447,6 @@ public class MainController {
         
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
         
-        // Assicurati che i metodi getObClienti() e getObLibreria() restituiscano ObservableList<T>
         ComboBox<Utente> comboUtenti = new ComboBox<>(biblioteca.getObClienti());
         ComboBox<Libro> comboLibri = new ComboBox<>(biblioteca.getObLibreria());
         DatePicker datePicker = new DatePicker(LocalDate.now().plusDays(30)); 
@@ -518,8 +469,8 @@ public class MainController {
                         datePicker.getValue()
                     );
                     tablePrestiti.refresh();
-                    tableLibri.refresh(); // Aggiorna il conteggio copie
-                    tableUtenti.refresh(); // Aggiorna il conteggio prestiti
+                    tableLibri.refresh();
+                    tableUtenti.refresh();
                 } catch (Exception e) {
                     alertErrore(e.getMessage());
                 }
@@ -530,7 +481,6 @@ public class MainController {
     // --- Metodi Helper (per le azioni delle tabelle) ---
 
     private void modificaLibro(Libro l) {
-         // Implementazione di modificaLibro
          if (l == null) return;
 
          Dialog<ButtonType> d = new Dialog<>();
@@ -557,10 +507,11 @@ public class MainController {
              if (response == ButtonType.OK) {
                  try {
                      int newanno = Integer.parseInt(tAnno.getText().trim());
-                     int newcopie = Integer.parseInt(tCopie.getText().trim());
+                     int newcopieTot = Integer.parseInt(tCopie.getText().trim());
+                     int newcopieDisp = l.getNumCopieDisponibili() - (l.getNumCopieTotali() - newcopieTot);
                      List<Autore> newautori = parseAutori(tAutori.getText());
                      
-                     biblioteca.modificaLibro(l, tTitolo.getText(), newautori, newanno, tIsbn.getText(), newcopie);
+                     biblioteca.modificaLibro(l, tTitolo.getText(), newautori, newanno, tIsbn.getText(), newcopieTot, newcopieDisp);
                      tableLibri.refresh();
                  } catch (Exception e) {
                      alertErrore(e.getMessage());
