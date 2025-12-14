@@ -261,7 +261,24 @@ public class MainController {
         // Colonna scadenza
         if (colPresData != null) colPresData.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getDataRestituzione().toString()));
 
+        if (tablePrestiti != null) {
+            tablePrestiti.setRowFactory(tv -> new TableRow<Prestito>() {
+                @Override
+                protected void updateItem(Prestito prestito, boolean empty) {
+                    super.updateItem(prestito, empty);
 
+                    if (prestito == null || empty)
+                        setStyle("");
+                    else {
+                        if (prestito.controllaRitardo())
+                            setStyle("-fx-background-color: #ffcccc;"); 
+                        else
+                            setStyle(""); 
+                    }
+                }
+            });
+        }
+        
         if (colPresStato != null) colPresStato.setCellFactory(c -> new TableCell<Prestito, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
