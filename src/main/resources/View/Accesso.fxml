@@ -6,17 +6,15 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #66c2ff;"
-    xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
-    fx:controller="Controller.AccessoController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #66c2ff;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AccessoController">
     <children>
-        <VBox alignment="CENTER" spacing="10.0" maxHeight="Infinity" maxWidth="Infinity">
+        <VBox alignment="CENTER" maxHeight="Infinity" maxWidth="Infinity" spacing="10.0">
          <children>
             <ImageView fx:id="logoImage" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,8 +29,8 @@
             </Label>
             <Region prefHeight="7.0" prefWidth="513.0" />
             <Separator fx:id="separatorBenvenuto" maxWidth="Infinity" prefHeight="0.0" style="-fx-background-color: black;" />
-            <Region  prefHeight="19.0" prefWidth="477.0" />
-            <Button fx:id="btnEntra" alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" graphicTextGap="2.0" mnemonicParsing="false" onAction="#handleEntraNelSistema" style="-fx-background-color: white;" styleClass="start-button" text="ENTRA NEL SISTEMA">
+            <Region prefHeight="19.0" prefWidth="477.0" />
+            <Button fx:id="btnEntra" alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" graphicTextGap="2.0" mnemonicParsing="false" onAction="#handleEntraNelSistema" style="-fx-background-color: white;" styleClass="start-button" stylesheets="@SBStyle.css" text="ENTRA NEL SISTEMA">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

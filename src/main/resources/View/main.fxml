@@ -19,11 +19,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
     <center>
         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane fx:id="paneLibri" prefHeight="200.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
                         <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
@@ -178,11 +178,10 @@
                                         <TableColumn fx:id="colUtAzioni" prefWidth="154.0001220703125" style="-fx-background-color: white;" text="Azioni" />
                                     </columns>
                                     <effect>
-                                        <InnerShadow blurType="GAUSSIAN" choke="0.59" height="27.81" radius="6.8374999999999995" width="1.54">
-                                            <color>
-                                                <Color red="0.3868041932582855" green="0.6336690783500671" blue="0.7982456088066101" />
-                                            </color>
-                                        </InnerShadow>
+                                        <InnerShadow blurType="GAUSSIAN" choke="0.37" height="18.61" radius="5.3125" width="4.64">
+                                 <color>
+                                    <Color red="0.18421052396297455" green="0.18023066222667694" blue="0.18023066222667694" />
+                                 </color></InnerShadow>
                                     </effect>
                                 </TableView>
                             </children>
@@ -190,7 +189,7 @@
                     </children>
                 </AnchorPane>
                 
-                <AnchorPane fx:id="panePrestiti" prefHeight="200.0" prefWidth="200.0" visible="false">
+                <AnchorPane fx:id="panePrestiti" prefHeight="200.0" prefWidth="200.0">
                     <children>
                         <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
@@ -231,7 +230,7 @@
                                                 <TableColumn fx:id="colPresAzioni" prefWidth="75.0" style="-fx-background-color: white;" text="Azioni" />
                                             </columns>
                                             <effect>
-                                                <InnerShadow radius="5.905" width="4.62" />
+                                                <InnerShadow height="20.6" radius="5.805000000000001" width="4.62" />
                                             </effect>
                                         </TableView>
                                     </children>

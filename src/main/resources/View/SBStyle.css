@@ -1,8 +1,8 @@
 /* Design System */
 
 .root {
-    -primary-color: #B3E5FC; /* Alternativa: #E1F5FE*/
-    -accent-color: #0288D1;
+    -primary-color: #33ADFF; /* Alternativa: #E1F5FE*/
+    -accent-color: #7A7A7A;
     -text-color: #303C42;
     -text-bg-color: #FAFAFA;
 }
