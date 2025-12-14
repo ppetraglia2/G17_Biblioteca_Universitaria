@@ -19,11 +19,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1059.0" stylesheets="@SBStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
     <center>
         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane fx:id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="true">
+                <AnchorPane fx:id="paneLibri" prefHeight="200.0" prefWidth="200.0" visible="false">
                     <children>
                         <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
@@ -44,7 +44,7 @@
                                                         <Font size="17.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="searchLibri" alignment="TOP_LEFT" prefHeight="37.0" prefWidth="523.0" promptText="Titolo, Autore, ISBN..." styleClass="textfield">
+                                                <TextField fx:id="searchLibri" alignment="TOP_LEFT" prefHeight="37.0" prefWidth="523.0" promptText="Titolo, Autore, ISBN..." style="-fx-background-color: white;" styleClass="textfield"> 
                                                     <font>
                                                         <Font size="15.0" />
                                                     </font>
@@ -59,7 +59,7 @@
                                                     </image>
                                                 </ImageView>
                                                 <Region prefHeight="98.0" prefWidth="48.0" />
-                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE" onAction="#nuovoLibro">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#nuovoLibro" prefHeight="36.0" prefWidth="143.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Libro" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="15.0" />
                                                     </font>
@@ -80,14 +80,14 @@
                                 </VBox>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <TableView fx:id="tableLibri" prefHeight="693.0" prefWidth="860.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <TableView fx:id="tableLibri" prefHeight="741.0" prefWidth="856.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn fx:id="colLibTitolo" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Titolo" />
-                                                <TableColumn fx:id="colLibAutori" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Autori" />
-                                                <TableColumn fx:id="colLibAnno" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Anno" />
-                                                <TableColumn fx:id="colLibIsbn" prefWidth="75.0" style="-fx-background-color: #33adff;" text="ISBN" />
-                                                <TableColumn fx:id="colLibCopie" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Copie (D/T)" />
-                                                <TableColumn fx:id="colLibAzioni" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Azioni" />
+                                                <TableColumn fx:id="colLibTitolo" prefWidth="75.0" style="-fx-background-color: white;" text="Titolo" />
+                                                <TableColumn fx:id="colLibAutori" prefWidth="75.0" style="-fx-background-color: white;" text="Autori" />
+                                                <TableColumn fx:id="colLibAnno" prefWidth="75.0" style="-fx-background-color: white;" text="Anno" />
+                                                <TableColumn fx:id="colLibIsbn" prefWidth="75.0" style="-fx-background-color: white;" text="ISBN" />
+                                                <TableColumn fx:id="colLibCopie" prefWidth="75.0" style="-fx-background-color: white;" text="Copie (D/T)" />
+                                                <TableColumn fx:id="colLibAzioni" prefWidth="75.0" style="-fx-background-color: white;" text="Azioni" />
                                             </columns>
                                             <effect>
                                                 <InnerShadow height="21.59" radius="6.0525" width="4.62" />
@@ -146,7 +146,7 @@
                                                     </children>
                                                 </HBox>
                                                 <Region prefHeight="39.0" prefWidth="81.0" HBox.hgrow="ALWAYS" />
-                                                <Button minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE" onAction="#nuovoUtente">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#nuovoUtente" prefHeight="36.0" prefWidth="158.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Utente" textFill="WHITE">
                                                     <HBox.margin>
                                                         <Insets />
                                                     </HBox.margin>
@@ -170,11 +170,11 @@
                                 </VBox>
                                 <TableView fx:id="tableUtenti" editable="true" prefHeight="665.0" prefWidth="859.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                     <columns>
-                                        <TableColumn fx:id="colUtCognome" prefWidth="123.33326470851898" style="-fx-background-color: #4db8ff;" text="Cognome" />
-                                        <TableColumn fx:id="colUtNome" prefWidth="132.66661834716797" style="-fx-background-color: #4db8ff;" text="Nome" />
-                                        <TableColumn fx:id="colUtMatr" prefWidth="132.66671752929688" style="-fx-background-color: #4db8ff;" text="Matricola" />
-                                        <TableColumn fx:id="colUtPrestiti" prefWidth="136.00003051757812" style="-fx-background-color: #4db8ff;" text="Prestiti" />
-                                        <TableColumn fx:id="colUtAzioni" prefWidth="154.0001220703125" style="-fx-background-color: #4db8ff;" text="Azioni" />
+                                        <TableColumn fx:id="colUtCognome" prefWidth="123.33326470851898" style="-fx-background-color: white;" text="Cognome" />
+                                        <TableColumn fx:id="colUtNome" prefWidth="132.66661834716797" style="-fx-background-color: white;" text="Nome" />
+                                        <TableColumn fx:id="colUtMatr" prefWidth="132.66671752929688" style="-fx-background-color: white;" text="Matricola" />
+                                        <TableColumn fx:id="colUtPrestiti" prefWidth="136.00003051757812" style="-fx-background-color: white;" text="Prestiti" />
+                                        <TableColumn fx:id="colUtAzioni" prefWidth="154.0001220703125" style="-fx-background-color: white;" text="Azioni" />
                                     </columns>
                                     <effect>
                                         <InnerShadow blurType="GAUSSIAN" choke="0.59" height="27.81" radius="6.8374999999999995" width="1.54">
@@ -189,7 +189,7 @@
                     </children>
                 </AnchorPane>
                 
-                <AnchorPane fx:id="panePrestiti" prefHeight="200.0" prefWidth="200.0" visible="false">
+                <AnchorPane fx:id="panePrestiti" prefHeight="200.0" prefWidth="200.0">
                     <children>
                         <VBox prefHeight="875.3333333333334" prefWidth="859.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
@@ -204,7 +204,7 @@
                                             </font>
                                         </Label>
                                         <Region prefHeight="100.0" prefWidth="374.0" />
-                                        <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE" onAction="#nuovoPrestito">
+                                        <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="-Infinity" mnemonicParsing="false" onAction="#nuovoPrestito" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #33adff;" styleClass="add-button" text="+ Nuovo Prestito" textFill="WHITE">
                                             <font>
                                                 <Font name="System Bold" size="15.0" />
                                             </font>
@@ -220,13 +220,13 @@
                                 </HBox>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <TableView fx:id="tablePrestiti" layoutX="3.2" layoutY="-6.0" prefHeight="684.0" prefWidth="859.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-6.0">
+                                        <TableView fx:id="tablePrestiti" layoutX="-0.6666666666666666" layoutY="-6.0" prefHeight="751.0" prefWidth="859.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-6.0">
                                             <columns>
-                                                <TableColumn fx:id="colPresUtente" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Utente" />
-                                                <TableColumn fx:id="colPresLibro" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Libro" />
-                                                <TableColumn fx:id="colPresData" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Scadenza" />
-                                                <TableColumn fx:id="colPresStato" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Stato" />
-                                                <TableColumn fx:id="colPresAzioni" prefWidth="75.0" style="-fx-background-color: #33adff;" text="Azioni" />
+                                                <TableColumn fx:id="colPresUtente" prefWidth="75.0" style="-fx-background-color: white;" text="Utente" />
+                                                <TableColumn fx:id="colPresLibro" prefWidth="75.0" style="-fx-background-color: white;" text="Libro" />
+                                                <TableColumn fx:id="colPresData" prefWidth="75.0" style="-fx-background-color: white;" text="Scadenza" />
+                                                <TableColumn fx:id="colPresStato" prefWidth="75.0" style="-fx-background-color: white;" text="Stato" />
+                                                <TableColumn fx:id="colPresAzioni" prefWidth="75.0" style="-fx-background-color: white;" text="Azioni" />
                                             </columns>
                                             <effect>
                                                 <InnerShadow radius="5.905" width="4.62" />
