@@ -77,16 +77,17 @@ public class Libreria implements Serializable{
      * @param titolo E' il titolo del libro da modificare
      * @param autori E' la lista di autori del libro da modificare
      * @param anno E' l'anno di publicazione del libro da modificare
-     * @param isbn E' il codice isbn del libro da modificare 
-     * @param copie E' il numero di copie totali del libro da modificare
+     * @param ISBN E' il codice ISBN del libro da modificare 
+     * @param copieTot E' il numero di copie totali del libro da modificare
+     * @param copieDisp E' il numero di copie disponibili del libro
      */
-    public void modificaLibro(Libro l, String titolo, List<Autore> autori, int anno, String isbn, int copieTot, int copieDisp) throws Exception{
+    public void modificaLibro(Libro l, String titolo, List<Autore> autori, int anno, String ISBN, int copieTot, int copieDisp) throws Exception{
         if(!isInLibreria(l)) throw new Exception("ERRORE: Libro non trovato per la modifica!");
         
         l.setTitolo(titolo);
         l.setAutori(autori);
         l.setAnno(anno);
-        l.setISBN(isbn);
+        l.setISBN(ISBN);
         l.setNumCopieTotali(copieTot);
         l.setNumCopieDisponibili(copieDisp);
     }

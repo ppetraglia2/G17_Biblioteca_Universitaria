@@ -69,7 +69,7 @@ public class AccessoController {
     /**
      * @brief Gestisce l'evento di click sul pulsante "ENTRA NEL SISTEMA".
      * Avvia la schermata principale dell'applicazione.
-     * * @param event L'evento di azione (click del mouse).
+     * @param event L'evento di azione (click del mouse).
      */
     @FXML
     private void handleEntraNelSistema(ActionEvent event) {

@@ -748,12 +748,4 @@ public class MainController {
         a.setContentText(messaggio);
         a.showAndWait();
     }
-    
-     /*private void alertInfo(String messaggio) {
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setTitle("Informazione");
-        a.setHeaderText(null);
-        a.setContentText(messaggio);
-        a.showAndWait();
-    }*/
 }
