@@ -487,6 +487,12 @@ public class MainController {
         TextField tIsbn = new TextField();
         TextField tCopie = new TextField();
         
+        tTitolo.setPromptText("Titolo Libro");
+        tAutori.setPromptText("Nome Cognome, Nome Cognome");
+        tAnno.setPromptText("2025");
+        tIsbn.setPromptText("9788889637159");
+        tCopie.setPromptText("6");
+        
         g.addRow(0, new Label("Titolo:"), tTitolo);
         g.addRow(1, new Label("Autori:"), tAutori);
         g.addRow(2, new Label("Anno:"), tAnno);
@@ -542,6 +548,11 @@ public class MainController {
          TextField tCognome = new TextField();
          TextField tMatricola = new TextField();
          TextField tEmail = new TextField();
+         
+         tNome.setPromptText("Mario"); 
+         tCognome.setPromptText("Rossi"); 
+         tMatricola.setPromptText("0612701234"); 
+         tEmail.setPromptText("m.rossi6@studenti.unisa.it");
          
          g.addRow(0, new Label("Nome:"), tNome);
          g.addRow(1, new Label("Cognome:"), tCognome);
@@ -642,6 +653,12 @@ public class MainController {
          TextField tIsbn = new TextField(l.getISBN());
          TextField tCopie = new TextField(String.valueOf(l.getNumCopieTotali()));
          
+        tTitolo.setPromptText("Titolo Libro");
+        tAutori.setPromptText("Nome Cognome, Nome Cognome");
+        tAnno.setPromptText("2025");
+        tIsbn.setPromptText("9788889637159");
+        tCopie.setPromptText("6");
+         
          g.addRow(0, new Label("Titolo:"), tTitolo);
          g.addRow(1, new Label("Autori:"), tAutori);
          g.addRow(2, new Label("Anno:"), tAnno);
@@ -687,6 +704,11 @@ public class MainController {
          TextField tCognome = new TextField(u.getCognome());
          TextField tMatricola = new TextField(u.getMatricola());
          TextField tEmail = new TextField(u.getEmail());
+         
+         tNome.setPromptText("Mario"); 
+         tCognome.setPromptText("Rossi"); 
+         tMatricola.setPromptText("0612701234"); 
+         tEmail.setPromptText("m.rossi6@studenti.unisa.it");
          
          g.addRow(0, new Label("Nome:"), tNome);
          g.addRow(1, new Label("Cognome:"), tCognome);
