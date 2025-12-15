@@ -138,7 +138,7 @@ public class Biblioteca implements Serializable{
             return false;
         
         for(Autore a : autori){
-            if(!a.getNome().trim().matches("^[\\p{L}' ]+$") || !a.getCognome().trim().matches("^[\\p{L}' ]+$"))
+            if(!a.getNome().trim().matches("^[\\p{L}' ]+$") || !a.getCognome().trim().matches("^[\\p{L}' ]*$"))
                 return false;
         }
         

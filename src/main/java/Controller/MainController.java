@@ -61,6 +61,7 @@ public class MainController {
     @FXML private TableColumn<Utente, String> colUtNome;
     @FXML private TableColumn<Utente, String> colUtCognome;
     @FXML private TableColumn<Utente, String> colUtMatr;
+    @FXML private TableColumn<Utente, String> colUtEmail;
     @FXML private TableColumn<Utente, Integer> colUtPrestiti;
     @FXML private TableColumn<Utente, Void> colUtAzioni;
 
@@ -258,6 +259,7 @@ public class MainController {
         if (colUtNome != null) colUtNome.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getNome()));
         if (colUtCognome != null) colUtCognome.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getCognome()));
         if (colUtMatr != null) colUtMatr.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getMatricola()));
+        if (colUtEmail != null) colUtEmail.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getEmail()));
         if (colUtPrestiti != null) colUtPrestiti.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getNumPrestitiAttivi()));
 
         if (colUtAzioni != null) colUtAzioni.setCellFactory(param -> new TableCell<Utente, Void>() {
@@ -681,11 +683,11 @@ public class MainController {
         a.showAndWait();
     }
     
-     private void alertInfo(String messaggio) {
+     /*private void alertInfo(String messaggio) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("Informazione");
         a.setHeaderText(null);
         a.setContentText(messaggio);
         a.showAndWait();
-    }
+    }*/
 }
