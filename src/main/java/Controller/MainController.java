@@ -78,7 +78,10 @@ public class MainController {
      * @brief Configura i binding per l'adattabilità (responsiveness) dell'interfaccia.
      */
     public void setupController() {
-
+        
+        biblioteca.getSlLibreria().comparatorProperty().bind(tableLibri.comparatorProperty());
+        biblioteca.getSlClienti().comparatorProperty().bind(tableUtenti.comparatorProperty());
+        
         if (tableLibri != null) {
             tableLibri.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
@@ -185,6 +188,8 @@ public class MainController {
         if (biblioteca.getObPrestiti() != null)
             tablePrestiti.setItems(biblioteca.getObPrestiti());
 
+        tableLibri.setItems(biblioteca.getSlLibreria());
+        tableUtenti.setItems(biblioteca.getSlClienti());
 
         if (searchLibri != null) {
             searchLibri.textProperty().addListener((obs, oldVal, newVal) -> biblioteca.filtraLibri(newVal));
