@@ -18,11 +18,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 //Necessari per JavaFX(ObservableList, FilteredList)
 import javafx.collections.ObservableList; 
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.SortedList;
 
 public class Biblioteca implements Serializable{
     
@@ -36,6 +38,9 @@ public class Biblioteca implements Serializable{
 
     private FilteredList<Libro> flLibreria;
     private FilteredList<Utente> flClienti;
+    
+    private SortedList<Libro> slLibreria;
+    private SortedList<Utente> slClienti;
     
     private final String filename = "output.bin";
     
@@ -64,6 +69,12 @@ public class Biblioteca implements Serializable{
     
     //Getter di FilteredList<Utente>
     public FilteredList<Utente> getFlClienti() { return flClienti; }
+
+    //Gettet di SortedList<Libro>
+    public SortedList<Libro> getSlLibreria() { return slLibreria; }
+
+    //Gettet di SortedList<utente>
+    public SortedList<Utente> getSlClienti() { return slClienti; }
     
     //Getter di ObservableList<Libro>
     public ObservableList<Libro> getObLibreria() { return obLibreria; }
@@ -90,6 +101,13 @@ public class Biblioteca implements Serializable{
         // Crea le FilteredList basate sulle ObservableList
         this.flLibreria = new FilteredList<>(obLibreria, p -> true); // Inizializza con tutti gli elementi
         this.flClienti = new FilteredList<>(obClienti, p -> true);   // Inizializza con tutti gli elementi
+        
+        this.slLibreria = new SortedList<>(flLibreria);
+        this.slClienti = new SortedList<>(flClienti);
+        
+        this.slLibreria.setComparator(Comparator.comparing(Libro::getTitolo, String.CASE_INSENSITIVE_ORDER));
+        this.slClienti.setComparator(Comparator.comparing(Utente::getCognome, String.CASE_INSENSITIVE_ORDER)
+                .thenComparing(Utente::getNome, String.CASE_INSENSITIVE_ORDER));
     }
     
     /**
