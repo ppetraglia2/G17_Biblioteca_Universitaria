@@ -26,7 +26,7 @@ public class Main extends Application {
         this.primaryStage.setTitle("Gestione Biblioteca Universitaria");
         
         try {
-            Image icon = new Image(getClass().getResourceAsStream("/View/icon.png"));
+            Image icon = new Image(getClass().getResourceAsStream("/View/books.png"));
             primaryStage.getIcons().add(icon);
             
         } catch (Exception e) {

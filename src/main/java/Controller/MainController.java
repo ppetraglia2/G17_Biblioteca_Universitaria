@@ -9,12 +9,14 @@
 package Controller;
 
 import Model.*;
+//import java.awt.Image;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -217,16 +219,24 @@ public class MainController {
 
 
         if (colLibAzioni != null) colLibAzioni.setCellFactory(param -> new TableCell<Libro, Void>() {
-            private final Button btnEdit = new Button("Modif.");
-            private final Button btnDel = new Button("Elim.");
+            
+            private final ImageView ModificaView = new ImageView(new Image(getClass().getResourceAsStream("/View/pencil.png")));
+            private final ImageView DeleteView = new ImageView(new Image(getClass().getResourceAsStream("/View/delete.png")));
+            private Button btnEdit = new Button("Modifica");
+            private final Button btnDel = new Button("Elimina");
             private final HBox pane = new HBox(5, btnEdit, btnDel);
-
+           
             {
-                btnDel.setStyle("-fx-text-fill: red;");
+                btnEdit.setGraphic(ModificaView);
+                ModificaView.setFitWidth(16);
+                ModificaView.setFitHeight(16);
                 btnEdit.setOnAction(event -> {
                     Libro l = getTableView().getItems().get(getIndex());
                     modificaLibro(l);
                 });
+                btnDel.setGraphic(DeleteView);
+                DeleteView.setFitWidth(16);
+                DeleteView.setFitHeight(16);
                 btnDel.setOnAction(event -> {
                     Libro l = getTableView().getItems().get(getIndex());
                     
@@ -234,6 +244,10 @@ public class MainController {
                     a.setTitle("Conferma Eliminazione");
                     a.setHeaderText("Eliminazione Libro");
                     a.setContentText("Sei sicuro di voler eliminare il libro: " + l.getTitolo() + "?");
+                    
+                    Image icon = new Image(getClass().getResourceAsStream("/View/delete.png"));
+                    javafx.stage.Stage stage = (javafx.stage.Stage) a.getDialogPane().getScene().getWindow();
+                    stage.getIcons().add(icon);
                     
                     Optional<ButtonType> result = a.showAndWait();
                    
@@ -268,16 +282,25 @@ public class MainController {
         if (colUtPrestiti != null) colUtPrestiti.setCellValueFactory(d -> new SimpleObjectProperty<>(d.getValue().getNumPrestitiAttivi()));
 
         if (colUtAzioni != null) colUtAzioni.setCellFactory(param -> new TableCell<Utente, Void>() {
-            private final Button btnEdit = new Button("Modif.");
-            private final Button btnDel = new Button("Elim.");
+            
+            private final ImageView ModificaView = new ImageView(new Image(getClass().getResourceAsStream("/View/pencil.png")));
+            private final ImageView DeleteView = new ImageView(new Image(getClass().getResourceAsStream("/View/delete.png")));
+            
+            private final Button btnEdit = new Button("Modifica");
+            private final Button btnDel = new Button("Elimina");
             private final HBox pane = new HBox(5, btnEdit, btnDel);
 
             {
-                btnDel.setStyle("-fx-text-fill: red;");
+                btnEdit.setGraphic(ModificaView);
+                ModificaView.setFitWidth(16);
+                ModificaView.setFitHeight(16);
                 btnEdit.setOnAction(event -> {
                     Utente u = getTableView().getItems().get(getIndex());
                     modificaUtente(u);
                 });
+                btnDel.setGraphic(DeleteView);
+                DeleteView.setFitWidth(16);
+                DeleteView.setFitHeight(16);
                 btnDel.setOnAction(event -> {
                     Utente u = getTableView().getItems().get(getIndex());
                     
@@ -285,6 +308,10 @@ public class MainController {
                     a.setTitle("Conferma Eliminazione");
                     a.setHeaderText("Eliminazione Utente");
                     a.setContentText("Sei sicuro di voler eliminare l'utente: " + u.getNome() +" "+ u.getCognome()+ "?");
+                    
+                    Image icon = new Image(getClass().getResourceAsStream("/View/delete.png"));
+                    javafx.stage.Stage stage = (javafx.stage.Stage) a.getDialogPane().getScene().getWindow();
+                    stage.getIcons().add(icon);
                     
                     Optional<ButtonType> result = a.showAndWait();
                     
@@ -361,6 +388,10 @@ public class MainController {
                     a.setTitle("Conferma Restituzione");
                     a.setHeaderText("Restituzione Libro");
                     a.setContentText("Sei sicuro di voler registrare la restituzione del libro : " + prestito.getLibro().getTitolo() + "?");
+                    
+                    Image icon = new Image(getClass().getResourceAsStream("/View/delete.png"));
+                    javafx.stage.Stage stage = (javafx.stage.Stage) a.getDialogPane().getScene().getWindow();
+                    stage.getIcons().add(icon);
                     
                     Optional<ButtonType> result = a.showAndWait();
                     
@@ -440,6 +471,12 @@ public class MainController {
         d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         d.getDialogPane().setStyle("-fx-font-size: 15px;");
         
+        Image IconView = new Image(getClass().getResourceAsStream("/View/open-book.png"));
+        if (d.getDialogPane().getScene().getWindow() instanceof javafx.stage.Stage) {
+            javafx.stage.Stage stage = (javafx.stage.Stage) d.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(IconView);
+        }
+        
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
         g.setStyle("-fx-alignment: center;");
         
@@ -456,7 +493,7 @@ public class MainController {
         g.addRow(4, new Label("Numero Copie:"), tCopie);
         
         d.getDialogPane().setContent(g);
-        
+
         Optional<ButtonType> result = d.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
@@ -491,6 +528,12 @@ public class MainController {
          d.setTitle("Nuovo Utente");
          d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
          d.getDialogPane().setStyle("-fx-font-size: 15px;");
+         
+        Image IconView = new Image(getClass().getResourceAsStream("/View/group.png"));
+        if (d.getDialogPane().getScene().getWindow() instanceof javafx.stage.Stage) {
+            javafx.stage.Stage stage = (javafx.stage.Stage) d.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(IconView);
+        }
          
          GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
          g.setStyle("-fx-alignment: center;");
@@ -533,6 +576,12 @@ public class MainController {
         d.setTitle("Nuovo Prestito");
         d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         d.getDialogPane().setStyle("-fx-font-size: 15px;");
+        
+        Image IconView = new Image(getClass().getResourceAsStream("/View/loan.png"));
+        if (d.getDialogPane().getScene().getWindow() instanceof javafx.stage.Stage) {
+            javafx.stage.Stage stage = (javafx.stage.Stage) d.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(IconView);
+        }
         
         GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
         g.setStyle("-fx-alignment: center;");
@@ -577,6 +626,12 @@ public class MainController {
          d.setTitle("Modifica Libro");
          d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
          
+        Image IconView = new Image(getClass().getResourceAsStream("/View/books.png"));
+        if (d.getDialogPane().getScene().getWindow() instanceof javafx.stage.Stage) {
+            javafx.stage.Stage stage = (javafx.stage.Stage) d.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(IconView);
+        }
+         
          GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
          g.setStyle("-fx-alignment: center;");
          
@@ -617,6 +672,12 @@ public class MainController {
          Dialog<ButtonType> d = new Dialog<>();
          d.setTitle("Modifica Utente");
          d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+         
+        Image IconView = new Image(getClass().getResourceAsStream("/View/group.png"));
+        if (d.getDialogPane().getScene().getWindow() instanceof javafx.stage.Stage) {
+            javafx.stage.Stage stage = (javafx.stage.Stage) d.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(IconView);
+        }
          
          GridPane g = new GridPane(); g.setHgap(10); g.setVgap(10);
          g.setStyle("-fx-alignment: center;");
