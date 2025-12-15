@@ -178,7 +178,7 @@ public class Biblioteca implements Serializable{
         return nome.matches("^[\\p{L}' ]+$") 
                 && cognome.matches("^[\\p{L}' ]+$") 
                 && matricola.matches("^\\d{10}$") 
-                && email.matches("^[A-Za-z]\\.[\\p{L}']+\\d+@studenti\\.unisa\\.it$") 
+                && email.matches("^[A-Za-z]\\.[\\p{L}']+\\d*+@studenti\\.unisa\\.it$") 
                 && numPrestitiAttivi >= 0;
     }
     
