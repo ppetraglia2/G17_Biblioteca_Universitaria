@@ -35,7 +35,7 @@ public class ClientiTest {
     public void testCostruttoreParametrizzato_ListaNonNull() {
         ArrayList<Utente> listaIniziale = new ArrayList<>();
         listaIniziale.add(utente1);
-
+        //test della push
         Clienti nuovaLista = new Clienti(listaIniziale);
         
         // ASSERT
