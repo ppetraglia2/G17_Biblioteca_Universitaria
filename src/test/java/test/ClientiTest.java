@@ -120,7 +120,7 @@ public class ClientiTest {
             clienti.aggiungiUtente(utente1);
             clienti.modificaUtente(utente1, nuovoNome,nuovoCognome, nuovaMatricola, nuovaEmail);
 
-            // 1. Verifica che l'oggetto in memoria sia stato modificato
+            // Verifica che l'oggetto in memoria sia stato modificato
             assertEquals(nuovoNome, utente1.getNome(), "Il nome non è stato aggiornato.");
             assertEquals(nuovoCognome, utente1.getCognome(), "Il cognome non è stato aggiornato.");
             assertEquals(nuovaMatricola, utente1.getMatricola(), "La matricola non è stata aggiornata.");
