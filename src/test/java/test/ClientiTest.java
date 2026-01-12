@@ -72,7 +72,7 @@ public class ClientiTest {
         Exception ex = assertThrows(Exception.class, () -> {clienti.aggiungiUtente(utente1);}, 
                                     "Deve lanciare un'eccezione se si aggiunge un duplicato.");
         
-        // Verifico il messaggio d'errore
+        //Verifico il messaggio d'errore
         assertTrue(ex.getMessage().contains("ERRORE DUPLICATO: Utente " + utente1.toString() + " già presente."));
         assertEquals(1, clienti.getClienti().size(), "La lista non deve aumentare di dimensione dopo l'errore.");
     }
@@ -101,14 +101,14 @@ public class ClientiTest {
             clienti.eliminaUtente(utente1);
         }, "Deve lanciare un'eccezione se l'utente non è presente.");
         
-        // Verifica il messaggio d'errore
+        //Verifica il messaggio d'errore
         assertTrue(exception.getMessage().contains("IMPOSSIBILE ELIMINARE UTENTE! Utente : " + utente1.toString() + " non presente nella lista!"));
     }
     
     // --- Test Modifica Utente --- 
     @Test
     void modificaUtente_Successo_AggiornaTuttiICampi() {
-        // Dati modificati
+        //Dati modificati
         String nuovoNome = "Marco";
         String nuovoCognome = "Bianchi";
         String nuovaMatricola = "1112223334";
@@ -119,7 +119,7 @@ public class ClientiTest {
             clienti.aggiungiUtente(utente1);
             clienti.modificaUtente(utente1, nuovoNome,nuovoCognome, nuovaMatricola, nuovaEmail);
 
-            // Verifica che l'oggetto in memoria sia stato modificato
+            //Verifica che l'oggetto in memoria sia stato modificato
             assertEquals(nuovoNome, utente1.getNome(), "Il nome non è stato aggiornato.");
             assertEquals(nuovoCognome, utente1.getCognome(), "Il cognome non è stato aggiornato.");
             assertEquals(nuovaMatricola, utente1.getMatricola(), "La matricola non è stata aggiornata.");
@@ -134,7 +134,7 @@ public class ClientiTest {
     void modificaUtente_Fallimento_UtenteNonEsistente_DeveLanciareEccezione() {
         Utente utente3 = new Utente("Gaia", "Rossomando", "0612708972", "g.rossomando9@studenti.unisa.it", 0);
         Exception exception = assertThrows(Exception.class, () -> {
-            // Tentativo di modifica su un utente mai aggiunto:
+            //Tentativo di modifica su un utente mai aggiunto
             clienti.modificaUtente(
                 utente3, 
                 "Maria", 
