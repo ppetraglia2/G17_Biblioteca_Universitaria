@@ -85,7 +85,6 @@ public class ClientiTest {
         clienti.aggiungiUtente(utente2);
         assertEquals(2, clienti.getClienti().size(), "La lista deve contenere due utenti.");
         
-        // ACT
         clienti.eliminaUtente(utente1);
         
         // ASSERT
