@@ -93,12 +93,10 @@ public class Biblioteca implements Serializable{
      *
      */
     private void inizializzaListe() {
-        // Crea le ObservableList, avvolgendo le liste interne dei gestori
         this.obLibreria = FXCollections.observableArrayList(libreria.getLibreria());
         this.obClienti = FXCollections.observableArrayList(clienti.getClienti());
         this.obPrestiti = FXCollections.observableArrayList(prestiti.getPrestiti());
 
-        // Crea le FilteredList basate sulle ObservableList
         this.flLibreria = new FilteredList<>(obLibreria, p -> true); // Inizializza con tutti gli elementi
         this.flClienti = new FilteredList<>(obClienti, p -> true);   // Inizializza con tutti gli elementi
         
