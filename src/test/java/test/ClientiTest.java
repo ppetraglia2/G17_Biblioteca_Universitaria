@@ -22,7 +22,7 @@ public class ClientiTest {
         clienti = new Clienti();
     }
     
-    // --- Test Costruttori e Getter ---
+    // --- Test Costruttori ---
 
     @Test
     public void testCostruttoreDefault_ListaVuota() {
