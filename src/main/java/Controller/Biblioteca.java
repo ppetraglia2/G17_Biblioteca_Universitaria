@@ -97,8 +97,8 @@ public class Biblioteca implements Serializable{
         this.obClienti = FXCollections.observableArrayList(clienti.getClienti());
         this.obPrestiti = FXCollections.observableArrayList(prestiti.getPrestiti());
 
-        this.flLibreria = new FilteredList<>(obLibreria, p -> true); // Inizializza con tutti gli elementi
-        this.flClienti = new FilteredList<>(obClienti, p -> true);   // Inizializza con tutti gli elementi
+        this.flLibreria = new FilteredList<>(obLibreria, p -> true);
+        this.flClienti = new FilteredList<>(obClienti, p -> true);
         
         this.slLibreria = new SortedList<>(flLibreria);
         this.slClienti = new SortedList<>(flClienti);
