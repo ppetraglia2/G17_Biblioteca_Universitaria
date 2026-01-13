@@ -93,14 +93,12 @@ public class Biblioteca implements Serializable{
      *
      */
     private void inizializzaListe() {
-        // Crea le ObservableList, avvolgendo le liste interne dei gestori
         this.obLibreria = FXCollections.observableArrayList(libreria.getLibreria());
         this.obClienti = FXCollections.observableArrayList(clienti.getClienti());
         this.obPrestiti = FXCollections.observableArrayList(prestiti.getPrestiti());
 
-        // Crea le FilteredList basate sulle ObservableList
-        this.flLibreria = new FilteredList<>(obLibreria, p -> true); // Inizializza con tutti gli elementi
-        this.flClienti = new FilteredList<>(obClienti, p -> true);   // Inizializza con tutti gli elementi
+        this.flLibreria = new FilteredList<>(obLibreria, p -> true);
+        this.flClienti = new FilteredList<>(obClienti, p -> true);
         
         this.slLibreria = new SortedList<>(flLibreria);
         this.slClienti = new SortedList<>(flClienti);
@@ -178,7 +176,7 @@ public class Biblioteca implements Serializable{
         return nome.matches("^[\\p{L}' ]+$") 
                 && cognome.matches("^[\\p{L}' ]+$") 
                 && matricola.matches("^\\d{10}$") 
-                && email.matches("^[A-Za-z]\\.[\\p{L}']+\\d+@studenti\\.unisa\\.it$") 
+                && email.matches("^[A-Za-z]\\.[\\p{L}']+\\d*+@studenti\\.unisa\\.it$") 
                 && numPrestitiAttivi >= 0;
     }
     

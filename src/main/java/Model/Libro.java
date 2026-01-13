@@ -199,7 +199,7 @@ public class Libro implements Serializable{
         Libro libro = (Libro) o;
         return this.ISBN.equals(libro.ISBN);
     }
-
+    
     /**
      * @brief Ritorna il codice hash dell'oggetto, basato sull'ISBN per coerenza con equals().
      */

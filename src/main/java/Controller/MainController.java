@@ -482,6 +482,7 @@ public class MainController {
         
         TextField tTitolo = new TextField();
         TextField tAutori = new TextField();
+        tAutori.setPromptText("Nome Cognome, ...");
         TextField tAnno = new TextField();
         TextField tIsbn = new TextField();
         TextField tCopie = new TextField();
@@ -493,7 +494,7 @@ public class MainController {
         tCopie.setPromptText("6");
         
         g.addRow(0, new Label("Titolo:"), tTitolo);
-        g.addRow(1, new Label("Autori (separati da ,):"), tAutori);
+        g.addRow(1, new Label("Autori:"), tAutori);
         g.addRow(2, new Label("Anno:"), tAnno);
         g.addRow(3, new Label("ISBN:"), tIsbn);
         g.addRow(4, new Label("Numero Copie:"), tCopie);

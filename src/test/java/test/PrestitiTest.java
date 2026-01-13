@@ -19,7 +19,7 @@ public class PrestitiTest {
     private Prestiti prestiti;
     private Prestito prestito1,prestito2;
     
-    //Dato che Prestiti dipende da Utente, Libro usiamo oggetti di supporto (Stubs)
+    //Dato che Prestiti dipende da Utente, Libro usiamo oggetti di supporto
     private Utente utente1;
     private Libro libro1;
     
