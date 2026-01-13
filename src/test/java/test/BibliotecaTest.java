@@ -59,6 +59,7 @@ public class BibliotecaTest {
         ArrayList<Autore> lista = new ArrayList<>();
         assertFalse(biblioteca.checkValiditaCampiLibro("Il Nome della Rosa", lista, 1980, "9789510", 5, 5),
                 "Dovrebbe essere FALSE con ISBN non a 13 cifre.");
+        //commento
     }
     
     @Test
